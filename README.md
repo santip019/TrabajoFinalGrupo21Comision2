@@ -3,6 +3,7 @@
 ## 👥 Integrantes del Grupo
 
 - **Padilla Santiago** – **santip019**
+- **Fernandez Cruz Bruno** – **brunofernandez77**
 
 ##  Tecnologías Utilizadas en el proyecto
 ...
