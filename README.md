@@ -4,6 +4,7 @@
 
 - **Padilla Santiago** – **santip019**
 - **Fernandez Cruz Bruno** – **brunofernandez77**
+- **Calpanchay Maximiliano** – **maxiicalpa**
 
 ##  Tecnologías Utilizadas en el proyecto
 ...
