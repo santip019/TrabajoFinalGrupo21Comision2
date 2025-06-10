@@ -12,12 +12,17 @@ import VerDetalles from './VerDetalles'
 function App() {
   const [productos, setProductos] = useState([]);
 
+const agregarProducto = (nuevoProducto) => {
+    setProductos([...productos, nuevoProducto]);
+  };
+  
+
   return(
     <Routes>  
       <Route path="/" element={<Layout />}>
         <Route index element={<Inicio productos={productos}/>} />
         <Route path="login" element={<Login />} />
-        <Route path="nuevo-producto" element={<NuevoProducto />} />
+        <Route path="/nuevo-producto" element={<NuevoProducto agregarProducto={agregarProducto} />} />
         <Route path="favoritos" element={<Favoritos />} />
         <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="/editar-producto/:id" element={ <EditarProducto productos={productos} setProductos={setProductos} /> } />
