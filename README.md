@@ -9,4 +9,6 @@
 -**Cruz Antonella Guadalupe** - **antocruz06**
 
 ##  Tecnologías Utilizadas en el proyecto
-...
+- **React + Vite**
+- **Bootstrap**
+- **React Router DOM**
