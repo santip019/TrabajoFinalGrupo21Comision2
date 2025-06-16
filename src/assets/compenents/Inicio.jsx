@@ -4,13 +4,17 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorito } from "../../redux/favoritos";
 
 function Inicio({ productos, eliminarProducto, restaurarProducto }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
 
-  const productosFiltrados = productos.filter(
-    (producto) => mostrarPapelera ? !producto.estado : producto.estado
+  const productosFiltrados = productos.filter((producto) =>
+    mostrarPapelera ? !producto.estado : producto.estado
   );
 
   const listaProductos = productosFiltrados.map((producto) => (
@@ -18,7 +22,7 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
       <Card className="card w-100">
         <Card.Img
           variant="top"
-          src={producto.imagen || "holder.js/100px180?text=Image cap"}
+          src={producto.imagen || "https://via.placeholder.com/180"}
         />
         <Card.Body>
           <Card.Title>{producto.nombre}</Card.Title>
@@ -27,6 +31,7 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
             <br />
             Descripcion: {producto.descripcion}
           </Card.Text>
+
           {!mostrarPapelera && (
             <>
               <Button
@@ -42,28 +47,45 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
                 Ver Detalles
               </Button>{" "}
               <Button
+                variant={
+                  favoritos.includes(producto.id)
+                    ? "warning"
+                    : "outline-warning"
+                }
+                onClick={() => dispatch(toggleFavorito(producto.id))}
+                style={{ fontSize: "1.2rem", padding: "0.3rem" }}
+                aria-label="Favorito"
+              >
+                {favoritos.includes(producto.id)
+                  ? "★ Favorito"
+                  : "☆ Marcar"}
+              </Button>{" "}
+              <Button
                 variant="danger"
                 onClick={() => eliminarProducto(producto.id)}
-                style={{ fontSize: '1.5rem', padding: '0.3rem' }}
+                style={{ fontSize: "1.5rem", padding: "0.3rem" }}
                 aria-label="Eliminar Producto"
               >
                 <MdDeleteForever />
               </Button>
             </>
           )}
+
           {mostrarPapelera && (
             <>
               <Button
                 variant="success"
                 onClick={() => restaurarProducto(producto.id)}
-                style={{ fontSize: '1.2rem', padding: '0.3rem' }}
+                style={{ fontSize: "1.2rem", padding: "0.3rem" }}
                 aria-label="Restaurar Producto"
               >
-              Restaurar
+                Restaurar
               </Button>
-              <Badge bg="danger" className="ms-2">Eliminado</Badge>
+              <Badge bg="danger" className="ms-2">
+                Eliminado
+              </Badge>
             </>
-        )}
+          )}
         </Card.Body>
       </Card>
     </div>

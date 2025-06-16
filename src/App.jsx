@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
-import Layout from './Layout'
-import Inicio from './Inicio'
-import Login from './Login'
-import NuevoProducto from './NuevoProducto'
-import Favoritos from './Favoritos'
-import AcercaDe from './AcercaDe'
-import EditarProducto from './EditarProducto'
-import VerDetalles from './VerDetalles'
-import Papelera from './Papelera'
+import Layout from './assets/compenents/Layout'
+import Inicio from './assets/compenents/Inicio'
+import Login from './assets/compenents/Login'
+import NuevoProducto from './assets/compenents/NuevoProducto'
+import Favoritos from './assets/compenents/Favoritos'
+import AcercaDe from './assets/compenents/AcercaDe'
+import EditarProducto from './assets/compenents/EditarProducto'
+import VerDetalles from './assets/compenents/VerDetalles'
+import Papelera from './assets/compenents/Papelera'
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -27,6 +27,7 @@ const restaurarProducto = (id) => {
   setProductos(productos.map(p =>
     p.id === id ? { ...p, estado: true } : p
   ));
+  
 };
 
   return(
@@ -35,7 +36,7 @@ const restaurarProducto = (id) => {
         <Route index element={<Inicio productos={productos} eliminarProducto={eliminarProducto} restaurarProducto={restaurarProducto} />} />
         <Route path="login" element={<Login />} />
         <Route path="/nuevo-producto" element={<NuevoProducto agregarProducto={agregarProducto} />} />
-        <Route path="favoritos" element={<Favoritos />} />
+        <Route path="favoritos" element={<Favoritos productos={productos} />} />
         <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="/editar-producto/:id" element={ <EditarProducto productos={productos} setProductos={setProductos} /> } />
         <Route path="/producto/:id" element={<VerDetalles productos={productos} />} />
