@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorito } from "../../redux/favoritos";
+import { useAuth } from "../../context/AuthContext";
 
 function Inicio({ productos, eliminarProducto, restaurarProducto }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
+  const { user } = useAuth();
 
   const productosFiltrados = productos.filter((producto) =>
     mostrarPapelera ? !producto.estado : producto.estado
@@ -34,12 +36,14 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
 
           {!mostrarPapelera && (
             <>
-              <Button
-                variant="success"
-                onClick={() => navigate(`/editar-producto/${producto.id}`)}
-              >
-                Editar
-              </Button>{" "}
+              {user?.role === "admin" && (
+                <Button
+                  variant="success"
+                  onClick={() => navigate(`/editar-producto/${producto.id}`)}
+                >
+                  Editar
+                </Button>
+              )}{" "}
               <Button
                 variant="info"
                 onClick={() => navigate(`/producto/${producto.id}`)}
@@ -60,6 +64,8 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
                   ? "★ Favorito"
                   : "☆ Marcar"}
               </Button>{" "}
+              {/*Solo el admin puede eliminar */}
+              {user?.role === "admin" && (
               <Button
                 variant="danger"
                 onClick={() => eliminarProducto(producto.id)}
@@ -68,11 +74,13 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
               >
                 <MdDeleteForever />
               </Button>
+               )}
             </>
           )}
 
           {mostrarPapelera && (
             <>
+            {user?.role === "admin" && (
               <Button
                 variant="success"
                 onClick={() => restaurarProducto(producto.id)}
@@ -81,6 +89,7 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
               >
                 Restaurar
               </Button>
+              )}
               <Badge bg="danger" className="ms-2">
                 Eliminado
               </Badge>
