@@ -29,7 +29,7 @@ function Favoritos() {
               <Card className="card w-100">
                 <Card.Img
                   variant="top"
-                  src={producto.imagen || 'https://via.placeholder.com/180'}
+                  src={producto.image || 'https://via.placeholder.com/180'}
                 />
                 <Card.Body>
                   <Card.Title>{producto.nombre}</Card.Title>

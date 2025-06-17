@@ -12,7 +12,7 @@ function EditarProducto() {
 
   const [formData, setFormData] = useState({
     id: "",
-    imagen: "",
+    image: "",
     nombre: "",
     precio: "",
     descripcion: "",
@@ -63,8 +63,8 @@ function EditarProducto() {
           <Form.Label>Imagen</Form.Label>
           <Form.Control
             type="text"
-            name="imagen"
-            value={formData.imagen}
+            name="image"
+            value={formData.image}
             onChange={handleChange}
           />
         </Form.Group>

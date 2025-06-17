@@ -19,7 +19,7 @@ function Papelera() {
               <Card className="card w-100">
                 <Card.Img
                   variant="top"
-                  src={producto.imagen || "holder.js/100px180?text=Image cap"}
+                  src={producto.image || "holder.js/100px180?text=Image cap"}
                 />
                 <Card.Body>
                   <Card.Title>{producto.nombre}</Card.Title>

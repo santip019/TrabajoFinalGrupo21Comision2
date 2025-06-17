@@ -26,7 +26,7 @@ function Inicio() {
       <Card className="card w-100">
         <Card.Img
           variant="top"
-          src={producto.image || producto.imagen || "https://via.placeholder.com/180"}
+          src={producto.image || "https://via.placeholder.com/180"}
         />
         <Card.Body>
           <Card.Title>{producto.title || producto.nombre}</Card.Title>
@@ -48,7 +48,7 @@ function Inicio() {
               )}{" "}
               <Button
                 variant="info"
-                onClick={() => navigate(`/producto/${producto.id}`)}
+                onClick={() => navigate(`/Layout/producto/${producto.id}`)}
               >
                 Ver Detalles
               </Button>{" "}
