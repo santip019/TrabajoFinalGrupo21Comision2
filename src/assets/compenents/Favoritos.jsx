@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
+import { useProductos } from "../../context/ProductosContext"; // Ajusta el path si es necesario
 
-function Favoritos({ productos }) {
+function Favoritos() {
+  const { productos } = useProductos();
   const favoritos = useSelector((state) => state.favoritos);
   const navigate = useNavigate();
 
