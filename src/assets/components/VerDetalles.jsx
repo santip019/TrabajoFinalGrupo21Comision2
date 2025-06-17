@@ -18,7 +18,7 @@ function VerDetalles() {
   const dispatch = useDispatch();
   const favoritos = useSelector((state) => state.favoritos);
 
-  const producto = productos.find((a) => a.id === id);
+  const producto = productos.find((a) => String(a.id) === String(id));
 
   if (!producto) {
     return (
@@ -26,7 +26,7 @@ function VerDetalles() {
     );
   }
 
-  const volverA = location.state?.from === "papelera" ? "/papelera" : "/";
+  const volverA = location.state?.from === "papelera" ? "/Layout/papelera" : "/Layout";
   const esFavorito = favoritos.includes(producto.id);
 
   return (
@@ -60,13 +60,10 @@ function VerDetalles() {
             </Card.Subtitle>
           </div>
           <Row className="mb-2">
-            <Col xs={4} className="fw-bold">
-              Imagen representativa:
-            </Col>
             <Col xs={8}>
               <img
-                src={producto.imagen || "https://via.placeholder.com/150"}
-                alt="Producto"
+                src={producto.image || "https://via.placeholder.com/150"}
+                alt="Imagen representativa"
                 style={{ maxWidth: "100%" }}
               />
             </Col>

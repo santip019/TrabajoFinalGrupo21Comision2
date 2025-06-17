@@ -1,4 +1,4 @@
-import AppRoutes from './assets/compenents/AppRoutes.jsx';
+import AppRoutes from './assets/components/AppRoutes.jsx';
 function App() {
 
   return (

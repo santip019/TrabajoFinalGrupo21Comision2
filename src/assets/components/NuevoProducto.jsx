@@ -1,27 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
+import { useProductos } from "../../context/ProductosContext";
 
 function NuevoProducto({ agregarProducto }) {
   const [producto, setProducto] = useState({
-    id: crypto.randomUUID(), // o usar Date.now(), si no usás UUID
+    id: String(crypto.randomUUID()), // o usar Date.now(), si no usás UUID
     nombre: "",
     precio: "",
     descripcion: "",
     categoria: "",
-    imagen: "",
+    image: "",
     estado: true,
   });
 
   const navigate = useNavigate();
-
+  const { productos, setProductos } = useProductos();
   const handleChange = (e) => {
     setProducto({ ...producto, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    agregarProducto(producto);
+    setProductos([...productos, producto]);
     navigate("/");
   };
 
@@ -48,7 +49,7 @@ function NuevoProducto({ agregarProducto }) {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>URL de Imagen</Form.Label>
-            <Form.Control name="imagen" onChange={handleChange} value={producto.imagen} required />
+            <Form.Control name="image" onChange={handleChange} value={producto.image} required />
           </Form.Group>
           <Button variant="primary" type="submit">Guardar</Button>
         </Form>
