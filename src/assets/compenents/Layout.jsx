@@ -13,13 +13,13 @@ function Layout() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+              <Nav.Link as={Link} to="/Layout">Inicio</Nav.Link>
               {!user && <Nav.Link as={Link} to="/login">Login</Nav.Link>}
               {user?.role === 'admin' && (
-                <Nav.Link as={Link} to="/nuevo-producto">Nuevo Producto</Nav.Link>
+                <Nav.Link as={Link} to="/Layout/nuevo-producto">Nuevo Producto</Nav.Link>
               )}
-              <Nav.Link as={Link} to="/favoritos">Favoritos</Nav.Link>
-              <Nav.Link as={Link} to="/acerca-de">Acerca de</Nav.Link>
+              <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
+              <Nav.Link as={Link} to="/Layout/acerca-de">Acerca de</Nav.Link>
               {user && <Nav.Link onClick={logout}>Cerrar Sesión</Nav.Link>}
             </Nav>
           </Navbar.Collapse>

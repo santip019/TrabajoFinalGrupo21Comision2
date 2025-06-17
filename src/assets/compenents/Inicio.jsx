@@ -5,7 +5,7 @@ import Badge from "react-bootstrap/Badge";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../../redux/favoritos";
+import { toggleFavorito } from "../../store/favoritos";
 import { useAuth } from "../../context/AuthContext";
 
 function Inicio({ productos, eliminarProducto, restaurarProducto }) {
