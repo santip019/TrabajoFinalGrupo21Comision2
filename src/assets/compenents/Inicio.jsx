@@ -104,8 +104,8 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
     <div className="container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>
-          <Badge bg="primary">
-            {mostrarPapelera ? "Papelera" : "Listado de productos"}
+          <Badge className="inicio" bg="primary">
+            {mostrarPapelera ? "Papelera" : "Productos"}
           </Badge>
         </h2>
         <Button
