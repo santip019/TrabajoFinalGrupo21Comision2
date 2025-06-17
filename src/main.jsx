@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css'
+import "./App.css";
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext';
 
