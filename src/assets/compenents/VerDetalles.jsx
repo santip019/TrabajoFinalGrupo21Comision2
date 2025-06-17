@@ -1,6 +1,6 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../../redux/favoritos"; // Verifica este path
+import { toggleFavorito } from "../../store/favoritos"; // Verifica este path
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";

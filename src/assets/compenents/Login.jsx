@@ -13,7 +13,11 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(username, role); // simulamos autenticación
-    navigate("/");
+    if (role === "admin") {
+    navigate("/Layout");
+  } else {
+    navigate("/Layout");
+  }
   };
 
   return (
