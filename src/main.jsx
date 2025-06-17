@@ -7,15 +7,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext';
+import { ProductosProvider } from './context/ProductosContext'; // <-- Importa el proveedor
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <ProductosProvider>
+            <App />
+          </ProductosProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </Provider>
   </StrictMode>
 )

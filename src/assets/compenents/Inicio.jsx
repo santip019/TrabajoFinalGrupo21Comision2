@@ -7,13 +7,15 @@ import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorito } from "../../store/favoritos";
 import { useAuth } from "../../context/AuthContext";
+import { useProductos } from "../../context/ProductosContext"; // <-- Corrige el import
 
-function Inicio({ productos, eliminarProducto, restaurarProducto }) {
+function Inicio() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
   const { user } = useAuth();
+  const { productos, eliminarProducto, restaurarProducto } = useProductos(); // <-- Obtén todo del contexto
 
   const productosFiltrados = productos.filter((producto) =>
     mostrarPapelera ? !producto.estado : producto.estado
@@ -24,14 +26,14 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
       <Card className="card w-100">
         <Card.Img
           variant="top"
-          src={producto.imagen || "https://via.placeholder.com/180"}
+          src={producto.image || producto.imagen || "https://via.placeholder.com/180"}
         />
         <Card.Body>
-          <Card.Title>{producto.nombre}</Card.Title>
+          <Card.Title>{producto.title || producto.nombre}</Card.Title>
           <Card.Text>
             Datos del producto ID: {producto.id}
             <br />
-            Descripcion: {producto.descripcion}
+            Descripcion: {producto.description || producto.descripcion}
           </Card.Text>
 
           {!mostrarPapelera && (
@@ -66,29 +68,29 @@ function Inicio({ productos, eliminarProducto, restaurarProducto }) {
               </Button>{" "}
               {/*Solo el admin puede eliminar */}
               {user?.role === "admin" && (
-              <Button
-                variant="danger"
-                onClick={() => eliminarProducto(producto.id)}
-                style={{ fontSize: "1.5rem", padding: "0.3rem" }}
-                aria-label="Eliminar Producto"
-              >
-                <MdDeleteForever />
-              </Button>
-               )}
+                <Button
+                  variant="danger"
+                  onClick={() => eliminarProducto(producto.id)}
+                  style={{ fontSize: "1.5rem", padding: "0.3rem" }}
+                  aria-label="Eliminar Producto"
+                >
+                  <MdDeleteForever />
+                </Button>
+              )}
             </>
           )}
 
           {mostrarPapelera && (
             <>
-            {user?.role === "admin" && (
-              <Button
-                variant="success"
-                onClick={() => restaurarProducto(producto.id)}
-                style={{ fontSize: "1.2rem", padding: "0.3rem" }}
-                aria-label="Restaurar Producto"
-              >
-                Restaurar
-              </Button>
+              {user?.role === "admin" && (
+                <Button
+                  variant="success"
+                  onClick={() => restaurarProducto(producto.id)}
+                  style={{ fontSize: "1.2rem", padding: "0.3rem" }}
+                  aria-label="Restaurar Producto"
+                >
+                  Restaurar
+                </Button>
               )}
               <Badge bg="danger" className="ms-2">
                 Eliminado

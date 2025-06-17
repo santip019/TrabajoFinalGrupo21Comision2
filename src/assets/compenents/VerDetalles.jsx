@@ -7,8 +7,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import { FaStar, FaRegStar } from "react-icons/fa"; // Iconos favoritos
+import { useProductos } from "../../context/ProductosContext";
 
-function VerDetalles({ productos }) {
+
+function VerDetalles() {
+  const { productos } = useProductos();
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
