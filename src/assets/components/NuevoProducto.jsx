@@ -23,7 +23,7 @@ function NuevoProducto({ agregarProducto }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setProductos([...productos, producto]);
-    navigate("/");
+    navigate("/Layout");
   };
 
   return (
