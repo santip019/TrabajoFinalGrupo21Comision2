@@ -20,7 +20,10 @@ function Layout() {
               )}
               <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
               <Nav.Link as={Link} to="/Layout/acerca-de">Acerca de</Nav.Link>
+              <Nav.Link as={Link} to="/soporte">Soporte</Nav.Link>
+              
               {user && <Nav.Link onClick={logout}>Cerrar Sesión</Nav.Link>}
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -31,5 +34,6 @@ function Layout() {
     </>
   );
 }
+
 
 export default Layout;
