@@ -53,43 +53,37 @@ function VerDetalles() {
               {producto.estado ? "Activo" : "Inactivo"}
             </Badge>
             <Card.Title as="h2" className="mb-1">
-              {producto.nombre}
+              {producto.nombre || producto.title}
             </Card.Title>
             <Card.Subtitle className="mb-3 text-muted">
               ID: {producto.id}
             </Card.Subtitle>
           </div>
-          <Row className="mb-2">
+          <Row className="mb-2 align-items-center">
             <Col xs={8}>
               <img
                 src={producto.image || "https://via.placeholder.com/150"}
                 alt="Imagen representativa"
-                style={{ maxWidth: "100%" }}
+                style={{ display: "block", marginLeft: "auto", marginRight: "auto", maxWidth: "100%" }}
               />
             </Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Nombre:</Col>
-            <Col xs={8}>{producto.nombre}</Col>
+            <Col xs={8}>{producto.nombre || producto.title}</Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Precio:</Col>
-            <Col xs={8}>{producto.precio}</Col>
+            <Col xs={8}>{producto.precio || producto.price}</Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Descripción:</Col>
-            <Col xs={8}>{producto.descripcion}</Col>
+            <Col xs={8}>{producto.descripcion || producto.description}</Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Categoría:</Col>
-            <Col xs={8}>{producto.categoria}</Col>
+            <Col xs={8}>{producto.categoria || producto.category}</Col>
           </Row>
-          {producto.stock !== undefined && (
-            <Row className="mb-4">
-              <Col xs={4} className="fw-bold">Stock:</Col>
-              <Col xs={8}>{producto.stock}</Col>
-            </Row>
-          )}
           <div className="d-flex justify-content-end">
             <Button variant="secondary" onClick={() => navigate(volverA)}>
               Volver

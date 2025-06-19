@@ -8,7 +8,7 @@ function EditarProducto() {
   const { productos, setProductos } = useProductos();
   const { id } = useParams();
   const navigate = useNavigate();
-  const productoOriginal = productos.find((a) => a.id === id);
+  const productoOriginal = productos.find((a) => String(a.id) === String(id));
 
   const [formData, setFormData] = useState({
     id: "",
@@ -38,7 +38,7 @@ function EditarProducto() {
     e.preventDefault();
     const nuevosProductos = productos.map((a) => (a.id === id ? formData : a));
     setProductos(nuevosProductos);
-    navigate("/");
+    navigate("/Layout");
   };
 
   if (!productoOriginal) {
@@ -73,7 +73,7 @@ function EditarProducto() {
           <Form.Control
             type="text"
             name="nombre"
-            value={formData.nombre}
+            value={formData.title || formData.nombre}
             onChange={handleChange}
           />
         </Form.Group>
@@ -82,7 +82,7 @@ function EditarProducto() {
           <Form.Control
             type="text"
             name="precio"
-            value={formData.precio}
+            value={formData.price || formData.precio}
             onChange={handleChange}
           />
         </Form.Group>
@@ -91,7 +91,7 @@ function EditarProducto() {
           <Form.Control
             type="text"
             name="descripcion"
-            value={formData.descripcion}
+            value={formData.description || formData.descripcion}
             onChange={handleChange}
           />
         </Form.Group>
@@ -100,7 +100,7 @@ function EditarProducto() {
           <Form.Control
             type="text"
             name="categoria"
-            value={formData.categoria}
+            value={formData.category || formData.categoria}
             onChange={handleChange}
           />
         </Form.Group>

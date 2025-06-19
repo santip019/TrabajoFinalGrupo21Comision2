@@ -31,9 +31,7 @@ function Inicio() {
         <Card.Body>
           <Card.Title>{producto.title || producto.nombre}</Card.Title>
           <Card.Text>
-            Datos del producto ID: {producto.id}
-            <br />
-            Descripcion: {producto.description || producto.descripcion}
+            Precio ${producto.precio || producto.price}
           </Card.Text>
 
           {!mostrarPapelera && (
@@ -41,7 +39,7 @@ function Inicio() {
               {user?.role === "admin" && (
                 <Button
                   variant="success"
-                  onClick={() => navigate(`/editar-producto/${producto.id}`)}
+                  onClick={() => navigate(`/Layout/editar-producto/${producto.id}`)}
                 >
                   Editar
                 </Button>
