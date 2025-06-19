@@ -10,12 +10,27 @@ import VerDetalles from './VerDetalles';
 import Papelera from './Papelera';
 import AdminRoute from "../../routes/AdminRoute";
 import RutaAutenticada from "./RutaAutenticada";
+import Soporte from './Soporte';
+import Devoluciones from './soporte/Devoluciones';
+import Faq from './soporte/Faq';
+import Contacto from './soporte/Contacto';
+import Seguridad from './soporte/Seguridad';
+import Cuenta from './soporte/Cuenta';
+
 
 function AppRoutes() {
   return (
     <Routes>
       {/* Login como pantalla inicial */}
       <Route path="/" element={<Login />} />
+
+      {/* Soporte técnico: RUTAS PÚBLICAS */}
+      <Route path="/soporte" element={<Soporte />} />
+      <Route path="/soporte/devoluciones" element={<Devoluciones />} />
+      <Route path="/soporte/faq" element={<Faq />} />
+      <Route path="/soporte/contacto" element={<Contacto />} />
+      <Route path="/soporte/seguridad" element={<Seguridad />} />
+      <Route path="/soporte/cuenta" element={<Cuenta />} />
 
       {/* Todo lo privado bajo Layout */}
       <Route path="/Layout" element={
@@ -44,7 +59,9 @@ function AppRoutes() {
       {/* Redirección por defecto */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
+    
   );
+  
 }
 
 export default AppRoutes;
