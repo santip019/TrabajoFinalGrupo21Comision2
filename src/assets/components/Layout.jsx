@@ -1,10 +1,13 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; 
+import { useSelector } from 'react-redux';
 
 
 function Layout() {
   const { user, logout } = useAuth();
+  const carrito = useSelector((state) => state.carrito);
+  const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   return (
     <>
@@ -21,7 +24,14 @@ function Layout() {
               <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
               <Nav.Link as={Link} to="/Layout/acerca-de">Acerca de</Nav.Link>
               <Nav.Link as={Link} to="/soporte">Soporte</Nav.Link>
-              
+              {user && (
+                <Nav.Link as={Link} to="/Layout/carrito">
+                  🛒 Carrito
+                  {cantidadTotal > 0 && (
+                    <span className="badge bg-light text-dark ms-1">{cantidadTotal}</span>
+                  )}
+             </Nav.Link>
+                 )}
               {user && <Nav.Link onClick={logout}>Cerrar Sesión</Nav.Link>}
               
             </Nav>

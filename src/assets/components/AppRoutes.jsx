@@ -16,6 +16,7 @@ import Faq from './soporte/Faq';
 import Contacto from './soporte/Contacto';
 import Seguridad from './soporte/Seguridad';
 import Cuenta from './soporte/Cuenta';
+import Carrito from './Carrito'
 
 
 function AppRoutes() {
@@ -43,6 +44,8 @@ function AppRoutes() {
         <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="papelera" element={<Papelera />} />
         <Route path="producto/:id" element={<VerDetalles />} />
+        <Route path="carrito" element={<Carrito />} />
+
         {/* Rutas solo para admin */}
         <Route path="nuevo-producto" element={
           <AdminRoute>
