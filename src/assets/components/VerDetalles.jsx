@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import { FaStar, FaRegStar } from "react-icons/fa"; // Iconos favoritos
 import { useProductos } from "../../context/ProductosContext";
+import { agregarAlCarrito } from "../../store/carrito";
 
 
 function VerDetalles() {
@@ -32,7 +33,6 @@ function VerDetalles() {
   return (
     <div className="d-flex justify-content-center mt-5">
       <Card className="shadow-lg position-relative" style={{ width: "32rem", borderRadius: "1rem" }}>
-        {/* Botón Favorito - Esquina superior derecha */}
         <Button
           variant={esFavorito ? "warning" : "outline-warning"}
           onClick={() => dispatch(toggleFavorito(producto.id))}
@@ -84,11 +84,21 @@ function VerDetalles() {
             <Col xs={4} className="fw-bold">Categoría:</Col>
             <Col xs={8}>{producto.categoria || producto.category}</Col>
           </Row>
-          <div className="d-flex justify-content-end">
-            <Button variant="secondary" onClick={() => navigate(volverA)}>
-              Volver
-            </Button>
-          </div>
+<div className="d-flex justify-content-end gap-2 mt-4">
+  <Button
+    variant="outline-primary"
+    onClick={() => dispatch(agregarAlCarrito(producto))}
+    aria-label="Agregar al carrito"
+  >
+    🛒 Agregar al carrito
+  </Button>
+  <Button
+    variant="secondary"
+    onClick={() => navigate(volverA)}
+  >
+    Volver
+  </Button>
+</div>
         </Card.Body>
       </Card>
     </div>

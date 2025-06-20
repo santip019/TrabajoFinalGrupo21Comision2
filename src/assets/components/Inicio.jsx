@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorito } from "../../store/favoritos";
 import { useAuth } from "../../context/AuthContext";
 import { useProductos } from "../../context/ProductosContext"; // <-- Corrige el import
+import { agregarAlCarrito } from '../../store/carrito'
 
 function Inicio() {
   const navigate = useNavigate();
@@ -61,10 +62,16 @@ function Inicio() {
                 aria-label="Favorito"
               >
                 {favoritos.includes(producto.id)
-                  ? "★ Favorito"
-                  : "☆ Marcar"}
+                  ? "★ "
+                  : "☆ "}
               </Button>{" "}
-              {/*Solo el admin puede eliminar */}
+              <Button
+               variant="outline-primary"
+               onClick={() => dispatch(agregarAlCarrito(producto))}
+              >
+                Añadir al carrito
+              </Button>
+
               {user?.role === "admin" && (
                 <Button
                   variant="danger"
