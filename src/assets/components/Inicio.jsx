@@ -2,6 +2,7 @@ import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
+import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +16,17 @@ function Inicio() {
   const dispatch = useDispatch();
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas")
   const { user } = useAuth();
   const { productos, eliminarProducto, restaurarProducto } = useProductos(); // <-- Obtén todo del contexto
+  const categorias = [...new Set(productos.map(p => p.categoria || p.category))]
 
-  const productosFiltrados = productos.filter((producto) =>
-    mostrarPapelera ? !producto.estado : producto.estado
-  );
+const productosFiltrados = productos.filter((producto) => {
+  const categoria = producto.categoria || producto.category;
+  const perteneceCategoria = categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
+  const activoOInactivo = mostrarPapelera ? !producto.estado : producto.estado;
+  return perteneceCategoria && activoOInactivo;
+});
 
   const listaProductos = productosFiltrados.map((producto) => (
     <div key={producto.id} className="col-md-4 d-flex mb-4">
@@ -61,9 +67,7 @@ function Inicio() {
                 style={{ fontSize: "1.2rem", padding: "0.3rem" }}
                 aria-label="Favorito"
               >
-                {favoritos.includes(producto.id)
-                  ? "★ "
-                  : "☆ "}
+                {favoritos.includes(producto.id)? "★ " : "☆ "}
               </Button>{" "}
               <Button
                variant="outline-primary"
@@ -107,7 +111,7 @@ function Inicio() {
     </div>
   ));
 
-  return (
+return (
     <div className="container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>
@@ -115,12 +119,26 @@ function Inicio() {
             {mostrarPapelera ? "Papelera" : "Productos"}
           </Badge>
         </h2>
-        <Button
-          variant={mostrarPapelera ? "secondary" : "outline-secondary"}
-          onClick={() => setMostrarPapelera(!mostrarPapelera)}
-        >
-          {mostrarPapelera ? "Ver activos" : "Ver papelera"}
-        </Button>
+        <div className="d-flex gap-2 align-items-center">
+          <Form.Select
+            value={categoriaSeleccionada}
+            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+            style={{ maxWidth: "200px" }}
+          >
+            <option value="todas">Todas las categorías</option>
+            {categorias.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </Form.Select>
+          <Button
+            variant={mostrarPapelera ? "secondary" : "outline-secondary"}
+            onClick={() => setMostrarPapelera(!mostrarPapelera)}
+          >
+            {mostrarPapelera ? "Ver activos" : "Ver papelera"}
+          </Button>
+        </div>
       </div>
       <div className="row">
         {listaProductos.length > 0 ? (
@@ -129,12 +147,13 @@ function Inicio() {
           <p className="text-muted">
             {mostrarPapelera
               ? "No hay productos en la papelera."
-              : "No hay productos activos en este momento."}
+              : "No hay productos activos en esta categoría."}
           </p>
         )}
       </div>
     </div>
   );
 }
+
 
 export default Inicio;
