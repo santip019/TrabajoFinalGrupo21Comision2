@@ -8,7 +8,7 @@ import AcercaDe from './AcercaDe';
 import EditarProducto from './EditarProducto';
 import VerDetalles from './VerDetalles';
 import Papelera from './Papelera';
-import AdminRoute from "../../routes/AdminRoute";
+import AdminRoute from "../routes/AdminRoute";
 import RutaAutenticada from "./RutaAutenticada";
 import Soporte from './Soporte';
 import Devoluciones from './Devoluciones';

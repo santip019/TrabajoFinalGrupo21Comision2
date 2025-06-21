@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
-import { useProductos } from "../../context/ProductosContext";
+import { useProductos } from "../context/ProductosContext";
 
 function NuevoProducto({ agregarProducto }) {
   const [producto, setProducto] = useState({

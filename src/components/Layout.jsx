@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; 
+import { useAuth } from '../context/AuthContext'; 
 import { useSelector } from 'react-redux';
 
 

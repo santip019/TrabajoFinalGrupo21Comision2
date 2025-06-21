@@ -6,10 +6,10 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../../store/favoritos";
-import { useAuth } from "../../context/AuthContext";
-import { useProductos } from "../../context/ProductosContext"; // <-- Corrige el import
-import { agregarAlCarrito } from '../../store/carrito'
+import { toggleFavorito } from "../store/favoritos";
+import { useAuth } from "../context/AuthContext";
+import { useProductos } from "../context/ProductosContext"; // <-- Corrige el import
+import { agregarAlCarrito } from '../store/carrito'
 
 function Inicio() {
   const navigate = useNavigate();

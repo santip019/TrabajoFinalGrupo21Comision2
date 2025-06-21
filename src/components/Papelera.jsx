@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import { useProductos } from "../../context/ProductosContext";
+import { useProductos } from "../context/ProductosContext";
 function Papelera() {
   const { productos } = useProductos();
   const productosEliminados = productos.filter(producto => producto.estado === false);

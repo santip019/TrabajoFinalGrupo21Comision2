@@ -1,14 +1,14 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../../store/favoritos"; // Verifica este path
+import { toggleFavorito } from "../store/favoritos"; // Verifica este path
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import { FaStar, FaRegStar } from "react-icons/fa"; // Iconos favoritos
-import { useProductos } from "../../context/ProductosContext";
-import { agregarAlCarrito } from "../../store/carrito";
+import { useProductos } from "../context/ProductosContext";
+import { agregarAlCarrito } from "../store/carrito";
 
 
 function VerDetalles() {
