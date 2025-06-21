@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { quitarDelCarrito, cambiarCantidad } from '../../store/carrito';
+import { quitarDelCarrito, cambiarCantidad } from '../store/carrito';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

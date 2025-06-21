@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useProductos } from "../../context/ProductosContext";
+import { useProductos } from "../context/ProductosContext";
 
 function EditarProducto() {
   const { productos, setProductos } = useProductos();

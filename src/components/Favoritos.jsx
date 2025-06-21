@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useProductos } from "../../context/ProductosContext";
+import { useProductos } from "../context/ProductosContext";
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 
