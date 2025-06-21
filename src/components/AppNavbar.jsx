@@ -1,8 +1,7 @@
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { Link, Outlet } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; 
-import { useSelector } from 'react-redux';
-
+import { Navbar, Container, Nav, Row, Col, Dropdown } from "react-bootstrap";
+import { Link, Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useSelector } from "react-redux";
 
 function Layout() {
   const { user, logout } = useAuth();
@@ -15,35 +14,47 @@ function Layout() {
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/Layout">Inicio</Nav.Link>
-              {!user && <Nav.Link as={Link} to="/login">Login</Nav.Link>}
-              {user?.role === 'admin' && (
-                <Nav.Link as={Link} to="/Layout/nuevo-producto">Nuevo Producto</Nav.Link>
-              )}
-              <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
-              <Nav.Link as={Link} to="/Layout/acerca-de">Acerca de</Nav.Link>
-              <Nav.Link as={Link} to="/soporte">Soporte</Nav.Link>
-              {user && (
-                <Nav.Link as={Link} to="/Layout/carrito">
-                  🛒 Carrito
-                  {cantidadTotal > 0 && (
-                    <span className="badge bg-light text-dark ms-1">{cantidadTotal}</span>
-                  )}
-             </Nav.Link>
-                 )}
-              {user && <Nav.Link onClick={logout}>Cerrar Sesión</Nav.Link>}
-              
-            </Nav>
+            <Row className="w-100">
+              <Col xs={12} className="d-flex justify-content-between align-items-center">
+                <Nav className="me-auto">
+                  <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
+                  <Nav.Link as={Link} to="/Layout/carrito">Carrito
+                    {cantidadTotal > 0 && (
+                      <span className="badge bg-light text-dark ms-1">
+                        {cantidadTotal}
+                      </span>
+                    )}
+                  </Nav.Link>
+                </Nav>
+              </Col>
+
+              <Col xs={12}>
+                <Nav className="me-auto">
+                  <Dropdown>
+            <Dropdown.Toggle variant="none" id="dropdown-categorias">
+              Filtrar por categoría
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#categoria1">Categoría 1</Dropdown.Item>
+              <Dropdown.Item href="#categoria2">Categoría 2</Dropdown.Item>
+              <Dropdown.Item href="#categoria3">Categoría 3</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+                  <Nav.Link as={Link} to="/Layout">Inicio</Nav.Link>
+                  <Nav.Link as={Link} to="/Layout/promociones">Promociones</Nav.Link>
+                  <Nav.Link as={Link} to="/Layout/mas-vendidos">Más Vendidos</Nav.Link>
+                  <Nav.Link as={Link} to="/Layout/novedades">Novedades</Nav.Link>
+                  <Nav.Link as={Link} to="/Layout/soporte">Ayuda</Nav.Link>
+                </Nav>
+              </Col>
+            </Row>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className="mt-4">
-        <Outlet />
-      </Container>
+      <Outlet />
     </>
   );
 }
-
 
 export default Layout;
