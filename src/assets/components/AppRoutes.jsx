@@ -11,11 +11,11 @@ import Papelera from './Papelera';
 import AdminRoute from "../../routes/AdminRoute";
 import RutaAutenticada from "./RutaAutenticada";
 import Soporte from './Soporte';
-import Devoluciones from './soporte/Devoluciones';
-import Faq from './soporte/Faq';
-import Contacto from './soporte/Contacto';
-import Seguridad from './soporte/Seguridad';
-import Cuenta from './soporte/Cuenta';
+import Devoluciones from './Devoluciones';
+import Faq from './Faq';
+import Contacto from './Contacto';
+import Seguridad from './Seguridad';
+import Cuenta from './Cuenta';
 import Carrito from './Carrito'
 
 
