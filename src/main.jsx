@@ -12,13 +12,11 @@ import { ProductosProvider } from './context/ProductosContext'; // <-- Importa e
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
         <AuthProvider>
           <ProductosProvider>
             <App />
           </ProductosProvider>
         </AuthProvider>
-      </BrowserRouter>
     </Provider>
   </StrictMode>
 )
