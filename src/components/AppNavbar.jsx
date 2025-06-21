@@ -14,41 +14,50 @@ function Layout() {
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Row className="w-100">
-              <Col xs={12} className="d-flex justify-content-between align-items-center">
-                <Nav className="me-auto">
-                  <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
-                  <Nav.Link as={Link} to="/Layout/carrito">Carrito
-                    {cantidadTotal > 0 && (
-                      <span className="badge bg-light text-dark ms-1">
-                        {cantidadTotal}
-                      </span>
-                    )}
-                  </Nav.Link>
-                </Nav>
-              </Col>
+            <Container>
+              <Row className="w-100 align-items-center">
+                <Col md={4}>
+                  <Navbar.Brand as={Link} to="/">Mi Logo</Navbar.Brand>
+                </Col>
+                
+                <Col md={4} className="text-center">
+                  
+                </Col>
 
-              <Col xs={12}>
-                <Nav className="me-auto">
-                  <Dropdown>
-            <Dropdown.Toggle variant="none" id="dropdown-categorias">
-              Filtrar por categoría
-            </Dropdown.Toggle>
+                <Col md={4} className="d-flex justify-content-end">
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/Layout/favoritos">Favoritos</Nav.Link>
+                    <Nav.Link as={Link} to="/Layout/carrito">Carrito
+                      {cantidadTotal > 0 && (
+                        <span className="badge bg-light text-dark ms-1">
+                          {cantidadTotal}
+                        </span>
+                      )}
+                    </Nav.Link>
+                  </Nav>
+                </Col>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#categoria1">Categoría 1</Dropdown.Item>
-              <Dropdown.Item href="#categoria2">Categoría 2</Dropdown.Item>
-              <Dropdown.Item href="#categoria3">Categoría 3</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-                  <Nav.Link as={Link} to="/Layout">Inicio</Nav.Link>
-                  <Nav.Link as={Link} to="/Layout/promociones">Promociones</Nav.Link>
-                  <Nav.Link as={Link} to="/Layout/mas-vendidos">Más Vendidos</Nav.Link>
-                  <Nav.Link as={Link} to="/Layout/novedades">Novedades</Nav.Link>
-                  <Nav.Link as={Link} to="/Layout/soporte">Ayuda</Nav.Link>
-                </Nav>
-              </Col>
-            </Row>
+                <Col xs={12}>
+                  <Nav className="me-auto">
+                    <Dropdown>
+                      <Dropdown.Toggle variant="none" id="dropdown-categorias">
+                        Categorías
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#categoria1">Categoría 1</Dropdown.Item>
+                        <Dropdown.Item href="#categoria2">Categoría 2</Dropdown.Item>
+                        <Dropdown.Item href="#categoria3">Categoría 3</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Nav.Link as={Link} to="/Layout">Inicio</Nav.Link>
+                    <Nav.Link as={Link} to="/Layout/promociones">Promociones</Nav.Link>
+                    <Nav.Link as={Link} to="/Layout/mas-vendidos">Más Vendidos</Nav.Link>
+                    <Nav.Link as={Link} to="/Layout/novedades">Novedades</Nav.Link>
+                    <Nav.Link as={Link} to="/Layout/soporte">Ayuda</Nav.Link>
+                  </Nav>
+                </Col>
+              </Row>
+            </Container>
           </Navbar.Collapse>
         </Container>
       </Navbar>
