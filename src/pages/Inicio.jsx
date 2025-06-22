@@ -18,14 +18,16 @@ function Inicio() {
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas")
   const { user } = useAuth();
-  const { productos, eliminarProducto, restaurarProducto } = useProductos(); // <-- Obtén todo del contexto
+  const { productos, eliminarProducto, restaurarProducto, busqueda } = useProductos(); // <-- Obtén todo del contexto
   const categorias = [...new Set(productos.map(p => p.categoria || p.category))]
 
-const productosFiltrados = productos.filter((producto) => {
+  const productosFiltrados = productos.filter((producto) => {
   const categoria = producto.categoria || producto.category;
   const perteneceCategoria = categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
   const activoOInactivo = mostrarPapelera ? !producto.estado : producto.estado;
-  return perteneceCategoria && activoOInactivo;
+  const nombre = (producto.nombre || producto.title || "").toLowerCase();
+  const coincideBusqueda = nombre.includes(busqueda.toLowerCase());
+  return perteneceCategoria && activoOInactivo && coincideBusqueda;
 });
 
   const listaProductos = productosFiltrados.map((producto) => (
