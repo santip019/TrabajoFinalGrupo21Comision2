@@ -21,7 +21,7 @@ function Layout() {
                 </Col>
                 
                 <Col md={4} className="text-center">
-                  
+                  {/*Acá va la barra de busqueda*/}
                 </Col>
 
                 <Col md={4} className="d-flex justify-content-end">
@@ -40,7 +40,7 @@ function Layout() {
                 <Col xs={12}>
                   <Nav className="me-auto">
                     <Dropdown>
-                      <Dropdown.Toggle variant="none" id="dropdown-categorias">
+                      <Dropdown.Toggle variant="none" id="dropdown-categorias" className="categorias">
                         Categorías
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
