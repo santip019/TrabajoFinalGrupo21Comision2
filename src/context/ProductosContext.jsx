@@ -46,12 +46,16 @@ export function ProductosProvider({ children }) {
     );
   };
 
+const [busqueda, setBusqueda] = useState("");
+
   return (
     <ProductosContext.Provider value={{
       productos,
       eliminarProducto,
       restaurarProducto,
-      setProductos
+      setProductos,
+      busqueda,
+      setBusqueda
     }}>
       {children}
     </ProductosContext.Provider>
