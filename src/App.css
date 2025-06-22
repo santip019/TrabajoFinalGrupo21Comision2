@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 #root {
   max-width: auto;
@@ -6,11 +7,13 @@
   text-align: center;
 }
 
-nav {
+/* Comienzo del estilo del navbar */
+
+.navbar {
   display: flex;
   justify-content: center;
   background-color: #224274;
-  height: 5em;
+  height: 8em;
 }
 
 a.nav-link, .categorias {
@@ -20,7 +23,76 @@ a.nav-link, .categorias {
   font-weight: 500;
 }
 
-span.inicio.badge.bg-primary {
+.menu-arriba {
+  height: 5em;
+}
+
+.menu-abajo {
+  height: 3em;
+  border-top: 1px solid #cccccc69;
+}
+
+.categorias {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.categorias:focus, .categorias:active {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.contenedor-busqueda {
+  position: relative;
+}
+
+.busqueda {
+  border: 1px solid #cccccc69;
+  padding-right: 2.5em;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+}
+
+.busqueda:hover, .icono-lupa:hover {
+  cursor: pointer;
+}
+
+.busqueda:focus {
+  box-shadow: 0 0 8px 2px #41414155;
+  outline: none;
+  border: #888;
+}
+
+.icono-lupa {
+  position: absolute;
+  right: 0.75em;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.icono-estrella, .icono-cliente, .icono-carrito, .icono-ayuda  {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.3em;
+  font-size: 1em;
+  vertical-align: middle;
+  margin-bottom: 0.3em;
+}
+
+.icono-carrito  {
+  font-size: 1.2em;
+}
+
+.icono-ayuda {
+  margin-left: 0.3em;
+}
+
+/* Finaliza del estilo del navbar */
+
+/*span.inicio.badge.bg-primary {
   background-color: transparent;
 }
 
@@ -59,3 +131,4 @@ span.inicio.badge.bg-primary {
 .read-the-docs {
   color: #888;
 }
+*/
