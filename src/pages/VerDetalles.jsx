@@ -46,14 +46,14 @@ function VerDetalles() {
         <Card.Body>
           <div className="text-center mb-3">
             <Badge
-              bg={producto.estado ? "success" : "secondary"}
+              bg={producto.status ? "success" : "secondary"}
               className="mb-2"
               style={{ fontSize: "1rem" }}
             >
-              {producto.estado ? "Activo" : "Inactivo"}
+              {producto.status ? "Activo" : "Inactivo"}
             </Badge>
             <Card.Title as="h2" className="mb-1">
-              {producto.nombre || producto.title}
+              {producto.title}
             </Card.Title>
             <Card.Subtitle className="mb-3 text-muted">
               ID: {producto.id}
@@ -70,19 +70,19 @@ function VerDetalles() {
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Nombre:</Col>
-            <Col xs={8}>{producto.nombre || producto.title}</Col>
+            <Col xs={8}>{producto.title}</Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Precio:</Col>
-            <Col xs={8}>{producto.precio || producto.price}</Col>
+            <Col xs={8}>{producto.price}</Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Descripción:</Col>
-            <Col xs={8}>{producto.descripcion || producto.description}</Col>
+            <Col xs={8}>{producto.description}</Col>
           </Row>
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Categoría:</Col>
-            <Col xs={8}>{producto.categoria || producto.category}</Col>
+            <Col xs={8}>{producto.category}</Col>
           </Row>
 <div className="d-flex justify-content-end gap-2 mt-4">
   <Button
