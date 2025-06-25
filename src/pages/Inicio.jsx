@@ -140,9 +140,9 @@ function Inicio() {
 
 
   return (
-    <div className="container">
+    <div className="container-inicio">
 
-      <CarruselDeImagenes imagenes={imagenesPrincipal} />
+      <CarruselDeImagenes imagenes={imagenesPrincipal} className="contenedor-principal" />
 
       <h2>Productos con Descuento</h2>
       <CarruselDeProductos
