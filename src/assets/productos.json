@@ -1,0 +1,642 @@
+[
+  {
+    "id": 21,
+    "title": "Sony WH-1000XM5 Wireless Headphones",
+    "brand": "Sony",
+    "price": 398,
+    "description": "Auriculares inalámbricos con cancelación de ruido líder en la industria y hasta 30 horas de batería.",
+    "category": "electronics",
+    "image": "https://m.media-amazon.com/images/I/51z3A6r1PUL._AC_SL1500_.jpg",
+    "rating": {
+      "rate": 4.8,
+      "count": 5143
+    },
+    "discount": 15,
+    "dateOfEntry": "2024-07-05",
+    "delivery": true
+  },
+  {
+    "id": 22,
+    "title": "Levi's Men's 501 Original Fit Jeans",
+    "brand": "Levi's",
+    "price": 69.5,
+    "description": "Jean clásico de corte recto, resistente y cómodo, con cierre de botones.",
+    "category": "men's clothing",
+    "image": "https://lsco.scene7.com/is/image/lsco/005010114-front-pdp",
+    "rating": {
+      "rate": 4.5,
+      "count": 2104
+    },
+    "discount": 20,
+    "dateOfEntry": "2023-11-28",
+    "delivery": false
+  },
+  {
+    "id": 23,
+    "title": "Nike Air Force 1 '07",
+    "brand": "Nike",
+    "price": 115,
+    "description": "Zapatillas clásicas de cuero blanco con suela de goma y diseño icónico.",
+    "category": "men's clothing",
+    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,q_auto:eco/c04bb35c-cd17-45fc-8883-25576d2785ad/air-force-1-07-zapatillas-GjGXSP.png",
+    "rating": {
+      "rate": 4.6,
+      "count": 6243
+    },
+    "discount": 5,
+    "dateOfEntry": "2024-01-15",
+    "delivery": true
+  },
+  {
+    "id": 24,
+    "title": "Zara Women's Floral Midi Dress",
+    "brand": "Zara",
+    "price": 49.9,
+    "description": "Vestido midi estampado con diseño floral, manga corta y corte fluido.",
+    "category": "women's clothing",
+    "image": "https://static.zara.net/photos///2023/I/0/1/p/7883/236/330/2/w/560/7883236330_1_1_1.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 981
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-03-22",
+    "delivery": false
+  },
+  {
+    "id": 25,
+    "title": "Pandora Silver Charm Bracelet",
+    "brand": "Pandora",
+    "price": 75,
+    "description": "Pulsera de plata esterlina compatible con charms de colección Pandora.",
+    "category": "jewelery",
+    "image": "https://images.pandora.net/image/pandora/product/590702HV_V2_RGB.jpg",
+    "rating": {
+      "rate": 4.7,
+      "count": 1789
+    },
+    "discount": 12,
+    "dateOfEntry": "2024-04-12",
+    "delivery": true
+  },
+  {
+    "id": 26,
+    "title": "MAC Ruby Woo Lipstick",
+    "brand": "MAC",
+    "price": 23,
+    "description": "Lápiz labial mate de color rojo vibrante, fórmula de larga duración.",
+    "category": "makeup",
+    "image": "https://www.maccosmetics.com/media/export/cms/products/13854/13854_packshot_primary_alt.png",
+    "rating": {
+      "rate": 4.9,
+      "count": 3030
+    },
+    "discount": 8,
+    "dateOfEntry": "2023-12-02",
+    "delivery": true
+  },
+  {
+    "id": 27,
+    "title": "Instant Pot Duo 7-in-1",
+    "brand": "Instant Pot",
+    "price": 89.99,
+    "description": "Olla a presión multifunción: cocción lenta, arroz, yogurt y más.",
+    "category": "appliances",
+    "image": "https://m.media-amazon.com/images/I/71VwkXIfLwL._AC_SL1500_.jpg",
+    "rating": {
+      "rate": 4.6,
+      "count": 5022
+    },
+    "discount": 20,
+    "dateOfEntry": "2024-02-09",
+    "delivery": false
+  },
+  {
+    "id": 28,
+    "title": "Google Pixel 8 Pro 128GB",
+    "brand": "Google",
+    "price": 999,
+    "description": "Smartphone premium de Google con Tensor G3, cámara avanzada y Android puro.",
+    "category": "electronics",
+    "image": "https://store.google.com/product/images/pixel_8_pro_front_back.png",
+    "rating": {
+      "rate": 4.8,
+      "count": 2415
+    },
+    "discount": 5,
+    "dateOfEntry": "2024-05-10",
+    "delivery": true
+  },
+  {
+    "id": 29,
+    "title": "Dyson Supersonic Hair Dryer",
+    "brand": "Dyson",
+    "price": 429,
+    "description": "Secador de pelo profesional con motor digital, protección contra el calor extremo.",
+    "category": "appliances",
+    "image": "https://dyson-h.assetsadobe2.com/is/image/content/dam/dyson/products/hair-care/supersonic/overview/pink-grey",
+    "rating": {
+      "rate": 4.9,
+      "count": 1621
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-06-03",
+    "delivery": true
+  },
+  {
+    "id": 30,
+    "title": "Cartier Love Bracelet",
+    "brand": "Cartier",
+    "price": 6300,
+    "description": "Icónica pulsera de oro rosa 18k con diseño atornillado, símbolo de compromiso eterno.",
+    "category": "jewelery",
+    "image": "https://www.cartier.com/content/dam/cartier_dam/personalization/jewelry-love-bracelet.png",
+    "rating": {
+      "rate": 4.9,
+      "count": 320
+    },
+    "discount": 3,
+    "dateOfEntry": "2024-03-30",
+    "delivery": false
+  },
+  {
+    "id": 31,
+    "title": "Samsung Galaxy S23 Ultra 256GB",
+    "brand": "Samsung",
+    "price": 1199,
+    "description": "Smartphone premium con cámara de 200 MP, S-Pen integrado y pantalla Dynamic AMOLED 2X de 6.8”.",
+    "category": "electronics",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/ar/sm-s918bzsgaro/gallery/ar-galaxy-s23-ultra-s918-sm-s918bzsgaro-534168622",
+    "rating": {
+      "rate": 4.9,
+      "count": 4168
+    },
+    "discount": 10,
+    "dateOfEntry": "2023-11-12",
+    "delivery": true
+  },
+  {
+    "id": 32,
+    "title": "H&M Women’s Long Cardigan",
+    "brand": "H&M",
+    "price": 34.99,
+    "description": "Cárdigan largo tejido con mezcla de lana, ideal para media estación.",
+    "category": "women's clothing",
+    "image": "https://lp2.hm.com/hmgoepprod?set=source[/67/43/6743ab2e52c5266eea50fe2a087bca4b2f15d61d.jpg]",
+    "rating": {
+      "rate": 4.5,
+      "count": 981
+    },
+    "discount": 12,
+    "dateOfEntry": "2024-04-07",
+    "delivery": false
+  },
+  {
+    "id": 33,
+    "title": "KitchenAid Artisan Stand Mixer",
+    "brand": "KitchenAid",
+    "price": 449,
+    "description": "Batidora de pedestal profesional con cabezal inclinable y múltiples accesorios.",
+    "category": "appliances",
+    "image": "https://www.kitchenaid.com/digitalassets/KSM150PSER/stand-mixer.png",
+    "rating": {
+      "rate": 4.9,
+      "count": 2890
+    },
+    "discount": 18,
+    "dateOfEntry": "2024-02-22",
+    "delivery": true
+  },
+  {
+    "id": 34,
+    "title": "Under Armour Sportstyle T-Shirt",
+    "brand": "Under Armour",
+    "price": 25,
+    "description": "Remera deportiva de alto rendimiento con tela transpirable y diseño moderno.",
+    "category": "men's clothing",
+    "image": "https://underarmour.scene7.com/is/image/Underarmour/1326799-001_FC",
+    "rating": {
+      "rate": 4.4,
+      "count": 1432
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-05-02",
+    "delivery": true
+  },
+  {
+    "id": 35,
+    "title": "NYX Soft Matte Lip Cream - Copenhagen",
+    "brand": "NYX",
+    "price": 8.50,
+    "description": "Labial líquido mate con textura cremosa y color duradero, tono Copenhagen.",
+    "category": "makeup",
+    "image": "https://www.nyxcosmetics.com/dw/image/v2/AAFM_PRD/on/demandware.static/-/Sites-nyx-master-catalog/default/dw2e3abf39",
+    "rating": {
+      "rate": 4.6,
+      "count": 1872
+    },
+    "discount": 20,
+    "dateOfEntry": "2024-03-08",
+    "delivery": true
+  },
+  {
+    "id": 36,
+    "title": "Swarovski Tennis Deluxe Bracelet",
+    "brand": "Swarovski",
+    "price": 169,
+    "description": "Elegante brazalete con cristales Swarovski, diseño brillante y sofisticado.",
+    "category": "jewelery",
+    "image": "https://www.swarovski.com/medias/5600046.jpg",
+    "rating": {
+      "rate": 4.8,
+      "count": 782
+    },
+    "discount": 17,
+    "dateOfEntry": "2023-10-14",
+    "delivery": false
+  },
+  {
+    "id": 37,
+    "title": "Adidas Essentials 3-Stripes Pants",
+    "brand": "Adidas",
+    "price": 40,
+    "description": "Pantalón deportivo con icónicas tres rayas, ajuste cómodo y tejido suave.",
+    "category": "men's clothing",
+    "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f8a3f9b4e06e447a8f95adc800aa6c31_9366/",
+    "rating": {
+      "rate": 4.3,
+      "count": 1415
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-01-20",
+    "delivery": true
+  },
+  {
+    "id": 38,
+    "title": "Maybelline Fit Me Matte + Poreless Foundation",
+    "brand": "Maybelline",
+    "price": 7.99,
+    "description": "Base líquida con acabado mate y control de brillo, ideal para piel normal a grasa.",
+    "category": "makeup",
+    "image": "https://images.maybelline.com/is/image/mny/maybelline-fit-me-foundation",
+    "rating": {
+      "rate": 4.5,
+      "count": 2210
+    },
+    "discount": 15,
+    "dateOfEntry": "2024-02-18",
+    "delivery": false
+  },
+  {
+    "id": 39,
+    "title": "ASUS ROG Strix G16 Gaming Laptop",
+    "brand": "ASUS",
+    "price": 1599,
+    "description": "Laptop gamer con procesador Intel i9, RTX 4070 y pantalla de 240Hz.",
+    "category": "electronics",
+    "image": "https://dlcdnwebimgs.asus.com/gain/5de4b61a-147c-4b86-8e36-43e3d0fa0776/",
+    "rating": {
+      "rate": 4.9,
+      "count": 922
+    },
+    "discount": 25,
+    "dateOfEntry": "2023-12-12",
+    "delivery": true
+  },
+  {
+    "id": 40,
+    "title": "Tiffany & Co. Elsa Peretti Pendant",
+    "brand": "Tiffany & Co.",
+    "price": 395,
+    "description": "Colgante de plata esterlina con diseño de gota, elegante y minimalista.",
+    "category": "jewelery",
+    "image": "https://media.tiffany.com/is/image/Tiffany/Elsa_Peretti_Original_Design",
+    "rating": {
+      "rate": 4.9,
+      "count": 301
+    },
+    "discount": 5,
+    "dateOfEntry": "2024-03-17",
+    "delivery": false
+  },
+  {
+    "id": 41,
+    "title": "Nespresso VertuoPlus Coffee Machine",
+    "brand": "Nespresso",
+    "price": 189,
+    "description": "Máquina de café con tecnología de extracción Centrifusion™ y sistema de cápsulas.",
+    "category": "appliances",
+    "image": "https://www.nespresso.com/ecom/medias/sys_master/public/VertuoPlus-machine",
+    "rating": {
+      "rate": 4.7,
+      "count": 2133
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-03-03",
+    "delivery": true
+  },
+  {
+    "id": 42,
+    "title": "L'Oréal Voluminous Original Mascara",
+    "brand": "L'Oréal",
+    "price": 9.99,
+    "description": "Máscara con volumen intenso para pestañas más gruesas y definidas.",
+    "category": "makeup",
+    "image": "https://www.lorealparisusa.com/-/media/project/loreal/brand-sites/oap/americas/us/products/eye/makeup/voluminous-original-mascara",
+    "rating": {
+      "rate": 4.6,
+      "count": 1840
+    },
+    "discount": 15,
+    "dateOfEntry": "2024-04-18",
+    "delivery": true
+  },
+  {
+    "id": 43,
+    "title": "Calvin Klein Modern Cotton Bralette",
+    "brand": "Calvin Klein",
+    "price": 30,
+    "description": "Corpiño deportivo con banda elástica y logo Calvin Klein. Comodidad y estilo.",
+    "category": "women's clothing",
+    "image": "https://images.calvinklein.com/is/image/CalvinKlein/WQF1761_001_main",
+    "rating": {
+      "rate": 4.4,
+      "count": 1449
+    },
+    "discount": 8,
+    "dateOfEntry": "2024-02-11",
+    "delivery": true
+  },
+  {
+    "id": 44,
+    "title": "The North Face Apex Bionic Jacket",
+    "brand": "The North Face",
+    "price": 149,
+    "description": "Campera softshell resistente al viento con ajuste atlético y bolsillos con cierre.",
+    "category": "men's clothing",
+    "image": "https://www.thenorthface.com/shop/product/mens-apex-bionic-jacket",
+    "rating": {
+      "rate": 4.8,
+      "count": 989
+    },
+    "discount": 12,
+    "dateOfEntry": "2023-12-29",
+    "delivery": false
+  },
+  {
+    "id": 45,
+    "title": "Apple Watch Series 9 41mm",
+    "brand": "Apple",
+    "price": 399,
+    "description": "Smartwatch con pantalla Always-On Retina, monitoreo de salud y Siri avanzada.",
+    "category": "electronics",
+    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-s9-alum-starlight-nc-45-cell-1up?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1693188619432",
+    "rating": {
+      "rate": 4.9,
+      "count": 5200
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-05-26",
+    "delivery": true
+  },
+  {
+    "id": 46,
+    "title": "Ray-Ban Wayfarer Classic Sunglasses",
+    "brand": "Ray-Ban",
+    "price": 163,
+    "description": "Anteojos de sol icónicos con montura negra y lentes verdes clásicos G-15.",
+    "category": "men's clothing",
+    "image": "https://assets.ray-ban.com/is/image/RayBan/805289602057_shad_qt?$594$",
+    "rating": {
+      "rate": 4.7,
+      "count": 2234
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-03-29",
+    "delivery": false
+  },
+  {
+    "id": 47,
+    "title": "Estée Lauder Double Wear Foundation",
+    "brand": "Estée Lauder",
+    "price": 46,
+    "description": "Base líquida de larga duración con cobertura total y acabado mate natural.",
+    "category": "makeup",
+    "image": "https://www.esteelauder.com/media/export/cms/products/858x1020/el_sku_P9C101_858x1020_0.jpg",
+    "rating": {
+      "rate": 4.8,
+      "count": 1987
+    },
+    "discount": 15,
+    "dateOfEntry": "2024-01-16",
+    "delivery": true
+  },
+  {
+    "id": 48,
+    "title": "Fossil Gen 6 Smartwatch",
+    "brand": "Fossil",
+    "price": 299,
+    "description": "Reloj inteligente con Wear OS, sensores de salud, carga rápida y estilo clásico.",
+    "category": "electronics",
+    "image": "https://fossil.scene7.com/is/image/FossilPartners/FTW6072_main?$sfcc_fos_medium$",
+    "rating": {
+      "rate": 4.3,
+      "count": 1390
+    },
+    "discount": 20,
+    "dateOfEntry": "2024-04-03",
+    "delivery": true
+  },
+  {
+    "id": 49,
+    "title": "Michael Kors Jet Set Large Tote",
+    "brand": "Michael Kors",
+    "price": 198,
+    "description": "Cartera tote espaciosa con logo de firma y asas dobles de cuero saffiano.",
+    "category": "women's clothing",
+    "image": "https://michaelkors.scene7.com/is/image/MichaelKors/30S5GTVT2L-0001_1?$medium$",
+    "rating": {
+      "rate": 4.6,
+      "count": 873
+    },
+    "discount": 15,
+    "dateOfEntry": "2024-02-28",
+    "delivery": true
+  },
+  {
+    "id": 50,
+    "title": "JBL Charge 5 Bluetooth Speaker",
+    "brand": "JBL",
+    "price": 139,
+    "description": "Parlante inalámbrico resistente al agua, batería de 20 horas y sonido JBL Pro.",
+    "category": "electronics",
+    "image": "https://www.jbl.com/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw32bdb254/1_JBL_Charge_5_Hero_Black.png",
+    "rating": {
+      "rate": 4.7,
+      "count": 4261
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-06-12",
+    "delivery": true
+  },
+  {
+    "id": 51,
+    "title": "Samsung 55'' QLED 4K Smart TV Q60C",
+    "brand": "Samsung",
+    "price": 649.99,
+    "description": "Smart TV 4K UHD con tecnología Quantum Dot, AirSlim Design y sistema operativo Tizen.",
+    "category": "electronics",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/ar/qn55q60cagczb/gallery/ar-qled-q60c-qn55q60cagczb-frontblack-535426319",
+    "rating": {
+      "rate": 4.6,
+      "count": 2761
+    },
+    "discount": 15,
+    "dateOfEntry": "2024-05-08",
+    "delivery": true
+  },
+  {
+    "id": 52,
+    "title": "Revlon One-Step Hair Dryer and Volumizer",
+    "brand": "Revlon",
+    "price": 41.99,
+    "description": "Cepillo secador de pelo 2 en 1 para alisar, secar y dar volumen con un solo paso.",
+    "category": "appliances",
+    "image": "https://m.media-amazon.com/images/I/71aXzP16Y+L._AC_SL1500_.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 3882
+    },
+    "discount": 25,
+    "dateOfEntry": "2024-04-15",
+    "delivery": true
+  },
+  {
+    "id": 53,
+    "title": "Uniqlo Men's Ultra Light Down Jacket",
+    "brand": "Uniqlo",
+    "price": 79.90,
+    "description": "Campera de pluma ultraligera, compresible y resistente al agua.",
+    "category": "men's clothing",
+    "image": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/437221/item/goods_09_437221.jpg",
+    "rating": {
+      "rate": 4.4,
+      "count": 942
+    },
+    "discount": 20,
+    "dateOfEntry": "2024-02-19",
+    "delivery": false
+  },
+  {
+    "id": 54,
+    "title": "Glossier Cloud Paint - Dusk",
+    "brand": "Glossier",
+    "price": 20,
+    "description": "Rubor en gel-crema de aspecto natural y fácil de difuminar. Tono Dusk.",
+    "category": "makeup",
+    "image": "https://cdn.glossier.com/production/spree/images/attachments/000/003/408/original/cloud_paint_dusk.png",
+    "rating": {
+      "rate": 4.7,
+      "count": 1584
+    },
+    "discount": 10,
+    "dateOfEntry": "2023-11-06",
+    "delivery": true
+  },
+  {
+    "id": 55,
+    "title": "Tommy Hilfiger Men's Oxford Shirt",
+    "brand": "Tommy Hilfiger",
+    "price": 49.50,
+    "description": "Camisa clásica de algodón con logo bordado y corte regular fit.",
+    "category": "men's clothing",
+    "image": "https://img01.ztat.net/article/spp-media-p1/960b2a4a4cf842f4b5a91aab8a9d07a1/b2c3dcdc008844488ebcd1dfec5792b2.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 1220
+    },
+    "discount": 12,
+    "dateOfEntry": "2024-01-22",
+    "delivery": true
+  },
+  {
+    "id": 56,
+    "title": "Garmin Forerunner 55 GPS Watch",
+    "brand": "Garmin",
+    "price": 199,
+    "description": "Reloj deportivo con GPS integrado, seguimiento de actividad y entrenamiento adaptativo.",
+    "category": "electronics",
+    "image": "https://static.garmincdn.com/en/products/010-02562-00/v/cf-lg-b2b61e4e-0c1d-4af3-9c24-81a264f8adf3.jpg",
+    "rating": {
+      "rate": 4.6,
+      "count": 1347
+    },
+    "discount": 18,
+    "dateOfEntry": "2024-03-12",
+    "delivery": true
+  },
+  {
+    "id": 57,
+    "title": "Sephora Collection Best Skin Ever Foundation",
+    "brand": "Sephora Collection",
+    "price": 20,
+    "description": "Base líquida con ingredientes cuidados de la piel, cobertura media natural.",
+    "category": "makeup",
+    "image": "https://www.sephora.com/productimages/sku/s2423735-main-zoom.jpg",
+    "rating": {
+      "rate": 4.5,
+      "count": 1890
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-04-30",
+    "delivery": true
+  },
+  {
+    "id": 58,
+    "title": "Apple MacBook Air M2 13''",
+    "brand": "Apple",
+    "price": 1099,
+    "description": "Laptop ultraligera con chip M2, pantalla Retina de 13.6” y 18 horas de batería.",
+    "category": "electronics",
+    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-m2-hero-202206?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1653493200207",
+    "rating": {
+      "rate": 4.9,
+      "count": 2733
+    },
+    "discount": 10,
+    "dateOfEntry": "2024-05-10",
+    "delivery": true
+  },
+  {
+    "id": 59,
+    "title": "Crocs Classic Clog",
+    "brand": "Crocs",
+    "price": 49.99,
+    "description": "Zuecos de espuma ligeros, cómodos y con orificios de ventilación.",
+    "category": "men's clothing",
+    "image": "https://crocs.com.ar/media/catalog/product/cache/1/small_image/380x500/9df78eab33525d08d6e5fb8d27136e95/1/0/10001-001-alt100.jpg",
+    "rating": {
+      "rate": 4.7,
+      "count": 3140
+    },
+    "discount": 15,
+    "dateOfEntry": "2023-12-08",
+    "delivery": false
+  },
+  {
+    "id": 60,
+    "title": "Dior Addict Lip Glow",
+    "brand": "Dior",
+    "price": 40,
+    "description": "Bálsamo labial hidratante que reacciona con el pH y realza el color natural.",
+    "category": "makeup",
+    "image": "https://www.dior.com/couture/var/dior/storage/images/horizon/products/makeup/lips/balm/dior-addict-lip-glow-color-awakening-lip-balm/3001638-2-eng-GB/dior-addict-lip-glow-color-awakening-lip-balm.png",
+    "rating": {
+      "rate": 4.9,
+      "count": 2450
+    },
+    "discount": 5,
+    "dateOfEntry": "2024-06-01",
+    "delivery": true
+  }
+]

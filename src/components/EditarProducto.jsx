@@ -13,11 +13,11 @@ function EditarProducto() {
   const [formData, setFormData] = useState({
     id: "",
     image: "",
-    nombre: "",
-    precio: "",
-    descripcion: "",
-    categoria: "",
-    favorito: false,
+    title: "",
+    price: "",
+    description: "",
+    category: "",
+    status: false,
   });
 
   useEffect(() => {
@@ -72,8 +72,8 @@ function EditarProducto() {
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
-            name="nombre"
-            value={formData.title || formData.nombre}
+            name="title"
+            value={formData.title}
             onChange={handleChange}
           />
         </Form.Group>
@@ -81,8 +81,8 @@ function EditarProducto() {
           <Form.Label>Precio</Form.Label>
           <Form.Control
             type="text"
-            name="precio"
-            value={formData.price || formData.precio}
+            name="price"
+            value={formData.price}
             onChange={handleChange}
           />
         </Form.Group>
@@ -90,8 +90,8 @@ function EditarProducto() {
           <Form.Label>Descripcion</Form.Label>
           <Form.Control
             type="text"
-            name="descripcion"
-            value={formData.description || formData.descripcion}
+            name="description"
+            value={formData.description}
             onChange={handleChange}
           />
         </Form.Group>
@@ -99,8 +99,8 @@ function EditarProducto() {
           <Form.Label>Categoria</Form.Label>
           <Form.Control
             type="text"
-            name="categoria"
-            value={formData.category || formData.categoria}
+            name="category"
+            value={formData.category}
             onChange={handleChange}
           />
         </Form.Group>
@@ -108,8 +108,8 @@ function EditarProducto() {
           <Form.Label>Favorito</Form.Label>
           <Form.Control
             type="checkbox"
-            name="favorito"
-            checked={formData.favorito}
+            name="favourite"
+            checked={formData.favourite}
             onChange={handleChange}
           />
         </Form.Group>
