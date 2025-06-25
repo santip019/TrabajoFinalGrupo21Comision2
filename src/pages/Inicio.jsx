@@ -9,26 +9,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorito } from "../store/favoritos";
 import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext"; // <-- Corrige el import
-import { agregarAlCarrito } from '../store/carrito'
+import { agregarAlCarrito } from "../store/carrito";
+import ListaDeProductos from "../components/ListaDeProductos";
 
 function Inicio() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas")
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas");
   const { user } = useAuth();
-  const { productos, eliminarProducto, restaurarProducto, busqueda } = useProductos(); // <-- Obtén todo del contexto
-  const categorias = [...new Set(productos.map(p => p.categoria || p.category))]
+  const { productos, eliminarProducto, restaurarProducto, busqueda } =
+    useProductos(); // <-- Obtén todo del contexto
+  const categorias = [
+    ...new Set(productos.map((p) => p.categoria || p.category)),
+  ];
 
   const productosFiltrados = productos.filter((producto) => {
-  const categoria = producto.categoria || producto.category;
-  const perteneceCategoria = categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
-  const activoOInactivo = mostrarPapelera ? !producto.estado : producto.estado;
-  const nombre = (producto.nombre || producto.title || "").toLowerCase();
-  const coincideBusqueda = nombre.includes(busqueda.toLowerCase());
-  return perteneceCategoria && activoOInactivo && coincideBusqueda;
-});
+    const categoria = producto.categoria || producto.category;
+    const perteneceCategoria =
+      categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
+    const activoOInactivo = mostrarPapelera
+      ? !producto.estado
+      : producto.estado;
+    const nombre = (producto.nombre || producto.title || "").toLowerCase();
+    const coincideBusqueda = nombre.includes(busqueda.toLowerCase());
+    return perteneceCategoria && activoOInactivo && coincideBusqueda;
+  });
 
   const listaProductos = productosFiltrados.map((producto) => (
     <div key={producto.id} className="col-md-4 d-flex mb-4">
@@ -39,16 +46,16 @@ function Inicio() {
         />
         <Card.Body>
           <Card.Title>{producto.title || producto.nombre}</Card.Title>
-          <Card.Text>
-            Precio ${producto.precio || producto.price}
-          </Card.Text>
+          <Card.Text>Precio ${producto.precio || producto.price}</Card.Text>
 
           {!mostrarPapelera && (
             <>
               {user?.role === "admin" && (
                 <Button
                   variant="success"
-                  onClick={() => navigate(`/Layout/editar-producto/${producto.id}`)}
+                  onClick={() =>
+                    navigate(`/Layout/editar-producto/${producto.id}`)
+                  }
                 >
                   Editar
                 </Button>
@@ -69,15 +76,14 @@ function Inicio() {
                 style={{ fontSize: "1.2rem", padding: "0.3rem" }}
                 aria-label="Favorito"
               >
-                {favoritos.includes(producto.id)? "★ " : "☆ "}
+                {favoritos.includes(producto.id) ? "★ " : "☆ "}
               </Button>{" "}
               <Button
-               variant="outline-primary"
-               onClick={() => dispatch(agregarAlCarrito(producto))}
+                variant="outline-primary"
+                onClick={() => dispatch(agregarAlCarrito(producto))}
               >
                 Añadir al carrito
               </Button>
-
               {user?.role === "admin" && (
                 <Button
                   variant="danger"
@@ -113,7 +119,7 @@ function Inicio() {
     </div>
   ));
 
-return (
+  return (
     <div className="container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>
@@ -143,8 +149,22 @@ return (
         </div>
       </div>
       <div className="row">
-        {listaProductos.length > 0 ? (
-          listaProductos
+        {productosFiltrados.length > 0 ? (
+          <ListaDeProductos
+            productos={productosFiltrados}
+            onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
+            onAgregarCarrito={(producto) =>
+              dispatch(agregarAlCarrito(producto))
+            }
+            mostrarPapelera={mostrarPapelera}
+            user={user}
+            favoritos={favoritos}
+            onToggleFavorito={(id) => dispatch(toggleFavorito(id))}
+            onEliminar={eliminarProducto}
+            onRestaurar={restaurarProducto}
+            onEditar={(id) => navigate(`/Layout/editar-producto/${id}`)} // falta implementar, editar no sirve 
+
+          />
         ) : (
           <p className="text-muted">
             {mostrarPapelera
@@ -156,6 +176,5 @@ return (
     </div>
   );
 }
-
 
 export default Inicio;

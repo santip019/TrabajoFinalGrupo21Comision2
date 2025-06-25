@@ -90,6 +90,13 @@ a.nav-link, .categorias {
   margin-left: 0.3em;
 }
 
+@media (min-width: 992px) {
+  .card-producto {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
 /* Finaliza del estilo del navbar */
 
 /*span.inicio.badge.bg-primary {
