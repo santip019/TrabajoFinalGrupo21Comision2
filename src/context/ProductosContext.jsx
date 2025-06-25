@@ -8,6 +8,7 @@ export function useProductos() {
 
 export function ProductosProvider({ children }) {
   const [productos, setProductos] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas"); // Esto guarda la categoría elegida por el usuario.
 
   // Cargar productos desde la API al montar el componente (async/await)
   useEffect(() => {
@@ -55,7 +56,9 @@ const [busqueda, setBusqueda] = useState("");
       restaurarProducto,
       setProductos,
       busqueda,
-      setBusqueda
+      setBusqueda,
+      categoriaSeleccionada, // Se expone de manera global el valor actual de la categoria y la funcion para cambiarla, asi desdes cualquier componente se puede acceder a la categoria seleccionada y cambiarla.
+      setCategoriaSeleccionada
     }}>
       {children}
     </ProductosContext.Provider>
