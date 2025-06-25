@@ -227,10 +227,10 @@
     "id": 35,
     "title": "NYX Soft Matte Lip Cream - Copenhagen",
     "brand": "NYX",
-    "price": 8.50,
+    "price": 8.5,
     "description": "Labial líquido mate con textura cremosa y color duradero, tono Copenhagen.",
     "category": "makeup",
-    "image": "https://www.nyxcosmetics.com/dw/image/v2/AAFM_PRD/on/demandware.static/-/Sites-nyx-master-catalog/default/dw2e3abf39",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_807819-MLA74780228085_022024-O.webp",
     "rating": {
       "rate": 4.6,
       "count": 1872
@@ -246,7 +246,7 @@
     "price": 169,
     "description": "Elegante brazalete con cristales Swarovski, diseño brillante y sofisticado.",
     "category": "jewelery",
-    "image": "https://www.swarovski.com/medias/5600046.jpg",
+    "image": "https://http2.mlstatic.com/D_Q_NP_983498-CBT83262342967_032025-O.webp",
     "rating": {
       "rate": 4.8,
       "count": 782
@@ -262,7 +262,7 @@
     "price": 40,
     "description": "Pantalón deportivo con icónicas tres rayas, ajuste cómodo y tejido suave.",
     "category": "men's clothing",
-    "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f8a3f9b4e06e447a8f95adc800aa6c31_9366/",
+    "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f752d59824f345cf984aaf02010bff8f_9366/Pantalon_Train_Essentials_3-Stripes_Negro_IB8168_01_laydown.jpg",
     "rating": {
       "rate": 4.3,
       "count": 1415
@@ -278,7 +278,7 @@
     "price": 7.99,
     "description": "Base líquida con acabado mate y control de brillo, ideal para piel normal a grasa.",
     "category": "makeup",
-    "image": "https://images.maybelline.com/is/image/mny/maybelline-fit-me-foundation",
+    "image": "https://lasmargaritas.vtexassets.com/arquivos/ids/2321261-800-auto?v=638549155197730000&width=800&height=auto&aspect=true",
     "rating": {
       "rate": 4.5,
       "count": 2210
@@ -294,7 +294,7 @@
     "price": 1599,
     "description": "Laptop gamer con procesador Intel i9, RTX 4070 y pantalla de 240Hz.",
     "category": "electronics",
-    "image": "https://dlcdnwebimgs.asus.com/gain/5de4b61a-147c-4b86-8e36-43e3d0fa0776/",
+    "image": "https://dlcdnwebimgs.asus.com/gain/14730014-9B03-4369-83EE-B668F348B5AA",
     "rating": {
       "rate": 4.9,
       "count": 922
@@ -310,7 +310,7 @@
     "price": 395,
     "description": "Colgante de plata esterlina con diseño de gota, elegante y minimalista.",
     "category": "jewelery",
-    "image": "https://media.tiffany.com/is/image/Tiffany/Elsa_Peretti_Original_Design",
+    "image": "https://media.tiffany.com/is/image/Tiffany/EcomItemL2/elsa-perettiopen-heart-pendant-25604032_1027651_ED.jpg",
     "rating": {
       "rate": 4.9,
       "count": 301
@@ -326,7 +326,7 @@
     "price": 189,
     "description": "Máquina de café con tecnología de extracción Centrifusion™ y sistema de cápsulas.",
     "category": "appliances",
-    "image": "https://www.nespresso.com/ecom/medias/sys_master/public/VertuoPlus-machine",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_968581-CBT75278486136_032024-O.webp",
     "rating": {
       "rate": 4.7,
       "count": 2133
@@ -342,7 +342,7 @@
     "price": 9.99,
     "description": "Máscara con volumen intenso para pestañas más gruesas y definidas.",
     "category": "makeup",
-    "image": "https://www.lorealparisusa.com/-/media/project/loreal/brand-sites/oap/americas/us/products/eye/makeup/voluminous-original-mascara",
+    "image": "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/loe/loe05909/l/13.jpg",
     "rating": {
       "rate": 4.6,
       "count": 1840
@@ -358,7 +358,7 @@
     "price": 30,
     "description": "Corpiño deportivo con banda elástica y logo Calvin Klein. Comodidad y estilo.",
     "category": "women's clothing",
-    "image": "https://images.calvinklein.com/is/image/CalvinKlein/WQF1761_001_main",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_688727-MLA69516784936_052023-O.webp",
     "rating": {
       "rate": 4.4,
       "count": 1449
@@ -374,7 +374,7 @@
     "price": 149,
     "description": "Campera softshell resistente al viento con ajuste atlético y bolsillos con cierre.",
     "category": "men's clothing",
-    "image": "https://www.thenorthface.com/shop/product/mens-apex-bionic-jacket",
+    "image": "https://www.nevisport.com/media/catalog/product/cache/b29a91fb1c32dd632a7a5f6a53b7a2f6/M/A/MAJKSSZZ0335B3K1.jpg",
     "rating": {
       "rate": 4.8,
       "count": 989
@@ -390,7 +390,7 @@
     "price": 399,
     "description": "Smartwatch con pantalla Always-On Retina, monitoreo de salud y Siri avanzada.",
     "category": "electronics",
-    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-s9-alum-starlight-nc-45-cell-1up?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1693188619432",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNYYbu31y8psLHZ_i-4c6I-8A-9CxFyxlSFw&s",
     "rating": {
       "rate": 4.9,
       "count": 5200
@@ -454,7 +454,7 @@
     "price": 198,
     "description": "Cartera tote espaciosa con logo de firma y asas dobles de cuero saffiano.",
     "category": "women's clothing",
-    "image": "https://michaelkors.scene7.com/is/image/MichaelKors/30S5GTVT2L-0001_1?$medium$",
+    "image": "https://i5.walmartimages.com/asr/65136527-9800-4eb8-a661-4398d3ff1cf4_1.302498a6f293454a652ca8a1999fb1bc.jpeg",
     "rating": {
       "rate": 4.6,
       "count": 873
@@ -470,7 +470,7 @@
     "price": 139,
     "description": "Parlante inalámbrico resistente al agua, batería de 20 horas y sonido JBL Pro.",
     "category": "electronics",
-    "image": "https://www.jbl.com/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw32bdb254/1_JBL_Charge_5_Hero_Black.png",
+    "image": "https://th.bing.com/th/id/OIP.gNs1TqSwsNcciUHBNHirVAHaHa?rs=1&pid=ImgDetMain",
     "rating": {
       "rate": 4.7,
       "count": 4261
@@ -486,7 +486,7 @@
     "price": 649.99,
     "description": "Smart TV 4K UHD con tecnología Quantum Dot, AirSlim Design y sistema operativo Tizen.",
     "category": "electronics",
-    "image": "https://images.samsung.com/is/image/samsung/p6pim/ar/qn55q60cagczb/gallery/ar-qled-q60c-qn55q60cagczb-frontblack-535426319",
+    "image": "https://samsungbrshop.vtexassets.com/arquivos/ids/205915-800-auto?v=638151050111230000&width=800&height=auto&aspect=true",
     "rating": {
       "rate": 4.6,
       "count": 2761
@@ -502,7 +502,7 @@
     "price": 41.99,
     "description": "Cepillo secador de pelo 2 en 1 para alisar, secar y dar volumen con un solo paso.",
     "category": "appliances",
-    "image": "https://m.media-amazon.com/images/I/71aXzP16Y+L._AC_SL1500_.jpg",
+    "image": "https://images.chickadvisor.com/item/73128/original/a6ba524a244de013bf369209ee592ba4.jpg",
     "rating": {
       "rate": 4.5,
       "count": 3882
@@ -515,10 +515,10 @@
     "id": 53,
     "title": "Uniqlo Men's Ultra Light Down Jacket",
     "brand": "Uniqlo",
-    "price": 79.90,
+    "price": 79.9,
     "description": "Campera de pluma ultraligera, compresible y resistente al agua.",
     "category": "men's clothing",
-    "image": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/437221/item/goods_09_437221.jpg",
+    "image": "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/400504/item/goods_69_400504.jpg?width=2000",
     "rating": {
       "rate": 4.4,
       "count": 942
@@ -534,7 +534,7 @@
     "price": 20,
     "description": "Rubor en gel-crema de aspecto natural y fácil de difuminar. Tono Dusk.",
     "category": "makeup",
-    "image": "https://cdn.glossier.com/production/spree/images/attachments/000/003/408/original/cloud_paint_dusk.png",
+    "image": "https://i.pinimg.com/originals/f2/d1/f8/f2d1f81761694caa01c6010f57c5e450.jpg",
     "rating": {
       "rate": 4.7,
       "count": 1584
@@ -547,10 +547,10 @@
     "id": 55,
     "title": "Tommy Hilfiger Men's Oxford Shirt",
     "brand": "Tommy Hilfiger",
-    "price": 49.50,
+    "price": 49.5,
     "description": "Camisa clásica de algodón con logo bordado y corte regular fit.",
     "category": "men's clothing",
-    "image": "https://img01.ztat.net/article/spp-media-p1/960b2a4a4cf842f4b5a91aab8a9d07a1/b2c3dcdc008844488ebcd1dfec5792b2.jpg",
+    "image": "https://th.bing.com/th/id/OIP.Es36L81U0RBJf81c0zyu7wHaJ4?rs=1&pid=ImgDetMain",
     "rating": {
       "rate": 4.5,
       "count": 1220
@@ -566,7 +566,7 @@
     "price": 199,
     "description": "Reloj deportivo con GPS integrado, seguimiento de actividad y entrenamiento adaptativo.",
     "category": "electronics",
-    "image": "https://static.garmincdn.com/en/products/010-02562-00/v/cf-lg-b2b61e4e-0c1d-4af3-9c24-81a264f8adf3.jpg",
+    "image": "https://i5.walmartimages.com/asr/1a97d940-2a3d-4b0a-b9a6-1dc1fcab1a22.4e662b6e0836595c09dcf22a734f285c.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff",
     "rating": {
       "rate": 4.6,
       "count": 1347
@@ -582,7 +582,7 @@
     "price": 20,
     "description": "Base líquida con ingredientes cuidados de la piel, cobertura media natural.",
     "category": "makeup",
-    "image": "https://www.sephora.com/productimages/sku/s2423735-main-zoom.jpg",
+    "image": "https://www.sephora.com/productimages/sku/s2423735-main-zoom.jpghttps://image-optimizer-reg.production.sephora-asia.net/images/product_images/zoom_2_Product_3378872186595-Sephora-Collection-Best-Skin-Ever-Glow-12HR-Moisturizing-Liquid-Fo_de4e8337d227b0d233916182fe488592940fa2a6_1659930485.png",
     "rating": {
       "rate": 4.5,
       "count": 1890

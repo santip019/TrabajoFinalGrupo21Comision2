@@ -97,6 +97,11 @@ a.nav-link, .categorias {
   }
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1) grayscale(1) brightness(0.3);
+}
+
 /* Finaliza del estilo del navbar */
 
 /*span.inicio.badge.bg-primary {
