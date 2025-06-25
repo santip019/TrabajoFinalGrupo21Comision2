@@ -20,8 +20,10 @@ function ListaDeProductos({
           key={producto.id}
           className="col-12 col-sm-6 col-md-4 col-lg card-producto d-flex mb-4"
         >
-          {" "}
-          <Card style={{ width: "14rem" }}>
+          <Card
+            style={{ width: "14rem", cursor: "pointer" }}
+            onClick={() => onVerDetalles(producto.id)}
+          >
             <Card.Img
               variant="top"
               src={
@@ -41,12 +43,10 @@ function ListaDeProductos({
                   {user?.role === "admin" && (
                     <Button
                       variant="success"
-                      onClick={
-                        () =>
-                          onEditar
-                            ? onEditar(producto.id)
-                            : onVerDetalles && onVerDetalles(producto.id) // fallback
-                      }
+                      onClick={e => {
+                        e.stopPropagation();
+                        onEditar && onEditar(producto.id);
+                      }}
                       className="me-2"
                     >
                       Editar
@@ -54,7 +54,10 @@ function ListaDeProductos({
                   )}
                   <Button
                     variant="info"
-                    onClick={() => onVerDetalles(producto.id)}
+                    onClick={e => {
+                      e.stopPropagation();
+                      onVerDetalles(producto.id);
+                    }}
                   >
                     Ver Detalles
                   </Button>{" "}
@@ -64,24 +67,29 @@ function ListaDeProductos({
                         ? "warning"
                         : "outline-warning"
                     }
-                    onClick={() =>
-                      onToggleFavorito && onToggleFavorito(producto.id)
-                    }
+                    onClick={e => {
+                      e.stopPropagation();
+                      onToggleFavorito && onToggleFavorito(producto.id);
+                    }}
                   >
                     {favoritos && favoritos.includes(producto.id) ? "★" : "☆"}
                   </Button>{" "}
                   <Button
                     variant="success"
-                    onClick={() =>
-                      onAgregarCarrito && onAgregarCarrito(producto)
-                    }
+                    onClick={e => {
+                      e.stopPropagation();
+                      onAgregarCarrito && onAgregarCarrito(producto);
+                    }}
                   >
                     Añadir al carrito
                   </Button>{" "}
                   {user?.role === "admin" && (
                     <Button
                       variant="danger"
-                      onClick={() => onEliminar && onEliminar(producto.id)}
+                      onClick={e => {
+                        e.stopPropagation();
+                        onEliminar && onEliminar(producto.id);
+                      }}
                     >
                       Eliminar
                     </Button>
@@ -91,7 +99,10 @@ function ListaDeProductos({
               {mostrarPapelera && user?.role === "admin" && (
                 <Button
                   variant="success"
-                  onClick={() => onRestaurar && onRestaurar(producto.id)}
+                  onClick={e => {
+                    e.stopPropagation();
+                    onRestaurar && onRestaurar(producto.id);
+                  }}
                 >
                   Restaurar
                 </Button>

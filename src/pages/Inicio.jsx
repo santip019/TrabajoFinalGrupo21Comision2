@@ -11,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext"; // <-- Corrige el import
 import { agregarAlCarrito } from "../store/carrito";
 import ListaDeProductos from "../components/ListaDeProductos";
+import CarruselDeProductos from "../components/CarruselDeProductos";
 
 function Inicio() {
   const navigate = useNavigate();
@@ -120,61 +121,74 @@ function Inicio() {
   ));
 
   return (
-    <div className="container">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>
-          <Badge className="inicio" bg="primary">
-            {mostrarPapelera ? "Papelera" : "Productos"}
-          </Badge>
-        </h2>
-        <div className="d-flex gap-2 align-items-center">
-          <Form.Select
-            value={categoriaSeleccionada}
-            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-            style={{ maxWidth: "200px" }}
-          >
-            <option value="todas">Todas las categorías</option>
-            {categorias.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </Form.Select>
-          <Button
-            variant={mostrarPapelera ? "secondary" : "outline-secondary"}
-            onClick={() => setMostrarPapelera(!mostrarPapelera)}
-          >
-            {mostrarPapelera ? "Ver activos" : "Ver papelera"}
-          </Button>
-        </div>
-      </div>
-      <div className="row">
-        {productosFiltrados.length > 0 ? (
-          <ListaDeProductos
-            productos={productosFiltrados}
-            onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
-            onAgregarCarrito={(producto) =>
-              dispatch(agregarAlCarrito(producto))
-            }
-            mostrarPapelera={mostrarPapelera}
-            user={user}
-            favoritos={favoritos}
-            onToggleFavorito={(id) => dispatch(toggleFavorito(id))}
-            onEliminar={eliminarProducto}
-            onRestaurar={restaurarProducto}
-            onEditar={(id) => navigate(`/Layout/editar-producto/${id}`)} // falta implementar, editar no sirve 
+  <div className="container">
+    {/* Carrusel de productos destacados */}
+    <h2>
+        <Badge className="inicio" bg="primary">
+          Productos Destacados
+        </Badge>
+    </h2>
+    <CarruselDeProductos
+      productos={productosFiltrados.slice(0, 12)} // Muestra los primeros 12 productos filtrados
+      onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+    />
 
-          />
-        ) : (
-          <p className="text-muted">
-            {mostrarPapelera
-              ? "No hay productos en la papelera."
-              : "No hay productos activos en esta categoría."}
-          </p>
-        )}
+    {/* TODO ESTO IRIA EN GestionarProducto.jsx
+    <div className="d-flex justify-content-between align-items-center mb-3">
+      <h2>
+        <Badge className="inicio" bg="primary">
+          {mostrarPapelera ? "Papelera" : "Productos"}
+        </Badge>
+      </h2>
+      <div className="d-flex gap-2 align-items-center">
+        <Form.Select
+          value={categoriaSeleccionada}
+          onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+          style={{ maxWidth: "200px" }}
+        >
+          <option value="todas">Todas las categorías</option>
+          {categorias.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </Form.Select>
+        <Button
+          variant={mostrarPapelera ? "secondary" : "outline-secondary"}
+          onClick={() => setMostrarPapelera(!mostrarPapelera)}
+        >
+          {mostrarPapelera ? "Ver activos" : "Ver papelera"}
+        </Button>
       </div>
     </div>
-  );
+    <div className="row">
+      {productosFiltrados.length > 0 ? (
+        <ListaDeProductos
+          productos={productosFiltrados}
+          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
+          onAgregarCarrito={(producto) =>
+            dispatch(agregarAlCarrito(producto))
+          }
+          mostrarPapelera={mostrarPapelera}
+          user={user}
+          favoritos={favoritos}
+          onToggleFavorito={(id) => dispatch(toggleFavorito(id))}
+          onEliminar={eliminarProducto}
+          onRestaurar={restaurarProducto}
+          onEditar={(id) => navigate(`/Layout/editar-producto/${id}`)}
+        />
+      ) : (
+        <p className="text-muted">
+          {mostrarPapelera
+            ? "No hay productos en la papelera."
+            : "No hay productos activos en esta categoría."}
+        </p>
+      )}
+    </div>
+  */}
+</div>
+
+);
 }
 
 export default Inicio;
