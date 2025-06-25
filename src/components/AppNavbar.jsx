@@ -28,9 +28,9 @@ function Layout() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Container>
               <Row className="menu-arriba w-100 align-items-center ">
-                <Col md={3} className="d-flex justify-content-start ">
+                <Col md={3} className="logo-col d-flex justify-content-start ">
                   <Navbar.Brand as={Link} to="/">
-                    Mi Logo
+                    <img src="/src/assets/images/LogoPaguinaWaldo's.png" alt="Logo" className="logo"/>
                   </Navbar.Brand>
                 </Col>
                 <Col md={5} className="d-flex justify-content-center ">
