@@ -18,16 +18,11 @@ function Inicio() {
   const dispatch = useDispatch();
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas");
   const { user } = useAuth();
-  const { productos, eliminarProducto, restaurarProducto, busqueda } =
-    useProductos(); // <-- Obtén todo del contexto
-  const categorias = [
-    ...new Set(productos.map((p) => p.categoria || p.category)),
-  ];
+  const { productos, eliminarProducto, restaurarProducto, busqueda, categoriaSeleccionada } = useProductos(); // <-- Obtén todo del contexto
 
-  const productosFiltrados = productos.filter((producto) => {
-    const categoria = producto.categoria || producto.category;
+  const productosFiltrados = productos.filter((producto) => { // Filtra los productos según la categoría, estado y búsqueda
+    const categoria = producto.category;
     const perteneceCategoria =
       categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
     const activoOInactivo = mostrarPapelera

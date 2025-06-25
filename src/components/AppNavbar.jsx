@@ -14,6 +14,11 @@ function Layout() {
   const carrito = useSelector((state) => state.carrito);
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const { busqueda, setBusqueda } = useProductos();
+  const { productos, categoriaSeleccionada, setCategoriaSeleccionada } = useProductos();
+  const categorias = [
+    "todas",
+    ...Array.from(new Set(productos.map(p => p.category)))
+  ]; // Aqui se guardan las categorías únicas de los productos
 
   return (
     <>
@@ -75,12 +80,18 @@ function Layout() {
                 <Col md={2} className="d-flex justify-content-start">
                   <Dropdown>
                     <Dropdown.Toggle variant="none" id="dropdown-categorias" className="categorias">
-                      Categorías
+                      {categoriaSeleccionada === "todas" ? "Categorías" : categoriaSeleccionada}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="#categoria1"> Categoría 1 </Dropdown.Item>
-                      <Dropdown.Item href="#categoria2"> Categoría 2 </Dropdown.Item>
-                      <Dropdown.Item href="#categoria3"> Categoría 3 </Dropdown.Item>
+                      {categorias.map(cat => (
+                        <Dropdown.Item
+                          key={cat}
+                          onClick={() => setCategoriaSeleccionada(cat)} // Cambia la categoría seleccionada
+                          active={categoriaSeleccionada === cat}
+                        >
+                          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                        </Dropdown.Item>
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
