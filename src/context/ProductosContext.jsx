@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import productosLocales from "../assets/productos.json"; // Importa tu JSON local
 
 const ProductosContext = createContext();
 
@@ -9,8 +10,9 @@ export function useProductos() {
 export function ProductosProvider({ children }) {
   const [productos, setProductos] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas"); // Esto guarda la categoría elegida por el usuario.
+  const [busqueda, setBusqueda] = useState("");
 
-  // Cargar productos desde la API al montar el componente (async/await)
+  // Cargar productos desde la API y el JSON local al montar el componente
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -19,9 +21,24 @@ export function ProductosProvider({ children }) {
         const productosAdaptados = data.map(prod => ({
           ...prod,
           estado: true, // activo por defecto
-          favoritos: false 
+          favoritos: false,
+          brand: prod.brand || "Waldo's",
+          discount: prod.discount || 0,
+          delivery: prod.delivery || false
         }));
-        setProductos(productosAdaptados);
+
+        // Adaptar productosLocales si es necesario
+        const productosLocalesAdaptados = productosLocales.map(prod => ({
+          ...prod,
+          estado: prod.estado !== undefined ? prod.estado : true,
+          favoritos: prod.favoritos !== undefined ? prod.favoritos : false,
+          brand: prod.brand || prod.marca || "",
+          discount: prod.discount || prod.descuento || 0,
+          delivery: prod.delivery !== undefined ? prod.delivery : false
+        }));
+
+        // Unir ambos arrays
+        setProductos([...productosAdaptados, ...productosLocalesAdaptados]);
       } catch (err) {
         console.error("Error al cargar productos:", err);
       }
@@ -47,8 +64,6 @@ export function ProductosProvider({ children }) {
     );
   };
 
-const [busqueda, setBusqueda] = useState("");
-
   return (
     <ProductosContext.Provider value={{
       productos,
@@ -57,7 +72,7 @@ const [busqueda, setBusqueda] = useState("");
       setProductos,
       busqueda,
       setBusqueda,
-      categoriaSeleccionada, // Se expone de manera global el valor actual de la categoria y la funcion para cambiarla, asi desdes cualquier componente se puede acceder a la categoria seleccionada y cambiarla.
+      categoriaSeleccionada,
       setCategoriaSeleccionada
     }}>
       {children}

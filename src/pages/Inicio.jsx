@@ -8,10 +8,11 @@ import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorito } from "../store/favoritos";
 import { useAuth } from "../context/AuthContext";
-import { useProductos } from "../context/ProductosContext"; // <-- Corrige el import
+import { useProductos } from "../context/ProductosContext";
 import { agregarAlCarrito } from "../store/carrito";
 import ListaDeProductos from "../components/ListaDeProductos";
 import CarruselDeProductos from "../components/CarruselDeProductos";
+import CarruselDeImagenes from "../components/CarruselDeImagenes";
 
 function Inicio() {
   const navigate = useNavigate();
@@ -19,9 +20,11 @@ function Inicio() {
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
   const { user } = useAuth();
-  const { productos, eliminarProducto, restaurarProducto, busqueda, categoriaSeleccionada } = useProductos(); // <-- Obtén todo del contexto
+  const { productos, eliminarProducto, restaurarProducto, busqueda, categoriaSeleccionada } = useProductos();
 
-  const productosFiltrados = productos.filter((producto) => { // Filtra los productos según la categoría, estado y búsqueda
+  // ...dentro del componente Inicio...
+
+  const productosFiltrados = productos.filter((producto) => {
     const categoria = producto.category;
     const perteneceCategoria =
       categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
@@ -115,75 +118,108 @@ function Inicio() {
     </div>
   ));
 
+  const imagenesPrincipal = [
+    "/src/assets/images/banner_promocion_productos3.png",
+    "/src/assets/images/banner_promocion_productos2.png",
+    "/src/assets/images/banner_promocion_productos1.png"
+  ];
+
+  const productosConDescuento = productos.filter(p => (p.discount || p.descuento || 0) > 0);
+
+  const productosWaldos = productos.filter(p => (p.brand || p.marca) && (p.brand || p.marca).toLowerCase() === "waldo's");
+
+  const productosNoWaldos = productos.filter(p => (p.brand || p.marca)?.toLowerCase() !== "waldo's");
+  const productosAleatorios = productosNoWaldos
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 20);
+
+  const imagenesDescuento = [
+    "/src/assets/images/Banners_promociones0.png",
+    "/src/assets/images/Banners_promociones1.png"
+  ];
+
+
   return (
-  <div className="container">
-    {/* Carrusel de productos destacados */}
-    <h2>
-        <Badge className="inicio" bg="primary">
-          Productos Destacados
-        </Badge>
-    </h2>
-    <CarruselDeProductos
-      productos={productosFiltrados.slice(0, 12)} // Muestra los primeros 12 productos filtrados
-      onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
-    />
+    <div className="container">
 
-    {/* TODO ESTO IRIA EN GestionarProducto.jsx
-    <div className="d-flex justify-content-between align-items-center mb-3">
-      <h2>
-        <Badge className="inicio" bg="primary">
-          {mostrarPapelera ? "Papelera" : "Productos"}
-        </Badge>
-      </h2>
-      <div className="d-flex gap-2 align-items-center">
-        <Form.Select
-          value={categoriaSeleccionada}
-          onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-          style={{ maxWidth: "200px" }}
-        >
-          <option value="todas">Todas las categorías</option>
-          {categorias.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </Form.Select>
-        <Button
-          variant={mostrarPapelera ? "secondary" : "outline-secondary"}
-          onClick={() => setMostrarPapelera(!mostrarPapelera)}
-        >
-          {mostrarPapelera ? "Ver activos" : "Ver papelera"}
-        </Button>
+      <CarruselDeImagenes imagenes={imagenesPrincipal} />
+
+      <h2>Productos con Descuento</h2>
+      <CarruselDeProductos
+        productos={productosConDescuento}
+        onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+      />
+
+      <h2>Productos Waldo's</h2>
+      <CarruselDeProductos
+        productos={productosWaldos}
+        onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+      />
+
+      <h2>Imágenes Promocionales</h2>
+      <CarruselDeImagenes imagenes={imagenesDescuento} />
+
+      <h2>20 Productos Aleatorios (no Waldo's)</h2>
+      <CarruselDeProductos
+        productos={productosAleatorios}
+        onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+      />
+
+      {/* TODO ESTO IRIA EN GestionarProducto.jsx
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2>
+          <Badge className="inicio" bg="primary">
+            {mostrarPapelera ? "Papelera" : "Productos"}
+          </Badge>
+        </h2>
+        <div className="d-flex gap-2 align-items-center">
+          <Form.Select
+            value={categoriaSeleccionada}
+            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+            style={{ maxWidth: "200px" }}
+          >
+            <option value="todas">Todas las categorías</option>
+            {categorias.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </Form.Select>
+          <Button
+            variant={mostrarPapelera ? "secondary" : "outline-secondary"}
+            onClick={() => setMostrarPapelera(!mostrarPapelera)}
+          >
+            {mostrarPapelera ? "Ver activos" : "Ver papelera"}
+          </Button>
+        </div>
       </div>
+      <div className="row">
+        {productosFiltrados.length > 0 ? (
+          <ListaDeProductos
+            productos={productosFiltrados}
+            onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
+            onAgregarCarrito={(producto) =>
+              dispatch(agregarAlCarrito(producto))
+            }
+            mostrarPapelera={mostrarPapelera}
+            user={user}
+            favoritos={favoritos}
+            onToggleFavorito={(id) => dispatch(toggleFavorito(id))}
+            onEliminar={eliminarProducto}
+            onRestaurar={restaurarProducto}
+            onEditar={(id) => navigate(`/Layout/editar-producto/${id}`)}
+          />
+        ) : (
+          <p className="text-muted">
+            {mostrarPapelera
+              ? "No hay productos en la papelera."
+              : "No hay productos activos en esta categoría."}
+          </p>
+        )}
+      </div>
+      */}
     </div>
-    <div className="row">
-      {productosFiltrados.length > 0 ? (
-        <ListaDeProductos
-          productos={productosFiltrados}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
-          onAgregarCarrito={(producto) =>
-            dispatch(agregarAlCarrito(producto))
-          }
-          mostrarPapelera={mostrarPapelera}
-          user={user}
-          favoritos={favoritos}
-          onToggleFavorito={(id) => dispatch(toggleFavorito(id))}
-          onEliminar={eliminarProducto}
-          onRestaurar={restaurarProducto}
-          onEditar={(id) => navigate(`/Layout/editar-producto/${id}`)}
-        />
-      ) : (
-        <p className="text-muted">
-          {mostrarPapelera
-            ? "No hay productos en la papelera."
-            : "No hay productos activos en esta categoría."}
-        </p>
-      )}
-    </div>
-  */}
-</div>
-
-);
+  );
 }
 
 export default Inicio;
