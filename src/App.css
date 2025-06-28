@@ -121,14 +121,83 @@ a.nav-link, .categorias {
   position: relative;
 }
 
-
 .imagenes-principal {
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   object-fit: cover;
   margin-top: 0;
+  display: block;
 }
 
+.carruseles-ofertas, .carruseles, .carruseles-promo {
+  width: 85%;
+  padding: 0 2em 2em;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border: 1px solid #0000002a;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px 2px #00000018;
+}
+
+.carruseles {
+  border: none;
+  box-shadow: none;
+}
+
+.carruseles-promo {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  border: none;
+  box-shadow: none;
+}
+
+.carruseles .carousel-control-prev, .carruseles-ofertas .carousel-control-prev, .carruseles-promo .carousel-control-prev {
+  left: -150px;
+}
+
+.carruseles .carousel-control-next, .carruseles-ofertas .carousel-control-next, .carruseles-promo .carousel-control-next {
+  right: -150px;
+}
+
+.carruseles-ofertas h2, .carruseles-promo h2, .carruseles h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #fff;
+  background: #5da066;
+  text-align: left;
+  align-self: flex-start;
+  padding: 0.2em 1em;
+  margin-bottom: 1.5em;
+}
+
+.carruseles-promo h2 {
+  background: none;
+  color: #000;
+  margin-bottom: 0px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.carruseles h2 {
+  margin-bottom: 10px;
+}
+
+.carruseles .card {
+  border: 1px solid #cccccc !important;
+  box-shadow: 0 0 8px 2px #00000017;
+  padding-top: 50px;
+  transition: box-shadow 0.2s;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.carruseles .card:hover {
+  box-shadow: 0 4px 16px 2px #00000049;
+}
 
 
 @media (min-width: 992px) {

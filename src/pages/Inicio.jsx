@@ -144,26 +144,34 @@ function Inicio() {
 
       <CarruselDeImagenes imagenes={imagenesPrincipal} className="contenedor-principal" />
 
-      <h2>Productos con Descuento</h2>
-      <CarruselDeProductos
-        productos={productosConDescuento}
-        onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
-      />
+      <div className="carruseles-ofertas">
+        <h2>Super Ofertas</h2>
+        <CarruselDeProductos
+          productos={productosConDescuento}
+          onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+        />
+      </div>
 
-      <h2>Productos Waldo's</h2>
-      <CarruselDeProductos
-        productos={productosWaldos}
-        onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
-      />
+      <div className="carruseles">
+        <h2>Productos Waldo's</h2>
+        <CarruselDeProductos
+          productos={productosWaldos}
+          onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+        />
+      </div>
 
-      <h2>Imágenes Promocionales</h2>
-      <CarruselDeImagenes imagenes={imagenesDescuento} />
+      <div className="carruseles-promo">
+        <h2>Conoce nuestras promociones bancarias</h2>
+        <CarruselDeImagenes imagenes={imagenesDescuento} />
+      </div>
 
-      <h2>20 Productos Aleatorios (no Waldo's)</h2>
-      <CarruselDeProductos
-        productos={productosAleatorios}
-        onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
-      />
+      <div className="carruseles">
+        <h2>Otras Marcas</h2>
+        <CarruselDeProductos
+          productos={productosAleatorios}
+          onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+        />
+      </div>
 
       {/* TODO ESTO IRIA EN GestionarProducto.jsx
       <div className="d-flex justify-content-between align-items-center mb-3">
