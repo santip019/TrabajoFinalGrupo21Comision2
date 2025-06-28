@@ -5,7 +5,9 @@ function CarruselDeImagenes({ imagenes }) {
     <Carousel indicators={false} controls={true} interval={null} wrap={true}>
       {imagenes.map((img, idx) => (
         <Carousel.Item key={idx}>
-          <img src={img} alt={`slide-${idx}`} className={img.includes("productos") ? "imagenes-principal" : "imagenes-promocion"}/>
+          <div className={img.includes("productos") ? "imagenes-principal-contenedor" : "imagenes-promocion-contenedor"}>
+            <img src={img} alt={`slide-${idx}`} className={img.includes("productos") ? "imagenes-principal" : "imagenes-promocion"}/>
+          </div>
         </Carousel.Item>
       ))}
     </Carousel>

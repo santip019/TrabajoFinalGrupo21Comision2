@@ -44,6 +44,7 @@ function CarruselDeProductos({ productos, onVerDetalles }) {
               <Card
                 key={producto.id + "-" + i}
                 style={{ width: "14rem", cursor: "pointer" }}
+                className="border-0"
                 onClick={() => onVerDetalles(producto.id)}
               >
                 <Card.Img
