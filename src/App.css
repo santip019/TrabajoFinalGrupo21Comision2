@@ -202,27 +202,45 @@ a.nav-link,
   margin-bottom: 10px;
 }
 
-.carruseles .card {
+.carruseles .card, .carruseles-ofertas .card {
+  width: 14rem;
+  height: 25rem;
   border: 1px solid #cccccc !important;
   box-shadow: 0 0 8px 2px #00000017;
   padding-top: 50px;
+  padding-bottom: 50px;
   transition: box-shadow 0.2s;
   margin-top: 15px;
-  margin-bottom: 15px;
+}
+
+.carruseles .card .h5, .carruseles-ofertas .card .h5 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #000;
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* Limita a 2 líneas */
+  -webkit-box-orient: vertical;
+  white-space: normal;         /* Permite varias líneas */
+  max-width: 100%;
 }
 
 .carruseles .card:hover {
   box-shadow: 0 4px 16px 2px #00000049;
 }
 
-.card-producto {
+/*.card-producto {
   width: 14rem;
   min-height: 300px;
   max-height: 420px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-}
+}*/
 
 .contenido-principal {
   margin-top: 9em; /* igual a la altura del navbar */
