@@ -1,6 +1,6 @@
 import { useProductos } from "../context/ProductosContext";
-import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
+import ProductoCard from "../components/ProductoCard";
 
 function Promociones() {
   const { productos } = useProductos();
@@ -17,7 +17,7 @@ function Promociones() {
   }
 
   return (
-    <div className="contenido-principal">
+    <div className="container contenido-principal">
       <h2>
         <Badge bg="success">Promociones</Badge>
       </h2>
@@ -27,26 +27,11 @@ function Promociones() {
       {filas.map((fila, idx) => (
         <div className="row mb-4 justify-content-center" key={idx}>
           {fila.map(producto => (
-            <div className="col-12 col-sm-6 col-md-4 col-lg-2 d-flex" key={producto.id}>
-              <Card className="w-100 mb-3">
-                <Card.Img
-                  variant="top"
-                  src={producto.image || producto.imagen || "https://via.placeholder.com/180"}
-                  style={{ height: "180px", objectFit: "contain" }}
-                />
-                <Card.Body>
-                  <Card.Title style={{ fontSize: "1rem" }}>
-                    {producto.title || producto.nombre}
-                  </Card.Title>
-                  <Card.Text>
-                    <b>${producto.precio || producto.price}</b>
-                    <br />
-                    <Badge bg="warning" text="dark">
-                      {producto.discount || producto.descuento}% OFF
-                    </Badge>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+            <div
+              key={producto.id}
+              className="d-flex justify-content-center mb-3"
+            >
+              <ProductoCard producto={producto} />
             </div>
           ))}
         </div>

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 #root {
   max-width: auto;
@@ -21,7 +21,8 @@
   box-shadow: none;
 }
 
-a.nav-link, .categorias {
+a.nav-link,
+.categorias {
   font-family: "Montserrat", sans-serif;
   color: #fff;
   text-decoration: none;
@@ -57,7 +58,8 @@ a.nav-link, .categorias {
   border: none;
 }
 
-.categorias:focus, .categorias:active {
+.categorias:focus,
+.categorias:active {
   outline: none;
   box-shadow: none;
   border: none;
@@ -74,7 +76,8 @@ a.nav-link, .categorias {
   font-style: normal;
 }
 
-.busqueda:hover, .icono-lupa:hover {
+.busqueda:hover,
+.icono-lupa:hover {
   cursor: pointer;
 }
 
@@ -92,7 +95,10 @@ a.nav-link, .categorias {
   color: #888;
 }
 
-.icono-estrella, .icono-cliente, .icono-carrito, .icono-ayuda  {
+.icono-estrella,
+.icono-cliente,
+.icono-carrito,
+.icono-ayuda {
   display: inline-flex;
   align-items: center;
   margin-right: 0.3em;
@@ -101,7 +107,7 @@ a.nav-link, .categorias {
   margin-bottom: 0.3em;
 }
 
-.icono-carrito  {
+.icono-carrito {
   font-size: 1.2em;
 }
 
@@ -131,7 +137,9 @@ a.nav-link, .categorias {
   display: block;
 }
 
-.carruseles-ofertas, .carruseles, .carruseles-promo {
+.carruseles-ofertas,
+.carruseles,
+.carruseles-promo {
   width: 85%;
   padding: 0 2em 2em;
   margin-top: 30px;
@@ -156,15 +164,21 @@ a.nav-link, .categorias {
   box-shadow: none;
 }
 
-.carruseles .carousel-control-prev, .carruseles-ofertas .carousel-control-prev, .carruseles-promo .carousel-control-prev {
+.carruseles .carousel-control-prev,
+.carruseles-ofertas .carousel-control-prev,
+.carruseles-promo .carousel-control-prev {
   left: -150px;
 }
 
-.carruseles .carousel-control-next, .carruseles-ofertas .carousel-control-next, .carruseles-promo .carousel-control-next {
+.carruseles .carousel-control-next,
+.carruseles-ofertas .carousel-control-next,
+.carruseles-promo .carousel-control-next {
   right: -150px;
 }
 
-.carruseles-ofertas h2, .carruseles-promo h2, .carruseles h2 {
+.carruseles-ofertas h2,
+.carruseles-promo h2,
+.carruseles h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 30px;
@@ -201,18 +215,18 @@ a.nav-link, .categorias {
   box-shadow: 0 4px 16px 2px #00000049;
 }
 
-
-@media (min-width: 992px) {
-  .card-producto {
-    flex: 0 0 20%;
-    max-width: 20%;
-  }
+.card-producto {
+  width: 14rem;
+  min-height: 300px;
+  max-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
 }
 
 .contenido-principal {
-  margin-top: 8em; /* igual a la altura del navbar */
+  margin-top: 9em; /* igual a la altura del navbar */
 }
-
 
 /*span.inicio.badge.bg-primary {
   background-color: transparent;
