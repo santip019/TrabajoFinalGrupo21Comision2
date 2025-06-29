@@ -6,6 +6,7 @@ import Registro from "../pages/Registrarse";
 import NuevoProducto from "./NuevoProducto";
 import Favoritos from "../pages/Favoritos";
 import AcercaDe from "../pages/AcercaDe";
+import ListarProductos from "../components/ListarProductos"; // Asegúrate de tener este componente
 import EditarProducto from "./EditarProducto";
 import VerDetalles from "../pages/VerDetalles";
 import Papelera from "../pages/Papelera";
@@ -51,6 +52,7 @@ function AppRoutes() {
             <Login />
           </RutaAutenticada>
         } />
+        <Route path="productos/:categoria" element={<ListarProductos />} />
         <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="papelera" element={<Papelera />} />
         <Route path="producto/:id" element={<VerDetalles />} />
