@@ -29,15 +29,23 @@ function ProductoCard({ producto }) {
           {producto.title || producto.nombre}
         </Card.Title>
         <Card.Text>
-          <b>${producto.precio || producto.price}</b>
           {producto.discount || producto.descuento ? (
             <>
+              <del style={{ color: "#888", marginRight: 8 }}>
+                ${producto.precio || producto.price}
+              </del>
               <br />
+              <b>
+                ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
+              </b>
               <Badge bg="warning" text="dark">
                 {producto.discount || producto.descuento}% OFF
               </Badge>
+              <br />
             </>
-          ) : null}
+          ) : (
+            <b>${producto.precio || producto.price}</b>
+          )}
         </Card.Text>
         <div className="d-flex gap-2">
           <Button
