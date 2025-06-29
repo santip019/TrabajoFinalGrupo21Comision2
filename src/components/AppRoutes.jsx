@@ -18,6 +18,8 @@ import Contacto from "./Contacto";
 import Seguridad from "./Seguridad";
 import Cuenta from "./Cuenta";
 import Carrito from "../pages/Carrito";
+import Promociones from "../pages/Promociones";
+
 
 function AppRoutes() {
   return (
@@ -50,6 +52,8 @@ function AppRoutes() {
         <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="papelera" element={<Papelera />} />
         <Route path="producto/:id" element={<VerDetalles />} />
+        <Route path="promociones" element={<Promociones />} />
+
         
 
         <Route path="soporte" element={<Soporte />} />
