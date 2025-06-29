@@ -3,11 +3,18 @@ import ProductoCard from "../components/ProductoCard";
 import Badge from "react-bootstrap/Badge";
 
 function MasVendidos() {
-  const { productos } = useProductos();
+  const { productos, busqueda } = useProductos();
 
-  // Filtra productos activos y con campo rating.count válido
   const productosConVentas = productos
-    .filter(p => p.estado !== false && p.rating && typeof p.rating.count === "number")
+    .filter(
+      p =>
+        p.estado !== false &&
+        p.rating && typeof p.rating.count === "number" &&
+        (
+          (p.title || p.nombre || "").toLowerCase().includes(busqueda.toLowerCase()) ||
+          (p.brand || p.marca || "").toLowerCase().includes(busqueda.toLowerCase())
+        )
+    )
     .sort((a, b) => b.rating.count - a.rating.count);
 
   // Agrupa de a 5 productos por fila (igual que en Promociones)

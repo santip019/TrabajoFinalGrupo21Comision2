@@ -27,9 +27,57 @@ function Inicio() {
     restaurarProducto,
     busqueda,
     categoriaSeleccionada,
+    // setCategoriaSeleccionada, // Si lo usás, descomenta
+    // categorias, // Si lo usás, descomenta
   } = useProductos();
 
-  // ...dentro del componente Inicio...
+  // --- BÚSQUEDA DINÁMICA ---
+  // Si hay texto en la barra de búsqueda, mostrar solo los resultados como en promociones/novedades
+  const productosFiltradosBusqueda = productos.filter((producto) => {
+    const nombre = (producto.title || producto.nombre || "").toLowerCase();
+    const marca = (producto.brand || producto.marca || "").toLowerCase();
+    const coincideBusqueda =
+      nombre.includes(busqueda.toLowerCase()) ||
+      marca.includes(busqueda.toLowerCase());
+    const perteneceCategoria =
+      categoriaSeleccionada === "todas" || producto.category === categoriaSeleccionada;
+    return producto.estado && coincideBusqueda && perteneceCategoria;
+  });
+
+  // Agrupa de a 5 productos por fila
+  const filas = [];
+  for (let i = 0; i < productosFiltradosBusqueda.length; i += 5) {
+    filas.push(productosFiltradosBusqueda.slice(i, i + 5));
+  }
+
+  if (busqueda.trim() !== "") {
+    return (
+      <div className="container contenido-principal">
+        <h2>
+          <Badge bg="primary">Resultados de búsqueda</Badge>
+        </h2>
+        {filas.length === 0 && (
+          <p className="text-muted">No se encontraron productos.</p>
+        )}
+        {filas.map((fila, idx) => (
+          <div className="row mb-4 justify-content-center" key={idx}>
+            {fila.map((producto) => (
+              <div
+                key={producto.id}
+                className="col-6 col-md-4 col-lg-2 d-flex mb-4"
+                style={{ minWidth: "14rem", maxWidth: "14rem" }}
+              >
+                <ProductoCard producto={producto} />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // --- CONTENIDO ORIGINAL DE INICIO ---
+  // Lo que no se usa queda igual o comentado
 
   const productosFiltrados = productos.filter((producto) => {
     const categoria = producto.category;
