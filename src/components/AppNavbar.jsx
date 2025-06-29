@@ -140,7 +140,7 @@ function Layout() {
                       {categorias.map(cat => (
                         <Dropdown.Item
                           key={cat}
-                          onClick={() => setCategoriaSeleccionada(cat)} // Cambia la categoría seleccionada
+                          onClick={() => { setCategoriaSeleccionada(cat); navigate(`/principal/productos/${cat}`); }} // Cambia la categoría seleccionada y redirige a la categoria seleccionada
                           active={categoriaSeleccionada === cat}
                         >
                           {cat.charAt(0).toUpperCase() + cat.slice(1)}

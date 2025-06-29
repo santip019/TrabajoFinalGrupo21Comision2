@@ -10,7 +10,7 @@ import { toggleFavorito } from "../store/favoritos";
 import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext";
 import { agregarAlCarrito } from "../store/carrito";
-import ListaDeProductos from "../components/ListaDeProductos";
+import ListarProductos from "../components/ListarProductos";
 import CarruselDeProductos from "../components/CarruselDeProductos";
 import CarruselDeImagenes from "../components/CarruselDeImagenes";
 import ProductoCard from "../components/ProductoCard";
