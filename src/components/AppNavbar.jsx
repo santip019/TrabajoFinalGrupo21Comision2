@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { useProductos } from "../context/ProductosContext";
 import { useState } from "react";
+import Footer from "../pages/Footer"; // Agrega esta línea al inicio
+
 
 function Layout() {
   const { user, logout } = useAuth();
@@ -167,8 +169,9 @@ function Layout() {
         </Container>
       </Navbar>
       <Outlet />
+      <Footer />
     </>
-  );
+    );
 }
 
 export default Layout;
