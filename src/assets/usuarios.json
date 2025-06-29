@@ -1,0 +1,14 @@
+[
+  {
+    "email": "admin@waldo.com",
+    "password": "admin123",
+    "name": "Admin",
+    "role": "admin"
+  },
+  {
+    "email": "cliente@waldo.com",
+    "password": "cliente123",
+    "name": "Cliente",
+    "role": "user"
+  }
+]

@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./AppNavbar";
 import Inicio from "../pages/Inicio";
 import Login from "../pages/Login";
-import Registro from "./Registrarse";
+import Registro from "../pages/Registrarse";
 import NuevoProducto from "./NuevoProducto";
 import Favoritos from "../pages/Favoritos";
 import AcercaDe from "../pages/AcercaDe";
@@ -26,12 +26,12 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Navigate to="/principal" />} />
 
+      <Route path="/principal/login" element={<Login />} />
+      <Route path="/principal/registrarse" element={<Registro />} />
+
         {/*Rutas Publicas*/}
       <Route path="/principal" element={<Layout />}>
         <Route index element={<Inicio />} />
-
-        <Route path="login" element={<Login />} />
-        <Route path="registrarse" element={<Registro />} />
 
         <Route path="favoritos" element={
           <RutaAutenticada>
@@ -63,6 +63,12 @@ function AppRoutes() {
         <Route path="soporte/seguridad" element={<Seguridad />} />
         <Route path="soporte/cuenta" element={<Cuenta />} />
 
+        {/* PROTEGER RUTAS ADMIN */}
+        <Route path="nuevo-producto" element={
+          <AdminRoute>
+            <NuevoProducto />
+          </AdminRoute>
+        } />
       </Route>
 
       {/* Redirección por defecto */}
