@@ -3,11 +3,17 @@ import Badge from "react-bootstrap/Badge";
 import ProductoCard from "../components/ProductoCard";
 
 function Promociones() {
-  const { productos } = useProductos();
+  const { productos, busqueda } = useProductos();
 
-  // Filtra productos activos con descuento
+  // Filtro por búsqueda (nombre o marca)
   const productosConDescuento = productos.filter(
-    (p) => (p.discount || p.descuento || 0) > 0 && p.estado !== false
+    (p) =>
+      (p.discount || p.descuento || 0) > 0 &&
+      p.estado !== false &&
+      (
+        (p.title || p.nombre || "").toLowerCase().includes(busqueda.toLowerCase()) ||
+        (p.brand || p.marca || "").toLowerCase().includes(busqueda.toLowerCase())
+      )
   );
 
   // Agrupa de a 5 productos por fila
@@ -30,6 +36,7 @@ function Promociones() {
             <div
               className="col-6 col-md-4 col-lg-2 d-flex mb-4"
               style={{ minWidth: "14rem", maxWidth: "14rem" }}
+              key={producto.id}
             >
               <ProductoCard producto={producto} />
             </div>

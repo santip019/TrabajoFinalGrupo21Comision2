@@ -3,11 +3,18 @@ import Badge from "react-bootstrap/Badge";
 import ProductoCard from "../components/ProductoCard";
 
 function Novedades() {
-  const { productos } = useProductos();
+  const { productos, busqueda } = useProductos();
 
-  // Filtra productos activos y con fecha válida
   const productosConFecha = productos
-    .filter(p => p.estado !== false && p.dateOfEntry)
+    .filter(
+      p =>
+        p.estado !== false &&
+        p.dateOfEntry &&
+        (
+          (p.title || p.nombre || "").toLowerCase().includes(busqueda.toLowerCase()) ||
+          (p.brand || p.marca || "").toLowerCase().includes(busqueda.toLowerCase())
+        )
+    )
     .sort((a, b) => new Date(b.dateOfEntry) - new Date(a.dateOfEntry));
 
   // Agrupa de a 5 productos por fila (igual que en Promociones)
