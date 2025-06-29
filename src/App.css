@@ -10,7 +10,9 @@
 /* Comienzo del estilo del navbar */
 
 .navbar {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   background: rgba(0, 0, 0, 0.438);
   height: 8em;
@@ -207,6 +209,9 @@ a.nav-link, .categorias {
   }
 }
 
+.contenido-principal {
+  margin-top: 8em; /* igual a la altura del navbar */
+}
 
 
 /*span.inicio.badge.bg-primary {
