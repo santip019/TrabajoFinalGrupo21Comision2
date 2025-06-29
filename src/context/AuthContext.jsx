@@ -5,25 +5,43 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
-  // Recupera el usuario de localStorage si existe
+  // Lee el usuario de sessionUser al iniciar
   const [user, setUser] = useState(() => {
-    const userGuardado = localStorage.getItem("user");
-    return userGuardado ? JSON.parse(userGuardado) : null;
+    const session = localStorage.getItem("sessionUser");
+    return session ? JSON.parse(session) : null;
   });
 
-  const login = (username, role) => {
-    const usuario = { username, role };
-    setUser(usuario);
-    localStorage.setItem("user", JSON.stringify(usuario));
+  // Mantiene la sesión al recargar
+  useEffect(() => {
+    const session = localStorage.getItem("sessionUser");
+    if (session && !user) setUser(JSON.parse(session));
+  }, []);
+
+  // Login: valida y guarda sessionUser
+  const login = (email, password) => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData && userData.email === email && userData.password === password) {
+      const sessionUser = { email: userData.email, role: userData.role || "user" };
+      setUser(sessionUser);
+      localStorage.setItem("sessionUser", JSON.stringify(sessionUser));
+      return { success: true };
+    }
+    return { success: false, message: "Credenciales inválidas" };
   };
 
+  // Logout
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("sessionUser");
+  };
+
+  // Registro
+  const register = (email, password, role = "user") => {
+    localStorage.setItem("user", JSON.stringify({ email, password, role }));
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );
