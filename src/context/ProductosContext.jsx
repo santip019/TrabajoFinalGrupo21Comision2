@@ -11,10 +11,12 @@ export function ProductosProvider({ children }) {
   const [productos, setProductos] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas"); // Esto guarda la categoría elegida por el usuario.
   const [busqueda, setBusqueda] = useState("");
+  const [loading, setLoading] = useState(false);// Se define un estado para controlar cuando mostrar el Spinner de carga
 
   // Cargar productos desde la API y el JSON local al montar el componente
   useEffect(() => {
     const fetchProductos = async () => {
+      setLoading(true); // cuando empieza a solicitar (get) los productos de la API se define como true el que aparezca el Spinner de carga 
       try {
         const res = await fetch("https://fakestoreapi.com/products");
         const data = await res.json();
@@ -41,6 +43,8 @@ export function ProductosProvider({ children }) {
         setProductos([...productosAdaptados, ...productosLocalesAdaptados]);
       } catch (err) {
         console.error("Error al cargar productos:", err);
+      } finally {
+        setLoading(false);// Cuando termina el (get) a la API se cambia el estado a false para que deje de aparecer el Spinner de carga
       }
     };
     fetchProductos();
@@ -73,7 +77,9 @@ export function ProductosProvider({ children }) {
       busqueda,
       setBusqueda,
       categoriaSeleccionada,
-      setCategoriaSeleccionada
+      setCategoriaSeleccionada,
+      loading, // Se importan el estado actual del Spinner de carga junto con su funcion para cambiarlo
+      setLoading
     }}>
       {children}
     </ProductosContext.Provider>
