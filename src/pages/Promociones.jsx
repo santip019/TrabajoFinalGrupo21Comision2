@@ -7,7 +7,7 @@ function Promociones() {
 
   // Filtra productos activos con descuento
   const productosConDescuento = productos.filter(
-    p => (p.discount || p.descuento || 0) > 0 && p.estado !== false
+    (p) => (p.discount || p.descuento || 0) > 0 && p.estado !== false
   );
 
   // Agrupa de a 5 productos por fila
@@ -26,10 +26,10 @@ function Promociones() {
       )}
       {filas.map((fila, idx) => (
         <div className="row mb-4 justify-content-center" key={idx}>
-          {fila.map(producto => (
+          {fila.map((producto) => (
             <div
-              key={producto.id}
-              className="d-flex justify-content-center mb-3"
+              className="col-6 col-md-4 col-lg-2 d-flex mb-4"
+              style={{ minWidth: "14rem", maxWidth: "14rem" }}
             >
               <ProductoCard producto={producto} />
             </div>
