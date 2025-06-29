@@ -81,13 +81,16 @@ function Layout() {
                           <Offcanvas.Body>
                             <ListGroup>
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/perfil"); }}>
-                                Editar perfil
+                                Ver perfil
                               </ListGroup.Item>
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/carrito"); }}>
-                                Mis compras
+                                Cambiar Tema
+                              </ListGroup.Item>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/soporte"); }}>
+                                Soporte Tecnico
                               </ListGroup.Item>
                             </ListGroup>
-                            <Button variant="outline-danger" onClick={() => { logout(); setShow(false); }}>Cerrar sesión</Button>
+                            <br></br>
                             {/* Opciones según rol */}
                             {user.role === "admin" && 
                             <div>
@@ -95,8 +98,16 @@ function Layout() {
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/nuevo-producto"); }}>
                                 Añadir Producto
                               </ListGroup.Item>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal"); }}>
+                                Gestionar Productos
+                              </ListGroup.Item>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/papelera"); }}>
+                                Ver Papelera
+                              </ListGroup.Item>
                             </ListGroup>
                             </div>}
+                            <br></br>
+                            <Button variant="outline-danger" onClick={() => { logout(); setShow(false); }}>Cerrar sesión</Button>
                           </Offcanvas.Body>
                         </Offcanvas>
                       </>
