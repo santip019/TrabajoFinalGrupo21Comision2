@@ -8,9 +8,11 @@ import { useAuth } from "../context/AuthContext";
 import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { useProductos } from "../context/ProductosContext";
+import { useState } from "react";
 
 function Layout() {
   const { user, logout } = useAuth();
+  const [show, setShow] = useState(false);
   const carrito = useSelector((state) => state.carrito);
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const { busqueda, setBusqueda } = useProductos();
@@ -49,19 +51,38 @@ function Layout() {
                 </Col>
                 <Col md={4} className="d-flex justify-content-end ">
                   <Nav>
-                    <Nav.Link as={Link} to="/Layout/favoritos">
+                    <Nav.Link as={Link} to="/principal/favoritos">
                       <span className="icono-estrella">
                         <FaRegStar />
                       </span>
                       Favoritos
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/Layout/login">
+                    {!user ? (
+                      <Nav.Link as={Link} to="/principal/login">
                       <span className="icono-cliente">
                         <FaRegUser />
                       </span>
                       Cliente
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/Layout/carrito">
+                    ):(
+                      <>
+                        <Nav.Link onClick={() => setShow(true)}>
+                          Bienvenido, {user.email}
+                        </Nav.Link>
+                        <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+                          <Offcanvas.Header closeButton>
+                            <Offcanvas.Title>Mi cuenta</Offcanvas.Title>
+                          </Offcanvas.Header>
+                          <Offcanvas.Body>
+                            <Button variant="outline-danger" onClick={() => { logout(); setShow(false); }}>Cerrar sesión</Button>
+                            {/* Opciones según rol */}
+                            {user.role === "admin" && <div>Opciones de admin</div>}
+                          </Offcanvas.Body>
+                        </Offcanvas>
+                      </>
+                    )}
+                    
+                    <Nav.Link as={Link} to="/principal/carrito">
                       <span className="icono-carrito">
                         <MdOutlineShoppingCart />
                       </span>
@@ -97,11 +118,11 @@ function Layout() {
                 </Col>
                 <Col md={10} className="d-flex justify-content-end">
                   <Nav>
-                    <Nav.Link as={Link} to="/Layout"> Inicio </Nav.Link>
-                    <Nav.Link as={Link} to="/Layout/promociones"> Promociones </Nav.Link>
-                    <Nav.Link as={Link} to="/Layout/mas-vendidos"> Más Vendidos </Nav.Link>
-                    <Nav.Link as={Link} to="/Layout/novedades"> Novedades </Nav.Link>
-                    <Nav.Link as={Link} to="/Layout/soporte"> 
+                    <Nav.Link as={Link} to="/principal"> Inicio </Nav.Link>
+                    <Nav.Link as={Link} to="/principal/promociones"> Promociones </Nav.Link>
+                    <Nav.Link as={Link} to="/principal/mas-vendidos"> Más Vendidos </Nav.Link>
+                    <Nav.Link as={Link} to="/principal/novedades"> Novedades </Nav.Link>
+                    <Nav.Link as={Link} to="/principal/soporte"> 
                       Ayuda 
                       <span className="icono-ayuda">
                         <MdOutlineContactSupport />

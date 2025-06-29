@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./AppNavbar";
 import Inicio from "../pages/Inicio";
 import Login from "../pages/Login";
+import Registro from "./Registrarse";
 import NuevoProducto from "./NuevoProducto";
 import Favoritos from "../pages/Favoritos";
 import AcercaDe from "../pages/AcercaDe";
@@ -9,7 +10,7 @@ import EditarProducto from "./EditarProducto";
 import VerDetalles from "../pages/VerDetalles";
 import Papelera from "../pages/Papelera";
 import AdminRoute from "../routes/AdminRoute";
-import RutaAutenticada from "./RutaAutenticada";
+import RutaAutenticada from "../routes/RutaAutenticada";
 import Soporte from "../pages/Soporte";
 import Devoluciones from "./Devoluciones";
 import Faq from "../pages/Faq";
@@ -21,15 +22,31 @@ import Carrito from "../pages/Carrito";
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/Layout" />} />
+      <Route path="/" element={<Navigate to="/principal" />} />
 
-      <Route path="/Layout" element={<Layout />}>
+        {/*Rutas Publicas*/}
+      <Route path="/principal" element={<Layout />}>
         <Route index element={<Inicio />} />
-        <Route path="favoritos" element={<Favoritos />} />
-        <Route path="login" element={<Login />} />
-        <Route path="carrito" element={<Carrito />} />
 
-        
+        <Route path="login" element={<Login />} />
+        <Route path="registrarse" element={<Registro />} />
+
+        <Route path="favoritos" element={
+          <RutaAutenticada>
+            <Favoritos />
+          </RutaAutenticada>
+        } />
+        <Route path="carrito" element={
+          <RutaAutenticada>
+            <Carrito />
+          </RutaAutenticada>
+        } />
+
+        <Route path="cliente" element={
+          <RutaAutenticada>
+            <Login />
+          </RutaAutenticada>
+        } />
         <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="papelera" element={<Papelera />} />
         <Route path="producto/:id" element={<VerDetalles />} />
