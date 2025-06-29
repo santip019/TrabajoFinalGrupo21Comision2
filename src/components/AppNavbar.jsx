@@ -1,9 +1,10 @@
-import { Navbar, Container, Nav, Row, Col, Dropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, Row, Col, Dropdown, Offcanvas, Button, ListGroup } from "react-bootstrap";
 import { LuSearch } from "react-icons/lu";
 import { FaRegStar, FaRegUser } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
@@ -13,6 +14,7 @@ import { useState } from "react";
 function Layout() {
   const { user, logout } = useAuth();
   const [show, setShow] = useState(false);
+  const navigate = useNavigate(); // Para navegar a otras rutas
   const carrito = useSelector((state) => state.carrito);
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const { busqueda, setBusqueda } = useProductos();
@@ -62,21 +64,39 @@ function Layout() {
                       <span className="icono-cliente">
                         <FaRegUser />
                       </span>
-                      Cliente
+                      Iniciar Sesion / Registrarse
                     </Nav.Link>
                     ):(
                       <>
                         <Nav.Link onClick={() => setShow(true)}>
-                          Bienvenido, {user.email}
+                          <span className="icono-cliente">
+                            <FaRegUser />
+                          </span>
+                          {user.name}
                         </Nav.Link>
                         <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
                           <Offcanvas.Header closeButton>
                             <Offcanvas.Title>Mi cuenta</Offcanvas.Title>
                           </Offcanvas.Header>
                           <Offcanvas.Body>
+                            <ListGroup>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/perfil"); }}>
+                                Editar perfil
+                              </ListGroup.Item>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/carrito"); }}>
+                                Mis compras
+                              </ListGroup.Item>
+                            </ListGroup>
                             <Button variant="outline-danger" onClick={() => { logout(); setShow(false); }}>Cerrar sesión</Button>
                             {/* Opciones según rol */}
-                            {user.role === "admin" && <div>Opciones de admin</div>}
+                            {user.role === "admin" && 
+                            <div>
+                              <ListGroup>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/nuevo-producto"); }}>
+                                Añadir Producto
+                              </ListGroup.Item>
+                            </ListGroup>
+                            </div>}
                           </Offcanvas.Body>
                         </Offcanvas>
                       </>
