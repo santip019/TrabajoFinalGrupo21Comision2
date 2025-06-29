@@ -13,7 +13,7 @@ function Soporte() {
   ];
 
   return (
-    <div className="container">
+    <div className="container contenido-principal">
       <h2 className="mb-4">Centro de Soporte Técnico</h2>
       <div className="mb-4">
         <Button variant="secondary" onClick={() => navigate(-1)}>← Volver atrás</Button>

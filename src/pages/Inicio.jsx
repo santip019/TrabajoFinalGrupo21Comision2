@@ -13,6 +13,7 @@ import { agregarAlCarrito } from "../store/carrito";
 import ListaDeProductos from "../components/ListaDeProductos";
 import CarruselDeProductos from "../components/CarruselDeProductos";
 import CarruselDeImagenes from "../components/CarruselDeImagenes";
+import ProductoCard from "../components/ProductoCard";
 
 function Inicio() {
   const navigate = useNavigate();
@@ -20,7 +21,13 @@ function Inicio() {
   const favoritos = useSelector((state) => state.favoritos);
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
   const { user } = useAuth();
-  const { productos, eliminarProducto, restaurarProducto, busqueda, categoriaSeleccionada } = useProductos();
+  const {
+    productos,
+    eliminarProducto,
+    restaurarProducto,
+    busqueda,
+    categoriaSeleccionada,
+  } = useProductos();
 
   // ...dentro del componente Inicio...
 
@@ -38,117 +45,49 @@ function Inicio() {
 
   const listaProductos = productosFiltrados.map((producto) => (
     <div key={producto.id} className="col-md-4 d-flex mb-4">
-      <Card className="card w-100">
-        <Card.Img
-          variant="top"
-          src={producto.image || "https://via.placeholder.com/180"}
-        />
-        <Card.Body>
-          <Card.Title>{producto.title || producto.nombre}</Card.Title>
-          <Card.Text>Precio ${producto.precio || producto.price}</Card.Text>
-
-          {!mostrarPapelera && (
-            <>
-              {user?.role === "admin" && (
-                <Button
-                  variant="success"
-                  onClick={() =>
-                    navigate(`/Layout/editar-producto/${producto.id}`)
-                  }
-                >
-                  Editar
-                </Button>
-              )}{" "}
-              <Button
-                variant="info"
-                onClick={() => navigate(`/Layout/producto/${producto.id}`)}
-              >
-                Ver Detalles
-              </Button>{" "}
-              <Button
-                variant={
-                  favoritos.includes(producto.id)
-                    ? "warning"
-                    : "outline-warning"
-                }
-                onClick={() => dispatch(toggleFavorito(producto.id))}
-                style={{ fontSize: "1.2rem", padding: "0.3rem" }}
-                aria-label="Favorito"
-              >
-                {favoritos.includes(producto.id) ? "★ " : "☆ "}
-              </Button>{" "}
-              <Button
-                variant="outline-primary"
-                onClick={() => dispatch(agregarAlCarrito(producto))}
-              >
-                Añadir al carrito
-              </Button>
-              {user?.role === "admin" && (
-                <Button
-                  variant="danger"
-                  onClick={() => eliminarProducto(producto.id)}
-                  style={{ fontSize: "1.5rem", padding: "0.3rem" }}
-                  aria-label="Eliminar Producto"
-                >
-                  <MdDeleteForever />
-                </Button>
-              )}
-            </>
-          )}
-
-          {mostrarPapelera && (
-            <>
-              {user?.role === "admin" && (
-                <Button
-                  variant="success"
-                  onClick={() => restaurarProducto(producto.id)}
-                  style={{ fontSize: "1.2rem", padding: "0.3rem" }}
-                  aria-label="Restaurar Producto"
-                >
-                  Restaurar
-                </Button>
-              )}
-              <Badge bg="danger" className="ms-2">
-                Eliminado
-              </Badge>
-            </>
-          )}
-        </Card.Body>
-      </Card>
+      <ProductoCard producto={producto} />
     </div>
   ));
 
   const imagenesPrincipal = [
     "/src/assets/images/banner_promocion_productos3.png",
     "/src/assets/images/banner_promocion_productos2.png",
-    "/src/assets/images/banner_promocion_productos1.png"
+    "/src/assets/images/banner_promocion_productos1.png",
   ];
 
-  const productosConDescuento = productos.filter(p => (p.discount || p.descuento || 0) > 0);
+  const productosConDescuento = productos.filter(
+    (p) => (p.discount || p.descuento || 0) > 0
+  );
 
-  const productosWaldos = productos.filter(p => (p.brand || p.marca) && (p.brand || p.marca).toLowerCase() === "waldo's");
+  const productosWaldos = productos.filter(
+    (p) =>
+      (p.brand || p.marca) && (p.brand || p.marca).toLowerCase() === "waldo's"
+  );
 
-  const productosNoWaldos = productos.filter(p => (p.brand || p.marca)?.toLowerCase() !== "waldo's");
+  const productosNoWaldos = productos.filter(
+    (p) => (p.brand || p.marca)?.toLowerCase() !== "waldo's"
+  );
   const productosAleatorios = productosNoWaldos
     .sort(() => Math.random() - 0.5)
     .slice(0, 20);
 
   const imagenesDescuento = [
     "/src/assets/images/Banners_promociones0.png",
-    "/src/assets/images/Banners_promociones1.png"
+    "/src/assets/images/Banners_promociones1.png",
   ];
-
 
   return (
     <div className="container-inicio">
-
-      <CarruselDeImagenes imagenes={imagenesPrincipal} className="contenedor-principal" />
+      <CarruselDeImagenes
+        imagenes={imagenesPrincipal}
+        className="contenedor-principal"
+      />
 
       <div className="carruseles-ofertas">
         <h2>Super Ofertas</h2>
         <CarruselDeProductos
           productos={productosConDescuento}
-          onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </div>
 
@@ -156,7 +95,7 @@ function Inicio() {
         <h2>Productos Waldo's</h2>
         <CarruselDeProductos
           productos={productosWaldos}
-          onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </div>
 
@@ -169,7 +108,7 @@ function Inicio() {
         <h2>Otras Marcas</h2>
         <CarruselDeProductos
           productos={productosAleatorios}
-          onVerDetalles={id => navigate(`/Layout/producto/${id}`)}
+          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </div>
 

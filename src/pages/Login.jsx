@@ -21,19 +21,21 @@ function Login() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h2>Iniciar sesión</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form.Group>
-        <Form.Label>Email</Form.Label>
-        <Form.Control value={email} onChange={e => setEmail(e.target.value)} required />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-      </Form.Group>
-      <Button type="submit" className="mt-3">Ingresar</Button>
-    </Form>
+    <div className="contenido-principal">
+      <Form onSubmit={handleSubmit}>
+        <h2>Iniciar sesión</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form.Group>
+          <Form.Label>Email</Form.Label>
+          <Form.Control value={email} onChange={e => setEmail(e.target.value)} required />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+        </Form.Group>
+        <Button type="submit" className="mt-3">Ingresar</Button>
+      </Form>
+    </div>
   );
 }
 

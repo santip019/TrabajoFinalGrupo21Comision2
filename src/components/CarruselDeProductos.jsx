@@ -1,8 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import ProductoCard from "./ProductoCard"; // Importa tu componente reutilizable
 
-function CarruselDeProductos({ productos, onVerDetalles }) {
+function CarruselDeProductos({ productos }) {
   const productosPorSlide = 5;
 
   // Si hay menos de 5 productos, repite desde el principio hasta llegar a 5
@@ -33,7 +32,7 @@ function CarruselDeProductos({ productos, onVerDetalles }) {
       indicators={false}
       controls={true}
       interval={null}
-      wrap={true} // Esto hace que el carrusel sea en bucle
+      wrap={true}
       nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" />}
       prevIcon={<span aria-hidden="true" className="carousel-control-prev-icon" />}
     >
@@ -41,35 +40,9 @@ function CarruselDeProductos({ productos, onVerDetalles }) {
         <Carousel.Item key={idx}>
           <div className="d-flex justify-content-center gap-3">
             {grupo.map((producto, i) => (
-              <Card
-                key={producto.id + "-" + i}
-                style={{ width: "14rem", cursor: "pointer" }}
-                className="border-0"
-                onClick={() => onVerDetalles(producto.id)}
-              >
-                <Card.Img
-                  variant="top"
-                  src={producto.image || producto.imagen || "https://via.placeholder.com/180"}
-                  style={{ height: "140px", objectFit: "contain" }}
-                />
-                <Card.Body>
-                  <Card.Title style={{ fontSize: "1rem" }}>
-                    {producto.title || producto.nombre}
-                  </Card.Title>
-                  <Card.Text>
-                    <b>${producto.precio || producto.price}</b>
-                  </Card.Text>
-                  <Button
-                    variant="info"
-                    onClick={e => {
-                      e.stopPropagation();
-                      onVerDetalles(producto.id);
-                    }}
-                  >
-                    Ver Detalles
-                  </Button>
-                </Card.Body>
-              </Card>
+              <div key={producto.id + "-" + i} style={{ width: "14rem" }}>
+                <ProductoCard producto={producto} />
+              </div>
             ))}
           </div>
         </Carousel.Item>
