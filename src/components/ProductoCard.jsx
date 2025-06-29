@@ -3,6 +3,7 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorito } from "../store/favoritos";
@@ -28,7 +29,14 @@ function ProductoCard({ producto }) {
         <Card.Title style={{ fontSize: "1rem" }}>
           {producto.title || producto.nombre}
         </Card.Title>
-        <Card.Text>
+        <div className="rating">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <span key={i} style={{ color: "#FFD700", fontSize: "1.1em" }}>
+              {i < Math.round(producto.rating.rate || producto.rating.rate || 0) ? <AiFillStar /> : <AiOutlineStar />}
+            </span>
+          ))}
+        </div>
+        <Card.Text className="precios">
           {producto.discount || producto.descuento ? (
             <>
               <del style={{ color: "#888", marginRight: 8 }}>
@@ -38,13 +46,24 @@ function ProductoCard({ producto }) {
               <b>
                 ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
               </b>
-              <Badge bg="warning" text="dark">
+              <Badge bg="danger" text="light" className="descuento">
                 {producto.discount || producto.descuento}% OFF
               </Badge>
               <br />
             </>
           ) : (
             <b>${producto.precio || producto.price}</b>
+          )}
+        </Card.Text>
+        <Card.Text className="envio">
+          {producto.delivery ? (
+            <p className="envio-gratis">
+              Envío GRATIS
+            </p>
+          ) : (
+            <p className="envio">
+              Sin envío gratis
+            </p>
           )}
         </Card.Text>
         <div className="d-flex gap-2">
