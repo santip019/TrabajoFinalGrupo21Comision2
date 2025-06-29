@@ -19,7 +19,8 @@ import Seguridad from "./Seguridad";
 import Cuenta from "./Cuenta";
 import Carrito from "../pages/Carrito";
 import Promociones from "../pages/Promociones";
-import MasVendidos from "../pages/MasVendidos"; // Agrega esta línea arriba
+import MasVendidos from "../pages/MasVendidos";
+import Novedades from "../pages/Novedades";
 
 
 function AppRoutes() {
@@ -55,6 +56,8 @@ function AppRoutes() {
         <Route path="producto/:id" element={<VerDetalles />} />
         <Route path="promociones" element={<Promociones />} />
         <Route path="mas-vendidos" element={<MasVendidos />} />
+        <Route path="novedades" element={<Novedades />} />
+
         
 
         <Route path="soporte" element={<Soporte />} />
