@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { useProductos } from "../context/ProductosContext";
 import { useState } from "react";
-import Footer from "../pages/Footer"; // Agrega esta línea al inicio
+import Footer from "../pages/Footer"; 
 
 
 function Layout() {
