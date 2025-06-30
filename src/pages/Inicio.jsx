@@ -53,14 +53,14 @@ function Inicio() {
   if (busqueda.trim() !== "") {
     return (
       <div className="container contenido-principal">
-        <h2>
-          <Badge bg="primary">Resultados de búsqueda</Badge>
+        <h2 className="titulos">
+          <Badge bg="none">Resultados de búsqueda</Badge>
         </h2>
         {filas.length === 0 && (
           <p className="text-muted">No se encontraron productos.</p>
         )}
         {filas.map((fila, idx) => (
-          <div className="row mb-4 justify-content-center" key={idx}>
+          <div className="productos row mb-4 justify-content-center" key={idx}>
             {fila.map((producto) => (
               <div
                 key={producto.id}

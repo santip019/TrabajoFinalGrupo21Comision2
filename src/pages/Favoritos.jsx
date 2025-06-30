@@ -14,8 +14,8 @@ function Favoritos() {
   return (
     <div className="container contenido-principal">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>
-          <Badge className="inicio" bg="warning">
+        <h2 className="titulos">
+          <Badge className="inicio" bg="none">
             Productos Favoritos
           </Badge>
         </h2>
@@ -23,7 +23,7 @@ function Favoritos() {
       <div className="row">
         {productosFavoritos.length > 0 ? (
           productosFavoritos.map((producto) => (
-            <div key={producto.id} className="col-md-4 d-flex mb-4">
+            <div key={producto.id} className="productos col-md-3 d-flex mb-4">
               <ProductoCard producto={producto} />
             </div>
           ))

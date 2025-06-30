@@ -24,14 +24,14 @@ function Promociones() {
 
   return (
     <div className="container contenido-principal">
-      <h2>
-        <Badge bg="success">Promociones</Badge>
+      <h2 className="titulos">
+        <Badge bg="none">Conocé nuestras Promociones</Badge>
       </h2>
       {filas.length === 0 && (
         <p className="text-muted">No hay productos en promoción.</p>
       )}
       {filas.map((fila, idx) => (
-        <div className="row mb-4 justify-content-center" key={idx}>
+        <div className="productos row mb-4 justify-content-center" key={idx}>
           {fila.map((producto) => (
             <div
               className="col-6 col-md-4 col-lg-2 d-flex mb-4"
