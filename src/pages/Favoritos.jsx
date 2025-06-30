@@ -1,12 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useFavoritos } from "../context/FavoritosContext";
 import { useProductos } from "../context/ProductosContext";
+import { useAuth } from "../context/AuthContext";
 import Badge from 'react-bootstrap/Badge';
 import ProductoCard from "../components/ProductoCard";
 
 function Favoritos() {
   const { productos } = useProductos();
-  const favoritos = useSelector((state) => state.favoritos);
+  const { user } = useAuth();
+  const { favoritos } = useFavoritos();
 
+  if (!user) {
+    window.location.href = "/principal/login";
+    return null;
+  }
+  
+  // Filtrar productos favoritos que están activos (estado=true)
   const productosFavoritos = productos.filter(
     (producto) => favoritos.includes(producto.id) && producto.estado
   );

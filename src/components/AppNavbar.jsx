@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav, Row, Col, Dropdown, Offcanvas, Button, ListGroup } from "react-bootstrap";
+import { Navbar, Container, Nav, Row, Col, Dropdown, Offcanvas, Button, ListGroup, Form } from "react-bootstrap";
 import { LuSearch } from "react-icons/lu";
 import { FaRegStar, FaRegUser } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -6,18 +6,17 @@ import { MdOutlineContactSupport } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useSelector } from "react-redux";
-import Form from "react-bootstrap/Form";
 import { useProductos } from "../context/ProductosContext";
 import { useState } from "react";
-import Footer from "../pages/Footer"; 
+import Footer from "../pages/Footer";
+import { useCarrito } from "../context/CarritoContext";
 
 
 function Layout() {
   const { user, logout } = useAuth();
   const [show, setShow] = useState(false);
   const navigate = useNavigate(); // Para navegar a otras rutas
-  const carrito = useSelector((state) => state.carrito);
+  const { carrito } = useCarrito();
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const { busqueda, setBusqueda } = useProductos();
   const { productos, categoriaSeleccionada, setCategoriaSeleccionada } = useProductos();
@@ -85,9 +84,9 @@ function Layout() {
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/perfil"); }}>
                                 Ver perfil
                               </ListGroup.Item>
-                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/carrito"); }}>
+                              {/*<ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/carrito"); }}>
                                 Cambiar Tema
-                              </ListGroup.Item>
+                              </ListGroup.Item> AGREGAR SI LLEGAMOS CON EL TIEMPO*/}
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/soporte"); }}>
                                 Soporte Tecnico
                               </ListGroup.Item>
@@ -100,7 +99,7 @@ function Layout() {
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/nuevo-producto"); }}>
                                 Añadir Producto
                               </ListGroup.Item>
-                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal"); }}>
+                              <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/productos/todas"); }}>
                                 Gestionar Productos
                               </ListGroup.Item>
                               <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/papelera"); }}>

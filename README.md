@@ -12,5 +12,4 @@
 - **React + Vite --> npm install**
 - **Bootstrap --> npm install react-bootstrap bootstrap**
 - **React Router DOM -->  npm i react-router --> npm install react-router-dom**
-- **Redux --> npm install @reduxjs/toolkit react-redux** 
 - **React icon --> npm install react-icons**

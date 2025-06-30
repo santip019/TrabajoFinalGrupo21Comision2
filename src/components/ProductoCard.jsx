@@ -5,14 +5,15 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../store/favoritos";
-import { agregarAlCarrito } from "../store/carrito";
+import { useFavoritos } from "../context/FavoritosContext";
+import { useCarrito } from "../context/CarritoContext";
+import { useAuth } from "../context/AuthContext";
 
 function ProductoCard({ producto }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const favoritos = useSelector((state) => state.favoritos);
+  const { user } = useAuth();
+  const { favoritos, toggleFavorito } = useFavoritos();
+  const { agregarAlCarrito } = useCarrito();
 
   return (
     <Card
@@ -72,7 +73,8 @@ function ProductoCard({ producto }) {
             variant={favoritos.includes(producto.id) ? "warning" : "outline-warning"}
             onClick={e => {
               e.stopPropagation();
-              dispatch(toggleFavorito(producto.id));
+              if (!user) return navigate("/principal/login");
+              toggleFavorito(producto.id);
             }}
             aria-label="Favorito"
           >
@@ -82,7 +84,8 @@ function ProductoCard({ producto }) {
             variant="success"
             onClick={e => {
               e.stopPropagation();
-              dispatch(agregarAlCarrito(producto));
+              if (!user) return navigate("/principal/login");
+              agregarAlCarrito(producto);
             }}
           >
             Añadir al carrito
