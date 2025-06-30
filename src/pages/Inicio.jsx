@@ -5,11 +5,10 @@ import Badge from "react-bootstrap/Badge";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../store/favoritos";
+import { useFavoritos } from "../context/FavoritosContext";
+import { useCarrito } from "../context/CarritoContext";
 import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext";
-import { agregarAlCarrito } from "../store/carrito";
 import ListarProductos from "../components/ListarProductos";
 import CarruselDeProductos from "../components/CarruselDeProductos";
 import CarruselDeImagenes from "../components/CarruselDeImagenes";
@@ -17,8 +16,8 @@ import ProductoCard from "../components/ProductoCard";
 
 function Inicio() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const favoritos = useSelector((state) => state.favoritos);
+  const { favoritos, toggleFavorito } = useFavoritos();
+  const { agregarAlCarrito } = useCarrito();
   const [mostrarPapelera, setMostrarPapelera] = useState(false);
   const { user } = useAuth();
   const {

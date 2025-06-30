@@ -54,7 +54,6 @@ function AppRoutes() {
         } />
         <Route path="productos/:categoria" element={<ListarProductos />} />
         <Route path="acerca-de" element={<AcercaDe />} />
-        <Route path="papelera" element={<Papelera />} />
         <Route path="producto/:id" element={<VerDetalles />} />
         <Route path="promociones" element={<Promociones />} />
         <Route path="mas-vendidos" element={<MasVendidos />} />
@@ -75,6 +74,12 @@ function AppRoutes() {
             <NuevoProducto />
           </AdminRoute>
         } />
+        <Route path="papelera" element={
+          <AdminRoute>
+            <Papelera />
+          </AdminRoute>
+        } />
+
       </Route>
 
       {/* Redirección por defecto */}

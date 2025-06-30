@@ -1,6 +1,4 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorito } from "../store/favoritos"; // Verifica este path
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -8,16 +6,18 @@ import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import { FaStar, FaRegStar } from "react-icons/fa"; // Iconos favoritos
 import { useProductos } from "../context/ProductosContext";
-import { agregarAlCarrito } from "../store/carrito";
-
+import { useFavoritos } from "../context/FavoritosContext";
+import { useCarrito } from "../context/CarritoContext";
+import { useAuth } from "../context/AuthContext";
 
 function VerDetalles() {
   const { productos } = useProductos();
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
-  const favoritos = useSelector((state) => state.favoritos);
+  const { favoritos, toggleFavorito } = useFavoritos();
+  const { agregarAlCarrito } = useCarrito();
+  const { user } = useAuth();
 
   const producto = productos.find((a) => String(a.id) === String(id));
 
@@ -35,7 +35,9 @@ function VerDetalles() {
       <Card className="shadow-lg position-relative" style={{ width: "32rem", borderRadius: "1rem" }}>
         <Button
           variant={esFavorito ? "warning" : "outline-warning"}
-          onClick={() => dispatch(toggleFavorito(producto.id))}
+          onClick={() => {
+            if (!user) return navigate("/principal/login");
+            toggleFavorito(producto.id);}}
           className="position-absolute"
           style={{ top: "10px", right: "10px", fontSize: "1.2rem", zIndex: 1 }}
           aria-label="Favorito"
@@ -84,21 +86,23 @@ function VerDetalles() {
             <Col xs={4} className="fw-bold">Categoría:</Col>
             <Col xs={8}>{producto.category}</Col>
           </Row>
-<div className="d-flex justify-content-end gap-2 mt-4">
-  <Button
-    variant="outline-primary"
-    onClick={() => dispatch(agregarAlCarrito(producto))}
-    aria-label="Agregar al carrito"
-  >
-    🛒 Agregar al carrito
-  </Button>
-  <Button
-    variant="secondary"
-    onClick={() => navigate(volverA)}
-  >
-    Volver
-  </Button>
-</div>
+          <div className="d-flex justify-content-end gap-2 mt-4">
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                if (!user) return navigate("/principal/login");
+                agregarAlCarrito(producto);}}
+              aria-label="Agregar al carrito"
+            >
+              🛒 Agregar al carrito
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => navigate(volverA)}
+            >
+              Volver
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     </div>

@@ -1,14 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { quitarDelCarrito, cambiarCantidad } from '../store/carrito';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { useCarrito } from "../context/CarritoContext";
+import { useAuth } from "../context/AuthContext";
+import { Card, Button, Form } from 'react-bootstrap';
 
 function Carrito() {
-  const carrito = useSelector((state) => state.carrito);
-  const dispatch = useDispatch();
+  const { user } = useAuth();
+  const { carrito, quitarDelCarrito, cambiarCantidad, vaciarCarrito } = useCarrito();
 
-  // ✅ Cálculo seguro de precio (precio || price || 0)
+  // Verificar si el usuario está autenticado
+  if (!user) {
+    window.location.href = "/principal/login";
+    return null;
+  }
+  // Cálculo seguro de precio (precio || price || 0)
   const total = carrito.reduce((acc, item) => {
     const precio = item.precio || item.price || 0;
     return acc + precio * item.cantidad;
@@ -24,7 +27,7 @@ function Carrito() {
           {carrito.map((item) => (
             <Card key={item.id} className="mb-3">
               <Card.Body className="d-flex align-items-center gap-4">
-                {/* ✅ Imagen del producto */}
+                {/* ✅ Imagen del producto AGREGAR UNA IMAGEN EN CASO DE NO TENER O NO CARGAR*/}
                 <img
                   src={item.image || item.imagen || 'https://via.placeholder.com/80'}
                   alt={item.nombre || item.title}
@@ -41,9 +44,7 @@ function Carrito() {
                     min={1}
                     value={item.cantidad}
                     onChange={(e) =>
-                      dispatch(
-                        cambiarCantidad({ id: item.id, cantidad: +e.target.value })
-                      )
+                      cambiarCantidad({ id: item.id, cantidad: +e.target.value })
                     }
                     style={{ width: '80px' }}
                   />
@@ -52,7 +53,7 @@ function Carrito() {
                 {/* ✅ Botón de quitar */}
                 <Button
                   variant="danger"
-                  onClick={() => dispatch(quitarDelCarrito(item.id))}
+                  onClick={() => quitarDelCarrito(item.id)}
                 >
                   Quitar
                 </Button>
@@ -60,6 +61,7 @@ function Carrito() {
             </Card>
           ))}
           <h4 className="mt-3 text-end">Total: ${total.toFixed(2)}</h4>
+          <Button variant="outline-danger" onClick={vaciarCarrito}>Vaciar carrito</Button>
         </>
       )}
     </div>

@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("sessionUser");
+    navigate("/principal");
   };
 
   const register = (email, password, name, role = "user") => {
