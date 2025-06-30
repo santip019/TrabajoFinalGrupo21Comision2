@@ -1,5 +1,6 @@
 import { useProductos } from "../context/ProductosContext";
 import Badge from "react-bootstrap/Badge";
+import { Container, Row, Col } from "react-bootstrap";
 import ProductoCard from "../components/ProductoCard";
 
 function Promociones() {
@@ -23,27 +24,22 @@ function Promociones() {
   }
 
   return (
-    <div className="container contenido-principal">
-      <h2 className="titulos">
-        <Badge bg="none">Conocé nuestras Promociones</Badge>
+    <Container className="my-4">
+      <h2 className="titulos d-flex align-items-start">
+        <Badge bg="none">Conocé las Promociones</Badge>
       </h2>
-      {filas.length === 0 && (
-        <p className="text-muted">No hay productos en promoción.</p>
-      )}
-      {filas.map((fila, idx) => (
-        <div className="productos row mb-4 justify-content-center" key={idx}>
-          {fila.map((producto) => (
-            <div
-              className="col-6 col-md-4 col-lg-2 d-flex mb-4"
-              style={{ minWidth: "14rem", maxWidth: "14rem" }}
-              key={producto.id}
-            >
+      {productosConDescuento.length === 0 ? (
+        <p className="text-muted">No hay productos para mostrar.</p>
+      ) : (
+        <Row className="productos">
+          {productosConDescuento.map((producto) => (
+            <Col xs={6} md={3} key={producto.id} className="mb-4">
               <ProductoCard producto={producto} />
-            </div>
+            </Col>
           ))}
-        </div>
-      ))}
-    </div>
+        </Row>
+      )}
+    </Container>
   );
 }
 
