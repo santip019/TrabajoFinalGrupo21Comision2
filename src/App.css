@@ -195,7 +195,7 @@ a.nav-link,
   margin-bottom: 10px;
 }
 
-.carruseles .card, .carruseles-ofertas .card {
+.carruseles .card, .carruseles-ofertas .card, .productos .card {
   width: 14rem;
   height: 28rem;
   border: 1px solid #cccccc !important;
@@ -204,9 +204,10 @@ a.nav-link,
   padding-bottom: 50px;
   transition: box-shadow 0.2s;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-.carruseles .card .h5, .carruseles-ofertas .card .h5 {
+.carruseles .card .h5, .carruseles-ofertas .card .h5, .productos .card .h5 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 1.2em;
@@ -222,7 +223,7 @@ a.nav-link,
   max-width: 100%;
 }
 
-.carruseles .card:hover, .carruseles-ofertas .card:hover {
+.carruseles .card:hover, .carruseles-ofertas .card:hover, .productos .card:hover {
   box-shadow: 0 4px 16px 2px #00000049;
 }
 
@@ -246,6 +247,10 @@ a.nav-link,
   font-size: 1.3em;
 }
 
+.rating .rating-texto {
+  font-size: 1em;
+}
+
 .descuento {
   margin-left: 10px;
   font-size: 0.8em;
@@ -262,6 +267,28 @@ a.nav-link,
 
 .envio {
   color: #b3b3b3;
+}
+
+/* Finaliza del estilo del inicio */
+
+/* Comienzo del estilo de otras vistas */
+
+.titulos {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #fff;
+  background: #5da066;
+  text-align: left;
+  align-self: flex-start;
+  padding: 0.2em 1em;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+  width: 40%;
+}
+
+.productos .card {
+  height: 30rem;
 }
 
 /* Footer personalizado Waldo's */
@@ -298,6 +325,12 @@ a.nav-link,
 
 .footer-form .footer-input {
   max-width: 220px;
+}
+
+@media (max-width: 576px) {
+  .producto-card {
+    flex-direction: column;
+  }
 }
 
 /*.card-producto {

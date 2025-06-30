@@ -34,16 +34,16 @@ function ListarProductos() {
 
   return (
     <div className="container mt-4">
-      <h2>
+      <h2 className="titulos">
         {categoria === "todas"
           ? "Todos los productos"
-          : `Productos de la categoría: ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`}
+          : ` ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`}
       </h2>
       {filas.length === 0 && (
         <p className="text-muted">No hay productos para mostrar.</p>
       )}
       {filas.map((fila, idx) => (
-        <div className="row mb-4 justify-content-center" key={idx}>
+        <div className="productos row mb-4 justify-content-center" key={idx}>
           {fila.map((producto) => (
             <div
               key={producto.id}

@@ -30,6 +30,7 @@ function ProductoCard({ producto }) {
           {producto.title || producto.nombre}
         </Card.Title>
         <div className="rating">
+          <span className="rating-texto"> {producto.rating.rate} </span>
           {Array.from({ length: 5 }).map((_, i) => (
             <span key={i} style={{ color: "#FFD700", fontSize: "1.1em" }}>
               {i < Math.round(producto.rating.rate || producto.rating.rate || 0) ? <AiFillStar /> : <AiOutlineStar />}
