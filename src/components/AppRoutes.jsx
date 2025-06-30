@@ -3,11 +3,10 @@ import Layout from "./AppNavbar";
 import Inicio from "../pages/Inicio";
 import Login from "../pages/Login";
 import Registro from "../pages/Registrarse";
-import NuevoProducto from "./NuevoProducto";
+import FormularioProducto from "./FormularioProducto";
 import Favoritos from "../pages/Favoritos";
 import AcercaDe from "../pages/AcercaDe";
 import ListarProductos from "../components/ListarProductos"; // Asegúrate de tener este componente
-import EditarProducto from "./EditarProducto";
 import VerDetalles from "../pages/VerDetalles";
 import Papelera from "../pages/Papelera";
 import AdminRoute from "../routes/AdminRoute";
@@ -71,9 +70,16 @@ function AppRoutes() {
         {/* PROTEGER RUTAS ADMIN */}
         <Route path="nuevo-producto" element={
           <AdminRoute>
-            <NuevoProducto />
+            <FormularioProducto />
           </AdminRoute>
         } />
+        {
+          <Route path="editar-producto/:id" element={
+            <AdminRoute>
+              <FormularioProducto esEdicion={true} />
+            </AdminRoute>
+          } />
+        }
         <Route path="papelera" element={
           <AdminRoute>
             <Papelera />
