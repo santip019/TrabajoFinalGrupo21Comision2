@@ -1,6 +1,7 @@
 import { useProductos } from "../context/ProductosContext";
 import ProductoCard from "../components/ProductoCard";
 import Badge from "react-bootstrap/Badge";
+import { Container, Row, Col } from "react-bootstrap";
 
 function MasVendidos() {
   const { productos, busqueda } = useProductos();
@@ -17,34 +18,23 @@ function MasVendidos() {
     )
     .sort((a, b) => b.rating.count - a.rating.count);
 
-  // Agrupa de a 5 productos por fila (igual que en Promociones)
-  const filas = [];
-  for (let i = 0; i < productosConVentas.length; i += 5) {
-    filas.push(productosConVentas.slice(i, i + 5));
-  }
-
   return (
-    <div className="container contenido-principal">
-      <h2 className="titulos">
-        <Badge bg="none">Fijate lo más Vendidos en Waldo's</Badge>
+    <Container className="my-4">
+      <h2 className="titulos d-flex align-items-start">
+        <Badge bg="none">Los más Vendidos</Badge>
       </h2>
-      {filas.length === 0 && (
+      {productosConVentas.length === 0 ? (
         <p className="text-muted">No hay productos para mostrar.</p>
-      )}
-      {filas.map((fila, idx) => (
-        <div className="productos row mb-4 justify-content-center" key={idx}>
-          {fila.map((producto) => (
-            <div
-              key={producto.id}
-              className="col-6 col-md-4 col-lg-2 d-flex mb-4"
-              style={{ minWidth: "14rem", maxWidth: "14rem" }}
-            >
+      ) : (
+        <Row className="productos">
+          {productosConVentas.map((producto) => (
+            <Col xs={6} md={3} key={producto.id} className="mb-4">
               <ProductoCard producto={producto} />
-            </div>
+            </Col>
           ))}
-        </div>
-      ))}
-    </div>
+        </Row>
+      )}
+    </Container>
   );
 }
 

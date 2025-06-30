@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Soporte() {
@@ -14,18 +14,23 @@ function Soporte() {
 
   return (
     <div className="container contenido-principal">
-      <h2 className="mb-4">Centro de Soporte Técnico</h2>
-      <div className="mb-4">
-        <Button variant="secondary" onClick={() => navigate(-1)}>← Volver atrás</Button>
-      </div>
-      <div className="row g-4">
+      <Row className="my-4 align-items-center">
+        <Col md={6} sm={8}>
+          <h2 className="titulos text-center mb-4">Centro de Soporte Técnico</h2>
+        </Col>
+        <Col md={6} sm={4} className="d-flex justify-content-end">
+          <Button variant="secondary" onClick={() => navigate(-1)}>← Volver atrás</Button>
+        </Col>
+      </Row>
+      
+      <div className="d-flex justify-content-center row g-4">
         {secciones.map((item, i) => (
           <div className="col-md-4" key={i}>
             <Card className="h-100 shadow">
               <Card.Body>
                 <Card.Title>{item.titulo}</Card.Title>
                 <Card.Text>{item.descripcion}</Card.Text>
-                <Button onClick={() => navigate(`/soporte/${item.ruta}`)} variant="info">
+                <Button onClick={() => navigate(`/soporte/${item.ruta}`)} variant="outline-success">
                   Ver más
                 </Button>
               </Card.Body>

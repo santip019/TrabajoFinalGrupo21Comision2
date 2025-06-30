@@ -110,16 +110,12 @@ a.nav-link,
 }
 
 /* Finaliza del estilo del navbar */
+
 /* Comienzo del estilo del inicio */
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1) grayscale(1) brightness(0.3);
-}
-
-.container-inicio {
-  width: 100%;
-  position: relative;
 }
 
 .imagenes-principal {
@@ -196,15 +192,11 @@ a.nav-link,
 }
 
 .carruseles .card, .carruseles-ofertas .card, .productos .card {
-  width: 14rem;
-  height: 28rem;
   border: 1px solid #cccccc !important;
   box-shadow: 0 0 8px 2px #00000017;
   padding-top: 50px;
   padding-bottom: 50px;
   transition: box-shadow 0.2s;
-  margin-top: 15px;
-  margin-bottom: 15px;
 }
 
 .carruseles .card .h5, .carruseles-ofertas .card .h5, .productos .card .h5 {
@@ -220,7 +212,7 @@ a.nav-link,
   -webkit-line-clamp: 2;     /* Limita a 2 líneas */
   line-clamp: 2;             /* Propiedad estándar para compatibilidad */
   -webkit-box-orient: vertical;
-  max-width: 100%;
+  
 }
 
 .carruseles .card:hover, .carruseles-ofertas .card:hover, .productos .card:hover {
@@ -275,21 +267,17 @@ a.nav-link,
 
 .titulos {
   font-family: "Montserrat", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 30px;
   color: #fff;
   background: #5da066;
-  text-align: left;
-  align-self: flex-start;
-  padding: 0.2em 1em;
-  margin-bottom: 0.5em;
-  margin-top: 1em;
-  width: 40%;
+  white-space: normal;
+  word-break: break-word;
 }
 
-.productos .card {
-  height: 30rem;
-}
+
+
+
 
 /* Footer personalizado Waldo's */
 .footer-waldos {
@@ -333,14 +321,7 @@ a.nav-link,
   }
 }
 
-/*.card-producto {
-  width: 14rem;
-  min-height: 300px;
-  max-height: 420px;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-}
+/*
 
 .contenido-principal {
   margin-top: 9em; igual a la altura del navbar

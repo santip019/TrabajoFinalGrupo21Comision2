@@ -3,6 +3,7 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
+import { MdAddShoppingCart } from "react-icons/md";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useFavoritos } from "../context/FavoritosContext";
@@ -17,47 +18,47 @@ function ProductoCard({ producto }) {
 
   return (
     <Card
-      className="w-100 mb-3 card-producto"
+      className="h-100 shadow-sm"
       style={{ cursor: "pointer" }}
       onClick={() => navigate(`/principal/producto/${producto.id}`)}
     >
       <Card.Img
         variant="top"
         src={producto.image || producto.imagen || "https://via.placeholder.com/180"}
-        style={{ height: "140px", objectFit: "contain" }}
+        style={{ width: '100%', maxWidth: '100%', height: "140px", objectFit: "contain" }}
       />
-      <Card.Body>
-        <Card.Title style={{ fontSize: "1rem" }}>
+      <Card.Body className="d-flex flex-column">
+        <Card.Title className="mb-1">
           {producto.title || producto.nombre}
         </Card.Title>
-        <div className="rating">
-          <span className="rating-texto"> {producto.rating.rate} </span>
+        <div className="d-flex align-items-center mb-2">
+          <span className="me-2">{producto.rating.rate}</span>
           {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} style={{ color: "#FFD700", fontSize: "1.1em" }}>
+            <span key={i} className="text-warning" size={14}>
               {i < Math.round(producto.rating.rate || producto.rating.rate || 0) ? <AiFillStar /> : <AiOutlineStar />}
             </span>
           ))}
         </div>
-        <Card.Text className="precios">
+        <Card.Text>
           {producto.discount || producto.descuento ? (
             <>
-              <del style={{ color: "#888", marginRight: 8 }}>
-                ${producto.precio || producto.price}
-              </del>
-              <br />
-              <b>
+              <span className="d-flex align-items-center mb-1">
+                <del className="text-decoration-line-through text-muted me-2 mb-0">
+                  ${producto.precio || producto.price}
+                </del>
+                <Badge bg="danger" text="light" className="ms-1">
+                  {producto.discount || producto.descuento}% OFF
+                </Badge>
+              </span>
+              <b className="text-dark fs-5 d-flex flex-column align-items-start">
                 ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
               </b>
-              <Badge bg="danger" text="light" className="descuento">
-                {producto.discount || producto.descuento}% OFF
-              </Badge>
-              <br />
             </>
           ) : (
             <b>${producto.precio || producto.price}</b>
           )}
         </Card.Text>
-        <Card.Text className="envio">
+        <Card.Text>
           {producto.delivery ? (
             <p className="envio-gratis">
               Envío GRATIS
@@ -68,8 +69,9 @@ function ProductoCard({ producto }) {
             </p>
           )}
         </Card.Text>
-        <div className="d-flex gap-2">
+        <div className="mt-auto d-flex justify-content-between align-items-center">
           <Button
+            size={"lg"}
             variant={favoritos.includes(producto.id) ? "warning" : "outline-warning"}
             onClick={e => {
               e.stopPropagation();
@@ -78,9 +80,10 @@ function ProductoCard({ producto }) {
             }}
             aria-label="Favorito"
           >
-            {favoritos.includes(producto.id) ? "★" : "☆"}
+            {favoritos.includes(producto.id) ? <AiFillStar /> : <AiOutlineStar />}
           </Button>
           <Button
+            size={"lg"}
             variant="success"
             onClick={e => {
               e.stopPropagation();
@@ -88,7 +91,7 @@ function ProductoCard({ producto }) {
               agregarAlCarrito(producto);
             }}
           >
-            Añadir al carrito
+           <MdAddShoppingCart />
           </Button>
         </div>
       </Card.Body>

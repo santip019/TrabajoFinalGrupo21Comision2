@@ -52,11 +52,6 @@ function Footer() {
             <small className="text-muted">No compartimos tu email con terceros.</small>
           </Col>
         </Row>
-        <Row>
-          <Col className="text-center mt-4">
-            <small>&copy; {new Date().getFullYear()} Waldo's - Todos los derechos reservados.</small>
-          </Col>
-        </Row>
       </Container>
     </footer>
   );
