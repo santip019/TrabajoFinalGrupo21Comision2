@@ -19,7 +19,7 @@ function VerDetalles() {
   const { agregarAlCarrito } = useCarrito();
   const { user } = useAuth();
 
-  const producto = productos.find((a) => String(a.id) === String(id));
+  const producto = productos.find((a) => (a.id) === Number(id));
 
   if (!producto) {
     return (
@@ -75,6 +75,10 @@ function VerDetalles() {
             <Col xs={8}>{producto.title}</Col>
           </Row>
           <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Marca:</Col>
+            <Col xs={8}>{producto.brand}</Col>
+          </Row>
+          <Row className="mb-2">
             <Col xs={4} className="fw-bold">Precio:</Col>
             <Col xs={8}>{producto.price}</Col>
           </Row>
@@ -85,6 +89,30 @@ function VerDetalles() {
           <Row className="mb-2">
             <Col xs={4} className="fw-bold">Categoría:</Col>
             <Col xs={8}>{producto.category}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Puntaje:</Col>
+            <Col xs={8}>{producto.rating?.rate}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Cantidad de votos:</Col>
+            <Col xs={8}>{producto.rating?.count}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Descuento:</Col>
+            <Col xs={8}>{producto.discount}%</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Fecha de ingreso:</Col>
+            <Col xs={8}>{producto.dateOfEntry}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Entrega disponible:</Col>
+            <Col xs={8}>{producto.delivery ? "Sí" : "No"}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col xs={4} className="fw-bold">Estado:</Col>
+            <Col xs={8}>{producto.estado ? "Activo" : "Inactivo"}</Col>
           </Row>
           <div className="d-flex justify-content-end gap-2 mt-4">
             <Button
