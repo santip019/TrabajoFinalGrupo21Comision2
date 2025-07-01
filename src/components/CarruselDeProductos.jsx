@@ -1,16 +1,32 @@
+import { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import ProductoCard from "./ProductoCard";
 
 function CarruselDeProductos({ productos }) {
-  const productosPorSlide = 5;
+  const [productosPorSlide, setProductosPorSlide] = useState(5);
 
-  // Divide los productos en grupos de 5, sin repetir ni rellenar
+  // Detectar tamaño de pantalla y ajustar cantidad de productos por slide
+  useEffect(() => {
+    function actualizarCantidad() {
+      if (window.matchMedia("(max-width: 576px)").matches) {
+        setProductosPorSlide(1); // Pantalla pequeña
+      } else if (window.matchMedia("(max-width: 992px)").matches) {
+        setProductosPorSlide(3); // Pantalla mediana
+      } else {
+        setProductosPorSlide(4); // Pantalla grande
+      }
+    }
+    actualizarCantidad();
+    window.addEventListener("resize", actualizarCantidad);
+    return () => window.removeEventListener("resize", actualizarCantidad);
+  }, []);
+
+  // Divide los productos en grupos según productosPorSlide
   const slides = [];
   for (let i = 0; i < productos.length; i += productosPorSlide) {
     slides.push(productos.slice(i, i + productosPorSlide));
   }
 
-  // Si no hay productos, no renderiza nada
   if (slides.length === 0) return null;
 
   return (
