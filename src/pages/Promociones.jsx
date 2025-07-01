@@ -17,12 +17,6 @@ function Promociones() {
       )
   );
 
-  // Agrupa de a 5 productos por fila
-  const filas = [];
-  for (let i = 0; i < productosConDescuento.length; i += 5) {
-    filas.push(productosConDescuento.slice(i, i + 5));
-  }
-
   return (
     <Container className="my-4">
       <h2 className="titulos d-flex align-items-start">

@@ -2,6 +2,7 @@ import { useFavoritos } from "../context/FavoritosContext";
 import { useProductos } from "../context/ProductosContext";
 import { useAuth } from "../context/AuthContext";
 import Badge from 'react-bootstrap/Badge';
+import {Container, Row, Col } from 'react-bootstrap';
 import ProductoCard from "../components/ProductoCard";
 
 function Favoritos() {
@@ -20,26 +21,25 @@ function Favoritos() {
   );
 
   return (
-    <div className="container contenido-principal">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2 className="titulos">
-          <Badge className="inicio" bg="none">
+    <Container className="my-4">
+      <h2 className="titulos d-flex align-items-star">
+        <Badge bg="none">
             Productos Favoritos
-          </Badge>
-        </h2>
-      </div>
-      <div className="row">
+        </Badge>
+      </h2>
+      
+      <Row className="productos">
         {productosFavoritos.length > 0 ? (
           productosFavoritos.map((producto) => (
-            <div key={producto.id} className="productos col-md-3 d-flex mb-4">
+            <Col xs={6} md={3} key={producto.id} className="mb-4">
               <ProductoCard producto={producto} />
-            </div>
+            </Col>
           ))
         ) : (
           <p className="text-muted">No hay productos favoritos.</p>
         )}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 

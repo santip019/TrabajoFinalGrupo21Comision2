@@ -7,7 +7,7 @@ function Footer() {
       <Container>
         <Row className="align-items-start">
           {/* Logo y redes */}
-          <Col md={3} className="mb-4 mb-md-0 d-flex flex-column align-items-start">
+          <Col md={2} className="mb-4 mb-md-0 d-flex flex-column align-items-center">
             <img
               src="/src/assets/images/LogoPaguinaWaldo's.png"
               alt="Logo"
@@ -29,7 +29,7 @@ function Footer() {
             </div>
           </Col>
           {/* Horarios y teléfonos */}
-          <Col md={5} className="mb-4 mb-md-0">
+          <Col md={5} className="mb-4 mb-md-0 d-flex flex-column align-items-center">
             <h5>Atención al Cliente</h5>
             <p className="footer-horarios">
               <b>Horarios:</b> Lunes a Sábado de 9:00 a 20:00<br />
@@ -37,9 +37,9 @@ function Footer() {
             </p>
           </Col>
           {/* Suscripción */}
-          <Col md={4}>
+          <Col md={5}>
             <h5>Recibí promociones y novedades</h5>
-            <Form className="d-flex gap-2 footer-form">
+            <Form className="d-flex gap-2 footer-form ">
               <Form.Control
                 type="email"
                 placeholder="Tu correo electrónico"
