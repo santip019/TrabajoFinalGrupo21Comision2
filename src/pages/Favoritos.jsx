@@ -1,16 +1,17 @@
 import { useFavoritos } from "../context/FavoritosContext";
 import { useProductos } from "../context/ProductosContext";
 import { useAuth } from "../context/AuthContext";
-import Badge from "react-bootstrap/Badge";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Badge } from "react-bootstrap";
 import ProductoCard from "../components/ProductoCard";
 
 function Favoritos() {
   const { productos } = useProductos();
-  const { user } = useAuth();
+  const { user, loadingUser } = useAuth();
   const { favoritos } = useFavoritos();
 
-  if (!user) {
+  if (loadingUser) return null;
+
+  if (!loadingUser && !user) {
     window.location.href = "/principal/login";
     return null;
   }

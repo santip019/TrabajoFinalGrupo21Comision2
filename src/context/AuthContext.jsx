@@ -1,19 +1,25 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import usuarios from "../assets/usuarios.json";
+
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const session = localStorage.getItem("sessionUser");
-    return session ? JSON.parse(session) : null;
-  });
+  const [user, setUser] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
+    //Precargar usuarios desde el JSON si no existen en localStorage
     if (!localStorage.getItem("usuarios")) {
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
+    // Simula carga de usuario desde localStorage
+    const sessionUser = localStorage.getItem("sessionUser");
+    if (sessionUser) {
+      setUser(JSON.parse(sessionUser));
     }
+    setLoadingUser(false);
   }, []);
 
   const login = (email, password) => {
@@ -41,7 +47,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider value={{ user, loadingUser, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );
