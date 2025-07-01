@@ -136,12 +136,12 @@ a.nav-link,
 
 .carruseles .carousel-control-prev,
 .carruseles-promo .carousel-control-prev {
-  left: -100px;
+  left: -50px;
 }
 
 .carruseles .carousel-control-next,
 .carruseles-promo .carousel-control-next {
-  right: -100px;
+  right: -50px;
 }
 
 .carruseles-promo h2,
