@@ -1,35 +1,23 @@
 import { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import { Col, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { MdDeleteForever } from "react-icons/md";
-import { useFavoritos } from "../context/FavoritosContext";
-import { useCarrito } from "../context/CarritoContext";
-import { useAuth } from "../context/AuthContext";
+import { Col, Row, Container, Toast, ToastContainer } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useProductos } from "../context/ProductosContext";
-import ListarProductos from "../components/ListarProductos";
+import { useAuth } from "../context/AuthContext";
 import CarruselDeProductos from "../components/CarruselDeProductos";
 import CarruselDeImagenes from "../components/CarruselDeImagenes";
 import ProductoCard from "../components/ProductoCard";
 
 function Inicio() {
-  const navigate = useNavigate();
-  const { favoritos, toggleFavorito } = useFavoritos();
-  const { agregarAlCarrito } = useCarrito();
-  const [mostrarPapelera, setMostrarPapelera] = useState(false);
+  const location = useLocation();
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+  const [nombre, setNombre] = useState("");
+  const [mostrarPapelera] = useState(false);
   const {
     productos,
-    eliminarProducto,
-    restaurarProducto,
     busqueda,
     categoriaSeleccionada,
-    // setCategoriaSeleccionada, // Si lo usás, descomenta
-    // categorias, // Si lo usás, descomenta
   } = useProductos();
 
   // --- BÚSQUEDA DINÁMICA ---
@@ -66,27 +54,6 @@ function Inicio() {
     );
   }
 
-  // --- CONTENIDO ORIGINAL DE INICIO ---
-  // Lo que no se usa queda igual o comentado
-
-  const productosFiltrados = productos.filter((producto) => {
-    const categoria = producto.category;
-    const perteneceCategoria =
-      categoriaSeleccionada === "todas" || categoria === categoriaSeleccionada;
-    const activoOInactivo = mostrarPapelera
-      ? !producto.estado
-      : producto.estado;
-    const nombre = (producto.nombre || producto.title || "").toLowerCase();
-    const coincideBusqueda = nombre.includes(busqueda.toLowerCase());
-    return perteneceCategoria && activoOInactivo && coincideBusqueda;
-  });
-
-  const listaProductos = productosFiltrados.map((producto) => (
-    <div key={producto.id} className="col-md-4 d-flex mb-4">
-      <ProductoCard producto={producto} />
-    </div>
-  ));
-
   const imagenesPrincipal = [
     "/src/assets/images/banner_promocion_productos3.png",
     "/src/assets/images/banner_promocion_productos2.png",
@@ -121,6 +88,18 @@ function Inicio() {
     "/src/assets/images/Banners_promociones1.png",
   ];
 
+  // --- Efecto para mostrar el toast de bienvenida ---
+  // Si el usuario viene de un logueo exitoso, muestra un toast de bienvenida
+  useEffect(() => {
+    if (location.state?.bienvenido) {
+      setShowToast(true);
+      // Usa el nombre del estado o, si no viene, el del usuario logueado
+      setNombre(location.state.nombre || user.name || "");
+      // Limpia el estado para que no se muestre el toast al refrescar
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate, user]);
+
   return (
     <div>
       <CarruselDeImagenes imagenes={imagenesPrincipal} />
@@ -153,60 +132,18 @@ function Inicio() {
           onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </Container>
-
-      {/* TODO ESTO IRIA EN GestionarProducto.jsx
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>
-          <Badge className="inicio" bg="primary">
-            {mostrarPapelera ? "Papelera" : "Productos"}
-          </Badge>
-        </h2>
-        <div className="d-flex gap-2 align-items-center">
-          <Form.Select
-            value={categoriaSeleccionada}
-            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-            style={{ maxWidth: "200px" }}
-          >
-            <option value="todas">Todas las categorías</option>
-            {categorias.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </Form.Select>
-          <Button
-            variant={mostrarPapelera ? "secondary" : "outline-secondary"}
-            onClick={() => setMostrarPapelera(!mostrarPapelera)}
-          >
-            {mostrarPapelera ? "Ver activos" : "Ver papelera"}
-          </Button>
-        </div>
-      </div>
-      <div className="row">
-        {productosFiltrados.length > 0 ? (
-          <ListaDeProductos
-            productos={productosFiltrados}
-            onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
-            onAgregarCarrito={(producto) =>
-              dispatch(agregarAlCarrito(producto))
-            }
-            mostrarPapelera={mostrarPapelera}
-            user={user}
-            favoritos={favoritos}
-            onToggleFavorito={(id) => dispatch(toggleFavorito(id))}
-            onEliminar={eliminarProducto}
-            onRestaurar={restaurarProducto}
-            onEditar={(id) => navigate(`/Layout/editar-producto/${id}`)}
-          />
-        ) : (
-          <p className="text-muted">
-            {mostrarPapelera
-              ? "No hay productos en la papelera."
-              : "No hay productos activos en esta categoría."}
-          </p>
-        )}
-      </div>
-      */}
+      {/*Esto es el componente renderizado del mensaje de logueo correcto*/}
+      <ToastContainer position="bottom-end" className="p-3">
+        <Toast show={showToast} onClose={() => setShowToast(false)} bg="success" delay={5000} autohide>
+          <Toast.Header className="text-black">
+            <strong className="me-auto">¡Acceso Exitoso!</strong>
+            <small className="text-muted">Ahora puedes comprar online</small>
+          </Toast.Header>
+          <Toast.Body className="text-white">
+            Bienvenido, {nombre}
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 }
