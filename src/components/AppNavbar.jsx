@@ -1,15 +1,4 @@
-import {
-  Navbar,
-  Container,
-  Nav,
-  Row,
-  Col,
-  Dropdown,
-  Offcanvas,
-  Button,
-  ListGroup,
-  Form,
-} from "react-bootstrap";
+import { Navbar, Container, Nav, Row, Col, Dropdown, Offcanvas, Button, ListGroup, Form, Modal} from "react-bootstrap";
 import { LuSearch } from "react-icons/lu";
 import { FaRegStar, FaRegUser } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -29,13 +18,13 @@ function Layout() {
   const { carrito } = useCarrito();
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const { busqueda, setBusqueda } = useProductos();
-  const { productos, categoriaSeleccionada, setCategoriaSeleccionada } =
-    useProductos();
+  const { productos, categoriaSeleccionada, setCategoriaSeleccionada } = useProductos();
   const categorias = [
     "todas",
     ...Array.from(new Set(productos.map((p) => p.category))),
   ];
 
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const expand = "lg";
 
   return (
@@ -156,7 +145,42 @@ function Layout() {
                               </span>
                               {user.name}
                             </Nav.Link>
-                            {/* ...Offcanvas... */}
+                            <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+                              <Offcanvas.Header closeButton>
+                                <Offcanvas.Title>Mi cuenta</Offcanvas.Title>
+                              </Offcanvas.Header>
+                              <Offcanvas.Body>
+                                <ListGroup>
+                                  <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/perfil"); }}>
+                                    Ver perfil
+                                  </ListGroup.Item>
+                                  {/*<ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/carrito"); }}>
+                                    Cambiar Tema
+                                  </ListGroup.Item> AGREGAR SI LLEGAMOS CON EL TIEMPO*/}
+                                  <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/soporte"); }}>
+                                    Soporte Tecnico
+                                  </ListGroup.Item>
+                                </ListGroup>
+                                <br></br>
+                                {/* Opciones según rol */}
+                                {user.role === "admin" && 
+                                <div>
+                                  <ListGroup>
+                                  <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/nuevo-producto"); }}>
+                                    Añadir Producto
+                                  </ListGroup.Item>
+                                  <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/productos/todas"); }}>
+                                    Gestionar Productos
+                                  </ListGroup.Item>
+                                  <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/papelera"); }}>
+                                    Ver Papelera
+                                  </ListGroup.Item>
+                                </ListGroup>
+                                </div>}
+                                <br></br>
+                                <Button variant="outline-danger" onClick={() => { setShow(false); setShowLogoutModal(true) }}>Cerrar sesión</Button>
+                              </Offcanvas.Body>
+                            </Offcanvas>
                           </>
                         )}
                         <Nav.Link
@@ -226,6 +250,29 @@ function Layout() {
               </Row>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
+          {/* Modal de confirmación de cierre de sesión */}
+          <Modal show={showLogoutModal} onHide={() => setShowLogoutModal(false)} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirmar cierre de sesión</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              ¿Seguro que deseas cerrar sesión?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowLogoutModal(false)}>
+                Cancelar
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  setShowLogoutModal(false);
+                  logout();
+                }}
+              >
+                Cerrar sesión
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Container>
       </Navbar>
       <Outlet />

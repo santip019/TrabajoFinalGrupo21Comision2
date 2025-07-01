@@ -23,7 +23,7 @@ function Footer() {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
                 <FaTwitter />
               </a>
-              <a href="https://wa.me/5493884961309" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+              <a href="https://wa.me" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
                 <FaWhatsapp />
               </a>
             </div>

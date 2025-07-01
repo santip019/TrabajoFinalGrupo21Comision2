@@ -1,12 +1,33 @@
-import { Card, Badge, Button, Container } from "react-bootstrap";
+import { Card, Badge, Button, Container, Modal } from "react-bootstrap";
 import { useProductos } from "../context/ProductosContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Papelera() {
   const { productos, restaurarProducto } = useProductos();
   const navigate = useNavigate();
   const productosEliminados = productos.filter(producto => producto.estado === false);
 
+  // Estado para modal de restaurar
+  const [showRestoreModal, setShowRestoreModal] = useState(false);
+  const [productoARestaurar, setProductoARestaurar] = useState(null);
+
+  const handleRestaurar = (producto) => {
+    setProductoARestaurar(producto);
+    setShowRestoreModal(true);
+  };
+
+  const confirmarRestaurar = () => {
+    if (productoARestaurar) {
+      restaurarProducto(productoARestaurar.id);
+      setShowRestoreModal(false);
+      setProductoARestaurar(null);
+    }
+  };
+  const cancelarRestaurar = () => {
+    setShowRestoreModal(false);
+    setProductoARestaurar(null);
+  };
   return (
     <div className="container">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -39,9 +60,8 @@ function Papelera() {
                       variant="success"
                       onClick={ e => {
                         e.stopPropagation();
-                        restaurarProducto(producto.id)}
-                      } 
-                        >
+                        handleRestaurar(producto)
+                      }}>
                       Restaurar
                     </Button>
                   </Container>
@@ -53,6 +73,23 @@ function Papelera() {
           <p className="text-muted">No hay productos en la papelera.</p>
         )}
       </div>
+      {/* Modal de confirmación de restaurar */}
+      <Modal show={showRestoreModal} onHide={() => setShowRestoreModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar restauración</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Seguro que deseas restaurar el producto <b>{productoARestaurar?.title || productoARestaurar?.nombre}</b>?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowRestoreModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="success" onClick={confirmarRestaurar}>
+            Restaurar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
