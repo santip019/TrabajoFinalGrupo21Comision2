@@ -40,7 +40,7 @@ function ProductoCard({ producto }) {
 
   return (
     <Card
-      className="h-100 shadow-sm"
+      className="cartas-productos h-100"
       style={{ cursor: "pointer" }}
       onClick={() => navigate(`/principal/producto/${producto.id}`)}
     >

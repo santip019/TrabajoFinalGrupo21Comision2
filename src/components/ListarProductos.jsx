@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useProductos } from "../context/ProductosContext";
+import { Container, Col, Row, Badge } from "react-bootstrap";
 import ProductoCard from "./ProductoCard";
 
 function ListarProductos() {
@@ -19,11 +20,6 @@ function ListarProductos() {
         )
     );
 
-  // Agrupa de a 5 productos por fila
-  const filas = [];
-  for (let i = 0; i < productosFiltrados.length; i += 5) {
-    filas.push(productosFiltrados.slice(i, i + 5));
-  }
 
   useEffect(() => {
     // Cuando el componente se desmonta, resetea la categoría seleccionada
@@ -33,29 +29,26 @@ function ListarProductos() {
   }, [setCategoriaSeleccionada]);
 
   return (
-    <div className="container mt-4">
-      <h2 className="titulos">
-        {categoria === "todas"
-          ? "Todos los productos"
-          : ` ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`}
+    <Container className="my-4">
+      <h2 className="titulos d-flex align-items-start">
+        <Badge bg="none">
+          {categoria === "todas"
+            ? "Todos los productos"
+            : ` ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`}
+        </Badge>
       </h2>
-      {filas.length === 0 && (
+      {productosFiltrados.length === 0 ? (
         <p className="text-muted">No hay productos para mostrar.</p>
-      )}
-      {filas.map((fila, idx) => (
-        <div className="productos row mb-4 justify-content-center" key={idx}>
-          {fila.map((producto) => (
-            <div
-              key={producto.id}
-              className="col-6 col-md-4 col-lg-2 d-flex mb-4"
-              style={{ minWidth: "14rem", maxWidth: "14rem" }}
-            >
+      ) : (
+        <Row className="productos">
+          {productosFiltrados.map((producto) => (
+            <Col xs={6} md={3} key={producto.id} className="mb-4">
               <ProductoCard producto={producto} />
-            </div>
+            </Col>
           ))}
-        </div>
-      ))}
-    </div>
+        </Row>
+      )}
+    </Container>
   );
 }
 

@@ -3,6 +3,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import {Col, Row} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useFavoritos } from "../context/FavoritosContext";
@@ -44,34 +46,22 @@ function Inicio() {
   });
 
   // Agrupa de a 5 productos por fila
-  const filas = [];
-  for (let i = 0; i < productosFiltradosBusqueda.length; i += 5) {
-    filas.push(productosFiltradosBusqueda.slice(i, i + 5));
-  }
 
   if (busqueda.trim() !== "") {
     return (
-      <div className="container contenido-principal">
-        <h2 className="titulos">
-          <Badge bg="none">Resultados de búsqueda</Badge>
-        </h2>
-        {filas.length === 0 && (
-          <p className="text-muted">No se encontraron productos.</p>
-        )}
-        {filas.map((fila, idx) => (
-          <div className="productos row mb-4 justify-content-center" key={idx}>
-            {fila.map((producto) => (
-              <div
-                key={producto.id}
-                className="col-6 col-md-4 col-lg-2 d-flex mb-4"
-                style={{ minWidth: "14rem", maxWidth: "14rem" }}
-              >
-                <ProductoCard producto={producto} />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      <Container className="my-4">
+        {productosFiltradosBusqueda.length === 0 ? (
+        <p className="text-muted">No hay productos para mostrar.</p>
+      ) : (
+        <Row className="productos">
+          {productosFiltradosBusqueda.map((producto) => (
+            <Col xs={6} md={3} key={producto.id} className="mb-4">
+              <ProductoCard producto={producto} />
+            </Col>
+          ))}
+        </Row>
+      )}
+      </Container>
     );
   }
 
@@ -124,40 +114,40 @@ function Inicio() {
   ];
 
   return (
-    <div className="container-inicio">
+    <div>
       <CarruselDeImagenes
         imagenes={imagenesPrincipal}
-        className="contenedor-principal"
       />
 
-      <div className="carruseles-ofertas">
+      <Container className="carruseles">
         <h2>Super Ofertas</h2>
         <CarruselDeProductos
           productos={productosConDescuento}
           onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
-      </div>
+      </Container>
 
-      <div className="carruseles">
+      <Container className="carruseles">
         <h2>Productos Waldo's</h2>
         <CarruselDeProductos
           productos={productosWaldos}
           onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
-      </div>
+      </Container>
 
-      <div className="carruseles-promo">
+      <Container className="carruseles-promo">
         <h2>Conoce nuestras promociones bancarias</h2>
         <CarruselDeImagenes imagenes={imagenesDescuento} />
-      </div>
+      </Container>
 
-      <div className="carruseles">
+      <Container className="carruseles">
         <h2>Otras Marcas</h2>
         <CarruselDeProductos
           productos={productosAleatorios}
           onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
-      </div>
+      </Container>
+      
 
       {/* TODO ESTO IRIA EN GestionarProducto.jsx
       <div className="d-flex justify-content-between align-items-center mb-3">
