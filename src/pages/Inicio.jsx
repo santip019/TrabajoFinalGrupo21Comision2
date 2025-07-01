@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import {Col, Row} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useFavoritos } from "../context/FavoritosContext";
@@ -41,7 +41,8 @@ function Inicio() {
       nombre.includes(busqueda.toLowerCase()) ||
       marca.includes(busqueda.toLowerCase());
     const perteneceCategoria =
-      categoriaSeleccionada === "todas" || producto.category === categoriaSeleccionada;
+      categoriaSeleccionada === "todas" ||
+      producto.category === categoriaSeleccionada;
     return producto.estado && coincideBusqueda && perteneceCategoria;
   });
 
@@ -51,16 +52,16 @@ function Inicio() {
     return (
       <Container className="my-4">
         {productosFiltradosBusqueda.length === 0 ? (
-        <p className="text-muted">No hay productos para mostrar.</p>
-      ) : (
-        <Row className="productos">
-          {productosFiltradosBusqueda.map((producto) => (
-            <Col xs={6} md={3} key={producto.id} className="mb-4">
-              <ProductoCard producto={producto} />
-            </Col>
-          ))}
-        </Row>
-      )}
+          <p className="text-muted">No hay productos para mostrar.</p>
+        ) : (
+          <Row className="productos">
+            {productosFiltradosBusqueda.map((producto) => (
+              <Col xs={6} md={3} key={producto.id} className="mb-4">
+                <ProductoCard producto={producto} />
+              </Col>
+            ))}
+          </Row>
+        )}
       </Container>
     );
   }
@@ -93,20 +94,27 @@ function Inicio() {
   ];
 
   const productosConDescuento = productos.filter(
-    (p) => (p.discount || p.descuento || 0) > 0
+    (p) => (p.discount || p.descuento || 0) > 0 && p.estado !== false
   );
 
   const productosWaldos = productos.filter(
     (p) =>
-      (p.brand || p.marca) && (p.brand || p.marca).toLowerCase() === "waldo's"
+      (p.brand || p.marca) &&
+      (p.brand || p.marca).toLowerCase() === "waldo's" &&
+      p.estado !== false
   );
 
-  const productosNoWaldos = productos.filter(
-    (p) => (p.brand || p.marca)?.toLowerCase() !== "waldo's"
-  );
-  const productosAleatorios = productosNoWaldos
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 20);
+  const [productosAleatorios, setProductosAleatorios] = useState([]);
+  useEffect(() => {
+    const productosNoWaldos = productos.filter(
+      (p) =>
+        (p.brand || p.marca)?.toLowerCase() !== "waldo's" && p.estado !== false
+    );
+    const mezclados = [...productosNoWaldos]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 20);
+    setProductosAleatorios(mezclados);
+  }, [productos]);
 
   const imagenesDescuento = [
     "/src/assets/images/Banners_promociones0.png",
@@ -115,9 +123,7 @@ function Inicio() {
 
   return (
     <div>
-      <CarruselDeImagenes
-        imagenes={imagenesPrincipal}
-      />
+      <CarruselDeImagenes imagenes={imagenesPrincipal} />
 
       <Container className="carruseles">
         <h2>Super Ofertas</h2>
@@ -147,7 +153,6 @@ function Inicio() {
           onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </Container>
-      
 
       {/* TODO ESTO IRIA EN GestionarProducto.jsx
       <div className="d-flex justify-content-between align-items-center mb-3">
