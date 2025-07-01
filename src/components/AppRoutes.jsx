@@ -22,6 +22,7 @@ import Promociones from "../pages/Promociones";
 import MasVendidos from "../pages/MasVendidos";
 import Novedades from "../pages/Novedades";
 import FormularioUsuario from "../components/FormularioUsuario";
+import ErrorPage from "../pages/ErrorPage";
 
 function PerfilWrapper() {
   const { user } = useAuth();
@@ -33,6 +34,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/principal" />} />
+      <Route path="/principal/error" element={<ErrorPage />} />
 
       <Route path="/principal/login" element={<Login />} />
       <Route
@@ -121,7 +123,7 @@ function AppRoutes() {
       </Route>
 
       {/* Redirección por defecto */}
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="/principal/error" />} />
     </Routes>
   );
 }
