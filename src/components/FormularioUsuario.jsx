@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button, Alert, Container } from "react-bootstrap";
+import { Form, Button, Alert, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 // Esta función sirve para registro y edición
@@ -84,9 +84,10 @@ function FormularioUsuario({ modo = "registro", usuarioActual = null, onSuccess 
   };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
-      <Form noValidate validated={validated} onSubmit={handleSubmit} style={{ minWidth: 350 }}>
-        <h2>{modo === "edicion" ? "Editar Perfil" : "Registrarse"}</h2>
+    <div className={`d-flex justify-content-center ${modo === "registro" ? "registrar" : "editar-user"}`}>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <h2>{modo === "edicion" ? "Editar Perfil" : "REGISTRARSE"}</h2>
+        <h3>{modo === "edicion" ? "" : "Bienvenido"}</h3>
         {error && <Alert variant="danger">{error}</Alert>}
         {exito && <Alert variant="success">{exito}</Alert>}
         <Form.Group className="mb-3">
@@ -147,11 +148,25 @@ function FormularioUsuario({ modo = "registro", usuarioActual = null, onSuccess 
             Las contraseñas deben coincidir.
           </Form.Control.Feedback>
         </Form.Group>
-        <Button type="submit" className="mt-3">
-          {modo === "edicion" ? "Guardar cambios" : "Registrarse"}
-        </Button>
+        {modo === "edicion" ? (
+          <Button type="submit" className="mt-3 w-100" variant="dark">
+            Guardar cambios
+          </Button>
+        ) : (
+          <Row>
+            <Button type="submit" variant="dark" className="mt-4 w-100">
+              Registrarse
+            </Button>
+            <Col>
+            <h5 className="login-texto-2 mt-4">
+              ¿Ya tienes una cuenta? 
+              <Button variant="link" href="/principal/login">Iniciar Sesión</Button>
+            </h5>
+          </Col>
+          </Row>
+        )}
       </Form>
-    </Container>
+    </div>
   );
 }
 

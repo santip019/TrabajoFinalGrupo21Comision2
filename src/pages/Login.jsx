@@ -21,35 +21,40 @@ function Login() {
   };
 
   return (
-    <div>
-      <title>Iniciar sesión</title>
-      {/*<h1>¡Accede a mas funciones inciando sesion!</h1>
-         SACAR ESTILO INLINE DE CONTAINER 
-      */}
-      <Container className="d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
-        <Form onSubmit={handleSubmit}>
-          <h2>Iniciar sesión</h2>
+    <div className="iniciar-sesion d-flex justify-content-center">
+    
+      <Col md={12} sm={12} className="d-flex align-items-center justify-content-center">
+        <Form className="contenedor-iniciar" onSubmit={handleSubmit}>
+          <h2 className="login-titulo">INICIAR SESIÓN</h2>
+          <h3 className="login-texto">¡Bienvenido de vuelta!</h3>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="login-campos" >Email</Form.Label>
             <Form.Control value={email} onChange={e => setEmail(e.target.value)} required />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Contraseña</Form.Label>
+            <Form.Label className="login-campos">Contraseña</Form.Label>
             <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </Form.Group>
-          <Button type="submit" className="mt-3">Ingresar</Button>
-          <Row> 
+          <Row>
             <Col>
-              <Button className="mt-3" href="/">Volver</Button>
+              <Button variant="secondary" className="mt-4 w-100" href="/">Volver</Button>
             </Col>
-            <Col>
-              <Button className="mt-3" href="/principal/registrarse">Registrarse</Button>
+            <Col md={8} sm={8}>
+              <Button type="submit" variant="dark" className="mt-4 w-100">Ingresar</Button>
             </Col>
           </Row>
+          <Col>
+            <h5 className="login-texto-2 mt-4">
+              ¿No tienes una cuenta? 
+              <Button variant="link" href="/principal/registrarse">Registrarse</Button>
+            </h5>
+          </Col>
         </Form>
-      </Container>
-    </div>
+      </Col>
+    
+  
+</div>
   );
 }
 

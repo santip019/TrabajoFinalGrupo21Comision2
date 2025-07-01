@@ -119,6 +119,7 @@ a.nav-link,
   margin-top: 0;
 }
 
+/**/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1) grayscale(1) brightness(0.3);
@@ -163,6 +164,8 @@ a.nav-link,
   font-weight: 500;
   font-size: 25px;
 }
+
+/**/
 
 .cartas-productos {
   box-shadow: 0 0 8px 2px #00000017;
@@ -214,10 +217,6 @@ a.nav-link,
   word-break: break-word;
 }
 
-
-
-
-
 /* Footer personalizado Waldo's */
 .footer-waldos {
   background: #222;
@@ -250,6 +249,55 @@ a.nav-link,
   margin-bottom: 0.5em;
 }
 
+/*login*/
+
+.iniciar-sesion, .registrar {
+  background-image: url("/src/assets/images/Imagen-login.png");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.contenedor-iniciar, .registrar form {
+  width: 100%;
+  max-width: 400px;
+  padding: 2em;
+  background-color: rgba(59, 99, 64, 0.253);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.274);
+}
+
+.login-titulo, .registrar h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 2em;
+  color: #000000;
+  margin-top: 10px;
+}
+
+.login-texto, .registrar h3 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-size: 1.2em;
+  color: #000000;
+  margin-bottom: 1em;
+}
+
+.login-texto-2 {
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.login-campos, .registrar .form-label {
+  font-family: "Nunito", sans-serif;
+  display: flex;
+  align-items: start;
+  margin-top: 20px;
+  margin-bottom: 2px;
+}
 
 @media (max-width: 767px) { 
   .carruseles,
