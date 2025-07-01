@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
       const sessionUser = { email: userData.email, role: userData.role || "user", name: userData.name };
       setUser(sessionUser);
       localStorage.setItem("sessionUser", JSON.stringify(sessionUser));
-      return { success: true };
+      return { success: true, name: userData.name };
     }
     return { success: false, message: "Credenciales inválidas" };
   };

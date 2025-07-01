@@ -34,7 +34,7 @@ function Login() {
 
     const res = login(email, password);
     if (res.success) {
-      navigate("/");
+      navigate("/principal", { state: { bienvenido: true, nombre: res.name } });
     } else {
       setError(res.message);
     }
