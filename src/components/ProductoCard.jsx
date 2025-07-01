@@ -1,20 +1,42 @@
 //Este archivo contiene la logica de que en card del producto se muestre la imagen, el nombre, el precio, si tiene descuento, el descuento, y los botones de favorito y añadir al carrito
 
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
+import { Card, Button, Badge, Modal } from "react-bootstrap";
 import { MdAddShoppingCart } from "react-icons/md";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useFavoritos } from "../context/FavoritosContext";
 import { useCarrito } from "../context/CarritoContext";
 import { useAuth } from "../context/AuthContext";
+import { useProductos } from "../context/ProductosContext";
+import { useState } from "react";
+
 
 function ProductoCard({ producto }) {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { favoritos, toggleFavorito } = useFavoritos();
   const { agregarAlCarrito } = useCarrito();
+  const { eliminarProducto } = useProductos();
+  const [mostrarModal, setMostrarModal] = useState(false);
+
+  const esAdmin = user && user.role === "admin";
+
+  // Abrir modal y guardar el id del producto a eliminar
+  const abrirModal = (e) => {
+    e.stopPropagation();
+    setMostrarModal(true);
+  };
+
+  //confirmar la eliminación
+  const confirmarEliminacion = () => {
+    eliminarProducto(producto.id);
+    setMostrarModal(false);
+  };
+
+  //cancela la eliminación
+  const cancelarEliminacion = () => {
+    setMostrarModal(false);
+  };
 
   return (
     <Card
@@ -60,39 +82,81 @@ function ProductoCard({ producto }) {
         </Card.Text>
         <Card.Text>
           {producto.delivery ? (
-            <p className="envio-gratis">
+            <span className="envio-gratis">
               Envío GRATIS
-            </p>
+            </span>
           ) : (
-            <p className="envio">
+            <span className="envio">
               Sin envío gratis
-            </p>
+            </span>
           )}
         </Card.Text>
         <div className="mt-auto d-flex justify-content-between align-items-center">
-          <Button
-            size={"lg"}
-            variant={favoritos.includes(producto.id) ? "warning" : "outline-warning"}
-            onClick={e => {
-              e.stopPropagation();
-              if (!user) return navigate("/principal/login");
-              toggleFavorito(producto.id);
-            }}
-            aria-label="Favorito"
-          >
-            {favoritos.includes(producto.id) ? <AiFillStar /> : <AiOutlineStar />}
-          </Button>
-          <Button
-            size={"lg"}
-            variant="success"
-            onClick={e => {
-              e.stopPropagation();
-              if (!user) return navigate("/principal/login");
-              agregarAlCarrito(producto);
-            }}
-          >
-           <MdAddShoppingCart />
-          </Button>
+          {esAdmin ? (
+            <>
+              <Button
+                variant="outline-primary"
+                onClick={e => {
+                  e.stopPropagation();
+                  navigate(`/principal/editar-producto/${producto.id}`);
+                }}
+              >
+                Editar
+              </Button>
+              <Button
+                variant="outline-danger"
+                onClick={abrirModal}
+              >
+                Eliminar
+              </Button>
+              {/* Modal de confirmación */}
+              <Modal show={mostrarModal} onHide={cancelarEliminacion} centered>
+                <Modal.Header closeButton>
+                  <Modal.Title>Confirmar eliminación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  ¿Seguro que deseas eliminar el producto <b>{producto.title || producto.nombre}</b>?
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={cancelarEliminacion}>
+                    Cancelar
+                  </Button>
+                  <Button variant="danger" onClick={e=> {
+                    e.stopPropagation();
+                    confirmarEliminacion()}}
+                    >
+                    Eliminar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
+          ) : (
+            <>
+              <Button
+                size={"lg"}
+                variant={favoritos.includes(producto.id) ? "warning" : "outline-warning"}
+                onClick={e => {
+                  e.stopPropagation();
+                  if (!user) return navigate("/principal/login");
+                  toggleFavorito(producto.id);
+                }}
+                aria-label="Favorito"
+              >
+                {favoritos.includes(producto.id) ? <AiFillStar /> : <AiOutlineStar />}
+              </Button>
+              <Button
+                size={"lg"}
+                variant="success"
+                onClick={e => {
+                  e.stopPropagation();
+                  if (!user) return navigate("/principal/login");
+                  agregarAlCarrito(producto);
+                }}
+              >
+              <MdAddShoppingCart />
+              </Button>
+          </>
+          )}
         </div>
       </Card.Body>
     </Card>
