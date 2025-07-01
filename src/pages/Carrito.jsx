@@ -3,11 +3,13 @@ import { useAuth } from "../context/AuthContext";
 import { Card, Button, Form } from 'react-bootstrap';
 
 function Carrito() {
-  const { user } = useAuth();
+  const { user, loadingUser } = useAuth();
   const { carrito, quitarDelCarrito, cambiarCantidad, vaciarCarrito } = useCarrito();
 
+  if (loadingUser) return null;
+
   // Verificar si el usuario está autenticado
-  if (!user) {
+  if (!loadingUser && !user) {
     window.location.href = "/principal/login";
     return null;
   }

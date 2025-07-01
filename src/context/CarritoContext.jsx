@@ -8,23 +8,21 @@ export function useCarrito() {
 }
 
 export function CarritoProvider({ children }) {
-  const { user } = useAuth();
+  const { user, loadingUser } = useAuth();
   const [carrito, setCarrito] = useState([]);
 
   useEffect(() => {
-    if (user) {
-      const cart = JSON.parse(localStorage.getItem(`carrito_${user.email}`)) || [];
-      setCarrito(cart);
-    } else {
-      setCarrito([]);
-    }
-  }, [user]);
+    if (user && user.email) {
+    const cart = localStorage.getItem(`carrito_${user.email}`);
+    setCarrito(cart ? JSON.parse(cart) : []);
+  }
+  }, [user, loadingUser]);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.email) {
       localStorage.setItem(`carrito_${user.email}`, JSON.stringify(carrito));
     }
-  }, [carrito, user]);
+  }, [carrito, user, loadingUser]);
 
   const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
@@ -34,6 +32,11 @@ export function CarritoProvider({ children }) {
     });
   };
 
+  // Limpia carrito cuando el usuario cierra sesión
+  useEffect(() => {
+    if (!user) setCarrito([]);
+  }, [user]);
+  
   const quitarDelCarrito = (id) => {
     setCarrito((prev) => prev.filter((item) => item.id !== id));
   };
