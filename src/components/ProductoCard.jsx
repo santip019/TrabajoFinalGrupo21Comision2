@@ -34,8 +34,9 @@ function ProductoCard({ producto }) {
   };
 
   //cancela la eliminación
-  const cancelarEliminacion = () => {
+  const cancelarEliminacion = (e) => {
     setMostrarModal(false);
+    e.stopPropagation();
   };
 
   return (
@@ -91,7 +92,7 @@ function ProductoCard({ producto }) {
             </span>
           )}
         </Card.Text>
-        <div className="mt-auto d-flex justify-content-between align-items-center">
+        
           {esAdmin ? (
             <>
               <Button
@@ -100,12 +101,14 @@ function ProductoCard({ producto }) {
                   e.stopPropagation();
                   navigate(`/principal/editar-producto/${producto.id}`);
                 }}
+                className="mt-1"
               >
                 Editar
               </Button>
               <Button
                 variant="outline-danger"
                 onClick={abrirModal}
+                className="mt-1"
               >
                 Eliminar
               </Button>
@@ -157,7 +160,7 @@ function ProductoCard({ producto }) {
               </Button>
           </>
           )}
-        </div>
+        
       </Card.Body>
     </Card>
   );

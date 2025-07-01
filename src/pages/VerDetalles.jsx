@@ -9,6 +9,8 @@ import { useProductos } from "../context/ProductosContext";
 import { useFavoritos } from "../context/FavoritosContext";
 import { useCarrito } from "../context/CarritoContext";
 import { useAuth } from "../context/AuthContext";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { FaArrowLeft } from "react-icons/fa";
 
 function VerDetalles() {
   const { productos } = useProductos();
@@ -32,107 +34,116 @@ function VerDetalles() {
 
   return (
     <div className="d-flex justify-content-center mt-5">
-      <Card className="shadow-lg position-relative" style={{ width: "32rem", borderRadius: "1rem" }}>
-        <Button
-          variant={esFavorito ? "warning" : "outline-warning"}
-          onClick={() => {
-            if (!user) return navigate("/principal/login");
-            toggleFavorito(producto.id);}}
-          className="position-absolute"
-          style={{ top: "10px", right: "10px", fontSize: "1.2rem", zIndex: 1 }}
-          aria-label="Favorito"
-        >
-          {esFavorito ? <FaStar /> : <FaRegStar />}
-        </Button>
+      <Row className="w-100">
+        <Col md={5} className="d-flex justify-content-center align-items-center mb-4 mb-md-0">
+          <img
+            src={producto.image}
+            alt="Imagen representativa"
+            className="imagen-detalle-producto img-fluid"
+          />
+        </Col>
 
-        <Card.Body>
-          <div className="text-center mb-3">
-            <Badge
-              bg={producto.status ? "success" : "secondary"}
-              className="mb-2"
-              style={{ fontSize: "1rem" }}
-            >
-              {producto.status ? "Activo" : "Inactivo"}
-            </Badge>
-            <Card.Title as="h2" className="mb-1">
-              {producto.title}
-            </Card.Title>
-            <Card.Subtitle className="mb-3 text-muted">
-              ID: {producto.id}
-            </Card.Subtitle>
-          </div>
-          <Row className="mb-2 align-items-center">
-            <Col xs={8}>
-              <img
-                src={producto.image || "https://via.placeholder.com/150"}
-                alt="Imagen representativa"
-                style={{ display: "block", marginLeft: "auto", marginRight: "auto", maxWidth: "100%" }}
-              />
-            </Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Nombre:</Col>
-            <Col xs={8}>{producto.title}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Marca:</Col>
-            <Col xs={8}>{producto.brand}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Precio:</Col>
-            <Col xs={8}>{producto.price}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Descripción:</Col>
-            <Col xs={8}>{producto.description}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Categoría:</Col>
-            <Col xs={8}>{producto.category}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Puntaje:</Col>
-            <Col xs={8}>{producto.rating?.rate}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Cantidad de votos:</Col>
-            <Col xs={8}>{producto.rating?.count}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Descuento:</Col>
-            <Col xs={8}>{producto.discount}%</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Fecha de ingreso:</Col>
-            <Col xs={8}>{producto.dateOfEntry}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Entrega disponible:</Col>
-            <Col xs={8}>{producto.delivery ? "Sí" : "No"}</Col>
-          </Row>
-          <Row className="mb-2">
-            <Col xs={4} className="fw-bold">Estado:</Col>
-            <Col xs={8}>{producto.estado ? "Activo" : "Inactivo"}</Col>
-          </Row>
-          <div className="d-flex justify-content-end gap-2 mt-4">
+        <Col md={7} className="d-flex justify-content-center">
+          <Card className="shadow position-relative ms-5 me-5">
             <Button
-              variant="outline-primary"
+              variant="outline-secondary"
+              onClick={() => navigate(volverA)}
+              className="position-absolute top-10 end-10 m-2"
+            >
+              <FaArrowLeft />
+            </Button>
+            <Button
+              variant={esFavorito ? "warning" : "outline-warning"}
               onClick={() => {
                 if (!user) return navigate("/principal/login");
-                agregarAlCarrito(producto);}}
-              aria-label="Agregar al carrito"
+                toggleFavorito(producto.id);
+              }}
+              className="position-absolute top-0 end-0 m-2"
+              aria-label="Favorito"
             >
-              🛒 Agregar al carrito
+              {esFavorito ? <FaStar /> : <FaRegStar />}
             </Button>
-            <Button
-              variant="secondary"
-              onClick={() => navigate(volverA)}
-            >
-              Volver
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+
+            <Card.Body className="ms-5 me-5">
+              <Card.Title className="titulo-ver-detalle mb-1 mt-5">
+                {producto.title}
+              </Card.Title>
+              <Card.Subtitle className="mb-3 text-muted">
+                ID: {producto.id}
+              </Card.Subtitle>
+
+              <Row className="mb-2">
+                <Col md={12} className="texto-ver-detalle text-start">Marca: {producto.brand}</Col>
+              </Row>
+              <Row className="mb-2">
+                <Col md={12} className="texto-ver-detalle text-start">
+                  <span className="me-2">{producto.rating.rate}</span>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i} className="text-warning" size={14}>
+                      {i < Math.round(producto.rating.rate || producto.rating.rate || 0) ? <AiFillStar /> : <AiOutlineStar />}
+                    </span>
+                  ))}
+                  <span className="me-2"> ({producto.rating.count})</span>
+                </Col>
+              </Row>
+              <Row className="mb-2">
+                <Col md={12} className="texto-ver-detalle text-start">
+                {producto.discount || producto.descuento ? (
+                  <>
+                    <span className="d-flex align-items-center mb-1">
+                      <del className="text-decoration-line-through text-muted me-2 mb-0">
+                        ${producto.precio || producto.price}
+                      </del>
+                      <Badge bg="danger" text="light" className="ms-1">
+                        {producto.discount || producto.descuento}% OFF
+                      </Badge>
+                    </span>
+                    <b className="texto-ver-detalle-precio text-dark d-flex flex-column align-items-start">
+                      ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
+                    </b>
+                  </>
+                ) : (
+                  <b>${producto.precio || producto.price}</b>
+                )}</Col>
+              </Row>
+              <Row className="ver-detalle mb-2">
+                <Col md={12} className="texto-ver-detalle-linea text-start">Categoría: {producto.category}</Col>
+              </Row>
+              
+              <Row className="mb-2">
+                <Col md={12} className="texto-ver-detalle text-start">Fecha de ingreso: {producto.dateOfEntry}</Col>
+              </Row>
+              <Col md={12} className="texto-ver-detalle text-start">{producto.description}</Col>
+              <Row className="mb-2">
+                <Col md={12} className="texto-ver-detalle text-start">{producto.delivery ? (
+                  <span className="envio-gratis">
+                    Envío GRATIS
+                  </span>
+                ) : (
+                  <span className="envio">
+                    Sin envío gratis
+                  </span>
+                )}
+               </Col>
+              </Row>
+
+              {/********/}
+              <Row className="mt-4 mb-3">
+                <Button
+                  variant="outline-primary"
+                  onClick={() => {
+                    if (!user) return navigate("/principal/login");
+                    agregarAlCarrito(producto);
+                  }}
+                  aria-label="Agregar al carrito"
+                >
+                  Agregar al carrito
+                </Button>
+              </Row>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 }
