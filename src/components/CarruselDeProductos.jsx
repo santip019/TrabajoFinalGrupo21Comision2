@@ -1,42 +1,28 @@
 import Carousel from "react-bootstrap/Carousel";
-import ProductoCard from "./ProductoCard"; // Importa tu componente reutilizable
+import ProductoCard from "./ProductoCard";
 
 function CarruselDeProductos({ productos }) {
   const productosPorSlide = 5;
 
-  // Si hay menos de 5 productos, repite desde el principio hasta llegar a 5
-  let productosExtendidos = [...productos];
-  while (productosExtendidos.length < productosPorSlide && productosExtendidos.length > 0) {
-    productosExtendidos = productosExtendidos.concat(productos.slice(0, productosPorSlide - productosExtendidos.length));
-  }
-
-  // Genera slides en bucle: cada slide tiene 5 productos, avanzando de a 5, y si faltan productos repite desde el inicio
+  // Divide los productos en grupos de 5, sin repetir ni rellenar
   const slides = [];
-  for (let i = 0; i < productosExtendidos.length; i += productosPorSlide) {
-    let grupo = productosExtendidos.slice(i, i + productosPorSlide);
-    // Si es el último grupo y faltan productos, repite desde el principio
-    if (grupo.length < productosPorSlide) {
-      grupo = grupo.concat(productosExtendidos.slice(0, productosPorSlide - grupo.length));
-    }
-    slides.push(grupo);
+  for (let i = 0; i < productos.length; i += productosPorSlide) {
+    slides.push(productos.slice(i, i + productosPorSlide));
   }
 
-  // Si hay solo un slide, duplícalo para que el Carousel muestre los controles
-  let slidesToShow = slides;
-  if (slides.length === 1) {
-    slidesToShow = [...slides, slides[0]];
-  }
+  // Si no hay productos, no renderiza nada
+  if (slides.length === 0) return null;
 
   return (
     <Carousel
       indicators={false}
-      controls={true}
+      controls={slides.length > 1}
       interval={null}
-      wrap={true}
+      wrap={false}
       nextIcon={<span aria-hidden="true" className="carousel-control-next-icon" />}
       prevIcon={<span aria-hidden="true" className="carousel-control-prev-icon" />}
     >
-      {slidesToShow.map((grupo, idx) => (
+      {slides.map((grupo, idx) => (
         <Carousel.Item key={idx}>
           <div className="d-flex justify-content-center gap-3">
             {grupo.map((producto, i) => (
