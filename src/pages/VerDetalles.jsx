@@ -27,7 +27,7 @@ function VerDetalles() {
     );
   }
 
-  const volverA = location.state?.from === "papelera" ? "/Layout/papelera" : "/Layout";
+  const volverA = location.state?.from === "papelera" ? "/principal/papelera" : "/principal";
   const esFavorito = favoritos.includes(producto.id);
 
   return (
