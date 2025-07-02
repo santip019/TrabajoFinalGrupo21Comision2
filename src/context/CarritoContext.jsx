@@ -1,7 +1,8 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState} from "react";
 import { useAuth } from "./AuthContext";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useUserLocalStorage } from "../hooks/useUserLocalStorage";
 
 const CarritoContext = createContext();
 
@@ -11,22 +12,9 @@ export function useCarrito() {
 
 export function CarritoProvider({ children }) {
   const navigate = useNavigate();
-  const { user, loadingUser } = useAuth();
-  const [carrito, setCarrito] = useState([]);
+  const { user } = useAuth();
   const [toasts, setToasts] = useState([]);
-
-  useEffect(() => {
-    if (user && user.email) {
-      const cart = localStorage.getItem(`carrito_${user.email}`);
-      setCarrito(cart ? JSON.parse(cart) : []);
-    }
-  }, [user, loadingUser]);
-
-  useEffect(() => {
-    if (user && user.email) {
-      localStorage.setItem(`carrito_${user.email}`, JSON.stringify(carrito));
-    }
-  }, [carrito, user, loadingUser]);
+  const [carrito, setCarrito] = useUserLocalStorage("carrito", user, []);
 
   const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
@@ -43,10 +31,6 @@ export function CarritoProvider({ children }) {
     // Agrega un toast para este producto
     setToasts((prev) => [...prev, producto]);
   };
-
-  useEffect(() => {
-    if (!user) setCarrito([]);
-  }, [user]);
 
   const quitarDelCarrito = (id) => {
     setCarrito((prev) => prev.filter((item) => item.id !== id));

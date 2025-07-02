@@ -5,7 +5,7 @@ function CarruselDeImagenes({ imagenes }) {
     <Carousel
       indicators={false}
       controls={true}
-      interval={3000} // Avanza automáticamente cada 3 segundos
+      interval={3000} 
       wrap={true}
     >
       {imagenes.map((img, idx) => (

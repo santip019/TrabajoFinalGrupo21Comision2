@@ -1,70 +1,105 @@
-import { Card, Row, Badge } from  "react-bootstrap";
+import { Card, Badge, Carousel, Container, Row, Col } from "react-bootstrap";
 import { FaGithub } from "react-icons/fa";
+import integrantes from "../assets/data/integrantes.json";
+import { useSlidesCarrusel } from "../hooks/useSlidesCarrusel";
+
 
 function AcercaDe() {
+  const slides = useSlidesCarrusel(integrantes, [
+    { max: 576, value: 1 },
+    { max: Infinity, value: 2 },
+  ]);
 
-  const participantes = [
-    {
-      nombre: "Santiago Padilla",
-      github: "santip019",
-      url: "https://github.com/santip019",
-      img: "https://github.com/santip019.png",
-    },
-    {
-      nombre:"Valentina Efimov",
-      github: "Valen-08",
-      url: "https://github.com/Valen-08",
-      img: "https://github.com/Valen-08.png",
-    },
-    {
-      nombre:"Antonela Cruz",
-      github: "antocruz06",
-      url: "https://github.com/antocruz06",
-      img: "https://github.com/antocruz06.png",
-    },
-    {
-      nombre:"Maximiliano Calpanchay",
-      github: "maxiicalpa",
-      url: "https://github.com/maxiicalpa",
-      img: "https://github.com/maxiicalpa.png",
-    },
-    {
-      nombre:"Bruno Fernandez",
-      github: "brunofernandez877",
-      url: "https://github.com/brunofernandez877",
-      img: "https://github.com/brunofernandez877.png",
-    },
-  ];
   return (
-    <div>
-      <h2>Acerca de</h2>
-      <Row>
-        {participantes.map((participante) => (
-          <Card key={participante.github} style={{ width: "12rem", margin: "1rem" }}>
-            <Card.Img
-              variant="top"
-              src={participante.img}
-              alt={participante.nombre}
-              style={{ width: "100%", borderRadius: "50%", marginTop: "1rem", objectFit: "cover", height: "120px" }}
-            />
-            <Card.Body className="text-center">
-              <Card.Title>{participante.nombre}</Card.Title>
-              <a
-                href={participante.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none" }}
-              >
-                <Badge bg="dark" className="d-inline-flex align-items-center gap-1 justify-content-center">
-                  <FaGithub style={{ fontSize: "1.1em" }} />
-                  {participante.github}
-                </Badge>
-              </a>
+    <Container className="my-4">
+      <h2 className="titulos d-flex align-center">
+        <Badge bg="none">Nosotros</Badge>
+      </h2>
+      <Row className="align-items-center">
+        {/* Columna izquierda: Texto */}
+        <Col xs={12} md={6} className="mb-4 mb-md-0">
+          <Card className="shadow-sm">
+            <Card.Body>
+              <Card.Title as="h3" className="mb-3 text-center">
+                Nuestro proyecto
+              </Card.Title>
+              <Card.Text className="text-center">
+                Este proyecto es un <b>e-commerce web</b> desarrollado para la
+                materia <b>Programación Visual</b>. Permite a los usuarios
+                explorar productos, agregarlos al carrito, gestionar favoritos,
+                registrarse, iniciar sesión y acceder a un panel de
+                administración.
+                <br />
+                Está construido con <b>React</b>, utiliza <b>React Bootstrap</b>{" "}
+                para la interfaz, <b>React Router</b> para la navegación, y
+                gestiona datos con <b>contextos</b> y <b>localStorage</b>.<br />
+                Incluye componentes reutilizables, manejo de usuarios, roles
+                (admin/cliente), y un diseño responsivo y moderno.
+              </Card.Text>
             </Card.Body>
           </Card>
-        ))}
+        </Col>
+        {/* Columna derecha: Carrusel */}
+        <Col xs={12} md={6}>
+          <Carousel
+            controls={false}
+            indicators={true}
+            interval={5000}
+            className="carrusel-integrantes"
+          >
+            {slides.map((grupo, idx) => (
+              <Carousel.Item key={idx}>
+                <div className="d-flex justify-content-end gap-3 flex-wrap">
+                  {grupo.map((participante) => (
+                    <Card
+                      key={participante.id}
+                      style={{
+                        width: "13rem",
+                        margin: "1rem",
+                        height: "18rem",
+                      }}
+                    >
+                      <Card.Img
+                        variant="top"
+                        src={participante.img}
+                        alt={participante.nombre}
+                        style={{
+                          width: "80%",
+                          borderRadius: "50%",
+                          marginTop: "2rem",
+                          objectFit: "cover",
+                          height: "150px",
+                          alignSelf: "center",
+                        }}
+                      />
+                      <Card.Body className="text-center">
+                        <Card.Title>{participante.nombre}</Card.Title>
+                        <a
+                          href={participante.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ textDecoration: "none" }}
+                          aria-label={`GitHub de ${participante.nombre}`}
+                        >
+                          <Badge
+                            bg="dark"
+                            className="d-inline-flex align-items-center gap-1 justify-content-center"
+                          >
+                            <FaGithub style={{ fontSize: "1.1em" }} />
+                            {participante.github}
+                          </Badge>
+                        </a>
+                      </Card.Body>
+                    </Card>
+                  ))}
+                </div>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </Col>
       </Row>
-    </div>
+    </Container>
   );
 }
+
 export default AcercaDe;
