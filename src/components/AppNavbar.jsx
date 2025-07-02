@@ -108,9 +108,11 @@ function Layout() {
                     {/* Favoritos, Usuario, Carrito */}
                     <Col
                       xs={12}
+                      md={6}
+                      lg={6}
                       className="d-flex justify-content-end"
                     >
-                      <Nav className="flex-column flex-md-row justify-content-end w-100 text-md-end">
+                      <Nav className="flex-column justify-content-end flex-md-row w-100 text-md-end">
                         <Nav.Link
                           as={Link}
                           to="/principal/favoritos"
@@ -200,9 +202,9 @@ function Layout() {
                     </Col>
                   </Row>
                   {/* Fila inferior: Menú principal */}
-                  <Row className="menu-abajo justify-content-end align-items-center">
+                  <Row className="menu-abajo align-items-center">
                     <Col xs={12} className="d-flex">
-                      <Nav className="flex-wrap">
+                      <Nav className="flex-column justify-content-end flex-md-row w-100 text-md-end">
                         <Nav.Link
                           as={Link}
                           to="/principal"
