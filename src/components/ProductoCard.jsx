@@ -1,5 +1,3 @@
-//Este archivo contiene la logica de que en card del producto se muestre la imagen, el nombre, el precio, si tiene descuento, el descuento, y los botones de favorito y añadir al carrito
-
 import { Card, Button, Badge, Modal } from "react-bootstrap";
 import { MdAddShoppingCart } from "react-icons/md";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -62,7 +60,6 @@ function ProductoCard({ producto, esPapelera = false }) {
   return (
       <Card
         className="cartas-productos h-100"
-        style={{ cursor: "pointer" }}
         onClick={() => navigate(`/principal/producto/${producto.id}`)}
       >
         <Card.Img
@@ -72,12 +69,7 @@ function ProductoCard({ producto, esPapelera = false }) {
             producto.imagen ||
             "https://via.placeholder.com/180"
           }
-          style={{
-            width: "100%",
-            maxWidth: "100%",
-            height: "140px",
-            objectFit: "contain",
-          }}
+          className="imagen-producto"
         />
         <Card.Body className="d-flex flex-column">
           <Card.Title className="mb-1">

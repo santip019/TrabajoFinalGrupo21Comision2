@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
-import { FaStar, FaRegStar } from "react-icons/fa"; // Iconos favoritos
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { useProductos } from "../context/ProductosContext";
 import { useFavoritos } from "../context/FavoritosContext";
 import { useCarrito } from "../context/CarritoContext";
@@ -88,23 +88,24 @@ function VerDetalles() {
               </Row>
               <Row className="mb-2">
                 <Col md={12} className="texto-ver-detalle text-start">
-                {producto.discount || producto.descuento ? (
-                  <>
-                    <span className="d-flex align-items-center mb-1">
-                      <del className="text-decoration-line-through text-muted me-2 mb-0">
-                        ${producto.precio || producto.price}
-                      </del>
-                      <Badge bg="danger" text="light" className="ms-1">
-                        {producto.discount || producto.descuento}% OFF
-                      </Badge>
-                    </span>
-                    <b className="texto-ver-detalle-precio text-dark d-flex flex-column align-items-start">
-                      ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
-                    </b>
-                  </>
-                ) : (
-                  <b>${producto.precio || producto.price}</b>
-                )}</Col>
+                  {producto.discount || producto.descuento ? (
+                    <>
+                      <span className="d-flex align-items-center mb-1">
+                        <del className="text-decoration-line-through text-muted me-2 mb-0">
+                          ${producto.precio || producto.price}
+                        </del>
+                        <Badge bg="danger" text="light" className="ms-1">
+                          {producto.discount || producto.descuento}% OFF
+                        </Badge>
+                      </span>
+                      <b className="texto-ver-detalle-precio text-dark d-flex flex-column align-items-start">
+                        ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
+                      </b>
+                    </>
+                  ) : (
+                    <b>${producto.precio || producto.price}</b>
+                  )}
+                </Col>
               </Row>
               <Row className="ver-detalle mb-2">
                 <Col md={12} className="texto-ver-detalle-linea text-start">Categoría: {producto.category}</Col>
@@ -127,7 +128,6 @@ function VerDetalles() {
                </Col>
               </Row>
 
-              {/********/}
               <Row className="mt-4 mb-3">
                 <Button
                   variant="outline-primary"

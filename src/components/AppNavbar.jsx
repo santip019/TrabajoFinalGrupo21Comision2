@@ -45,7 +45,7 @@ function Layout() {
                 {/* Logo y Categorías */}
                 <Col xs={12} lg="auto" className="d-flex flex-column align-items-lg-start align-items-center mb-2 mb-lg-0">
                   <Link to="/principal">
-                    <img src="/src/assets/images/LogoPaguinaWaldo's.png" alt="Logo" className="logo" style={{width: "160px", height: "auto", cursor: "pointer"}} />
+                    <img src="/src/assets/images/LogoPaguinaWaldo's.png" alt="Logo" className="logo" />
                   </Link>
                   <Dropdown className="w-100 mt-2">
                     <Dropdown.Toggle variant="none" id="dropdown-categorias" className="categorias">

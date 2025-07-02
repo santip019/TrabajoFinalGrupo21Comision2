@@ -1,7 +1,6 @@
-import { Card, Badge, Button, Container, Modal, Row, Col } from "react-bootstrap";
+import { Badge, Button, Container, Modal, Row, Col } from "react-bootstrap";
 import { useProductos } from "../context/ProductosContext";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import ProductoCard from "../components/ProductoCard";
 
 function Papelera() {
