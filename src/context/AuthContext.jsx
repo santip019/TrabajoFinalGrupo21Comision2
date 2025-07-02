@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import usuarios from "../assets/usuarios.json";
+import usuarios from "../assets/data/usuarios.json";
 
 const AuthContext = createContext();
 
