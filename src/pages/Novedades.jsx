@@ -26,7 +26,7 @@ function Novedades() {
       {productosConFecha.length === 0 ? (
         <p className="text-muted">No hay productos nuevos para mostrar.</p>
       ) : (
-        <Row className="productos">
+        <Row className="my-4 align-items-center">
           {productosConFecha.map((producto) => (
             <Col xs={6} md={3} key={producto.id} className="mb-4">
               <ProductoCard producto={producto} />
