@@ -118,7 +118,7 @@ function ProductoCard({ producto, esPapelera = false }) {
                 </b>
               </>
             ) : (
-              <b>${producto.precio || producto.price}</b>
+              <b className="text-dark fs-5 d-flex flex-column align-items-start">${producto.precio || producto.price}</b>
             )}
           </Card.Text>
           <Card.Text>

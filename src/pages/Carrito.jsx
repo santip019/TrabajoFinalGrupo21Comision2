@@ -92,7 +92,7 @@ function Carrito() {
                             </b>
                           </>
                         ) : (
-                          <b>${item.precio || item.price}</b>
+                          <b className="text-dark fs-5 d-flex flex-column align-items-start">${item.precio || item.price}</b>
                         )}
                         <Button
                           variant="secondary"
@@ -107,9 +107,12 @@ function Carrito() {
                 </Card>
               ))}
           </Col>
-          <Col md={2}>
-            <h4 className="mt-3 text-end">Total: ${total.toFixed(2)}</h4>
-            <Button variant="outline-danger" onClick={vaciarCarrito}>Vaciar carrito</Button>
+          <Col>
+              <Card className="contenedor-total-carrito shadow-sm p-3 text-end h-100">
+                <h4 className="w-100 mt-auto">Total: ${total.toFixed(2)}</h4>
+                <Button variant="success" className="mt-2 w-100">Finalizar compra</Button>
+                <Button variant="danger" onClick={vaciarCarrito} className="mt-2 w-100">Vaciar carrito</Button>
+              </Card>
           </Col>
         </Row>
         </>
