@@ -92,13 +92,13 @@ function FormularioProducto({ esEdicion = false }) {
 
   return (
     <div className="d-flex justify-content-center mt-5">
-      <Card className="w-100 p-4 shadow me-5 ms-5">
+      <Card className="editar w-100">
         <Card.Title className="editar-titulo">{esEdicion ? "Editar Producto" : "Agregar Nuevo Producto"}</Card.Title>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Nombre</Form.Label>
+                <Form.Label className="editar-texto">Nombre</Form.Label>
                 <Form.Control
                   name="title"
                   onChange={handleChange}
@@ -111,7 +111,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Marca</Form.Label>
+                <Form.Label className="editar-texto">Marca</Form.Label>
                 <Form.Control
                   name="brand"
                   onChange={handleChange}
@@ -123,7 +123,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Precio</Form.Label>
+                <Form.Label className="editar-texto">Precio</Form.Label>
                 <Form.Control
                   type="number"
                   name="price"
@@ -137,7 +137,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Descripción</Form.Label>
+                <Form.Label className="editar-texto">Descripción</Form.Label>
                 <Form.Control
                   name="description"
                   onChange={handleChange}
@@ -150,7 +150,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Categoría</Form.Label>
+                <Form.Label className="editar-texto">Categoría</Form.Label>
                 <Form.Select
                   name="category"
                   onChange={handleChange}
@@ -169,7 +169,7 @@ function FormularioProducto({ esEdicion = false }) {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>URL de Imagen</Form.Label>
+                <Form.Label className="editar-texto">URL de Imagen</Form.Label>
                 <Form.Control
                   name="image"
                   onChange={handleChange}
@@ -182,7 +182,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Rating (Puntaje)</Form.Label>
+                <Form.Label className="editar-texto">Rating (Puntaje)</Form.Label>
                 <Form.Control
                   type="number"
                   name="rate"
@@ -198,7 +198,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Rating (Cantidad de votos)</Form.Label>
+                <Form.Label className="editar-texto">Rating (Cantidad de votos)</Form.Label>
                 <Form.Control
                   type="number"
                   name="count"
@@ -212,7 +212,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Descuento (%)</Form.Label>
+                <Form.Label className="editar-texto">Descuento (%)</Form.Label>
                 <Form.Control
                   type="number"
                   name="discount"
@@ -227,7 +227,7 @@ function FormularioProducto({ esEdicion = false }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Fecha de ingreso</Form.Label>
+                <Form.Label className="editar-texto">Fecha de ingreso</Form.Label>
                 <Form.Control
                   type="date"
                   name="dateOfEntry"
@@ -239,7 +239,9 @@ function FormularioProducto({ esEdicion = false }) {
                   Ingrese la fecha de ingreso.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group className="mb-3">
+            </Col>
+            <Col xs={12} className="d-flex justify-content-center my-3">
+              <Form.Group>
                 <Form.Check
                   type="checkbox"
                   label="Entrega disponible"
@@ -248,7 +250,9 @@ function FormularioProducto({ esEdicion = false }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+            </Col>
+            <Col xs={12} className="d-flex justify-content-center">
+              <Button variant="dark" type="submit">
                 {esEdicion ? "Guardar Cambios" : "Guardar"}
               </Button>
             </Col>
