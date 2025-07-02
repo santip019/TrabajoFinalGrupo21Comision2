@@ -3,23 +3,26 @@ import { LuSearch } from "react-icons/lu";
 import { FaRegStar, FaRegUser } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlineContactSupport } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { IoMdExit } from "react-icons/io";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext";
+import { useCarrito } from "../context/CarritoContext";
 import { useState } from "react";
 import Footer from "../pages/Footer";
-import { useCarrito } from "../context/CarritoContext";
-import { IoMdExit } from "react-icons/io";
 
 
 function Layout() {
   const { user, logout } = useAuth();
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
   const { carrito } = useCarrito();
-  const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const { busqueda, setBusqueda } = useProductos();
+
+  const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+
+  const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
   const { productos, categoriaSeleccionada, setCategoriaSeleccionada } = useProductos();
   const categorias = [
     "todas",
@@ -27,50 +30,26 @@ function Layout() {
   ];
 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const expand = "lg";
 
   return (
     <>
-      <Navbar expand={expand} className="navbar">
+      <Navbar expand="lg" className="navbar">
         <Container fluid>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
-          <Navbar.Offcanvas
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-            placement="end"
-          >
+          <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id="offcanvasNavbarLabel">Menú</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Row className="w-100 align-items-center">
                 {/* Logo y Categorías */}
-                <Col
-                  xs={12}
-                  lg="auto"
-                  className="d-flex flex-column align-items-lg-start align-items-center mb-2 mb-lg-0"
-                >
+                <Col xs={12} lg="auto" className="d-flex flex-column align-items-lg-start align-items-center mb-2 mb-lg-0">
                   <Link to="/principal">
-                    <img
-                      src="/src/assets/images/LogoPaguinaWaldo's.png"
-                      alt="Logo"
-                      className="logo"
-                      style={{
-                        width: "160px",
-                        height: "auto",
-                        cursor: "pointer",
-                      }}
-                    />
+                    <img src="/src/assets/images/LogoPaguinaWaldo's.png" alt="Logo" className="logo" style={{width: "160px", height: "auto", cursor: "pointer"}} />
                   </Link>
                   <Dropdown className="w-100 mt-2">
-                    <Dropdown.Toggle
-                      variant="none"
-                      id="dropdown-categorias"
-                      className="categorias"
-                    >
-                      {categoriaSeleccionada === "todas"
-                        ? "Categorías"
-                        : categoriaSeleccionada}
+                    <Dropdown.Toggle variant="none" id="dropdown-categorias" className="categorias">
+                      {categoriaSeleccionada === "todas" ? "Categorías" : categoriaSeleccionada}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       {categorias.map((cat) => (
@@ -102,27 +81,14 @@ function Layout() {
                           value={busqueda}
                           onChange={(e) => setBusqueda(e.target.value)}
                         />
-                        <span className="icono-lupa">
-                          <LuSearch />
-                        </span>
+                        <span className="icono-lupa"><LuSearch /></span>
                       </Form>
                     </Col>
                     {/* Favoritos, Usuario, Carrito */}
-                    <Col
-                      xs={12}
-                      md={6}
-                      lg={6}
-                      className="d-flex justify-content-end"
-                    >
+                    <Col xs={12} md={6} lg={6} className="d-flex justify-content-end">
                       <Nav className="flex-column justify-content-end flex-md-row w-100 text-md-end">
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/favoritos"
-                          className="text-dark"
-                        >
-                          <span className="icono-estrella">
-                            <FaRegStar />
-                          </span>
+                        <Nav.Link as={Link} to="/principal/favoritos" className="text-dark">
+                          <span className="icono-estrella"><FaRegStar /></span>
                           Favoritos
                         </Nav.Link>
                         {!user ? (
@@ -131,9 +97,7 @@ function Layout() {
                             to="/principal/login"
                             className="text-dark"
                           >
-                            <span className="icono-cliente">
-                              <FaRegUser />
-                            </span>
+                            <span className="icono-cliente"><FaRegUser /></span>
                             Iniciar Sesión / Registrarse
                           </Nav.Link>
                         ) : (
@@ -142,9 +106,7 @@ function Layout() {
                               onClick={() => setShow(true)}
                               className="text-dark"
                             >
-                              <span className="icono-cliente">
-                                <FaRegUser />
-                              </span>
+                              <span className="icono-cliente"><FaRegUser /></span>
                               {user.name}
                             </Nav.Link>
                             <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
@@ -154,11 +116,8 @@ function Layout() {
                               <Offcanvas.Body>
                                 <ListGroup>
                                   <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/perfil"); }}>
-                                    Ver perfil
+                                    Editar perfil
                                   </ListGroup.Item>
-                                  {/*<ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/carrito"); }}>
-                                    Cambiar Tema
-                                  </ListGroup.Item> AGREGAR SI LLEGAMOS CON EL TIEMPO*/}
                                   <ListGroup.Item action onClick={() => { setShow(false); navigate("/principal/soporte"); }}>
                                     Soporte Tecnico
                                   </ListGroup.Item>
@@ -180,24 +139,18 @@ function Layout() {
                                 </ListGroup>
                                 </div>}
                                 <br></br>
-                                <Button variant="outline-danger" onClick={() => { setShow(false); setShowLogoutModal(true) }}>Cerrar sesión <IoMdExit /></Button>
+                                <Button variant="outline-danger" onClick={() => { setShow(false); setShowLogoutModal(true) }}>
+                                  Cerrar sesión <IoMdExit />
+                                </Button>
                               </Offcanvas.Body>
                             </Offcanvas>
                           </>
                         )}
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/carrito"
-                          className="text-dark"
-                        >
-                          <span className="icono-carrito">
-                            <MdOutlineShoppingCart />
-                          </span>
+                        <Nav.Link as={Link} to="/principal/carrito" className="text-dark">
+                          <span className="icono-carrito"><MdOutlineShoppingCart /></span>
                           Carrito
                           {cantidadTotal > 0 && (
-                            <span className="badge bg-light text-dark ms-1">
-                              {cantidadTotal}
-                            </span>
+                            <span className="badge bg-light text-dark ms-1">{cantidadTotal}</span>
                           )}
                         </Nav.Link>
                       </Nav>
@@ -207,50 +160,24 @@ function Layout() {
                   <Row className="menu-abajo align-items-center">
                     <Col xs={12} className="d-flex">
                       <Nav className="flex-column justify-content-end flex-md-row w-100 text-md-end">
-                        <Nav.Link
-                          as={Link}
-                          to="/principal"
-                          className="text-dark"
-                        >
+                        <Nav.Link as={Link} to="/principal" className="text-dark">
                           Inicio
                         </Nav.Link>
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/promociones"
-                          className="text-dark"
-                        >
+                        <Nav.Link as={Link} to="/principal/promociones" className="text-dark">
                           Promociones
                         </Nav.Link>
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/mas-vendidos"
-                          className="text-dark"
-                        >
+                        <Nav.Link as={Link} to="/principal/mas-vendidos" className="text-dark">
                           Más Vendidos
                         </Nav.Link>
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/novedades"
-                          className="text-dark"
-                        >
+                        <Nav.Link as={Link} to="/principal/novedades" className="text-dark"                        >
                           Novedades
                         </Nav.Link>
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/acerca-de"
-                          className="text-dark"
-                        >
+                        <Nav.Link as={Link} to="/principal/acerca-de" className="text-dark">
                           Acerca de
                         </Nav.Link>
-                        <Nav.Link
-                          as={Link}
-                          to="/principal/soporte"
-                          className="text-dark"
-                        >
+                        <Nav.Link as={Link} to="/principal/soporte" className="text-dark">
                           Ayuda
-                          <span className="icono-ayuda">
-                            <MdOutlineContactSupport />
-                          </span>
+                          <span className="icono-ayuda"><MdOutlineContactSupport /></span>
                         </Nav.Link>
                       </Nav>
                     </Col>
