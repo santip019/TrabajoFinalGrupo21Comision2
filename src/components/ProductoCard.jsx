@@ -10,14 +10,14 @@ import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext";
 import { useState } from "react";
 
-
 function ProductoCard({ producto }) {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { favoritos, toggleFavorito } = useFavoritos();
-  const { agregarAlCarrito } = useCarrito();
   const { eliminarProducto } = useProductos();
   const [mostrarModal, setMostrarModal] = useState(false);
+  const { agregarAlCarrito, carrito, quitarDelCarrito, cambiarCantidad } =
+    useCarrito();
 
   const esAdmin = user && user.role === "admin";
 
@@ -40,64 +40,80 @@ function ProductoCard({ producto }) {
   };
 
   return (
-    <Card
-      className="cartas-productos h-100"
-      style={{ cursor: "pointer" }}
-      onClick={() => navigate(`/principal/producto/${producto.id}`)}
-    >
-      <Card.Img
-        variant="top"
-        src={producto.image || producto.imagen || "https://via.placeholder.com/180"}
-        style={{ width: '100%', maxWidth: '100%', height: "140px", objectFit: "contain" }}
-      />
-      <Card.Body className="d-flex flex-column">
-        <Card.Title className="mb-1">
-          {producto.title || producto.nombre}
-        </Card.Title>
-        <div className="d-flex align-items-center mb-2">
-          <span className="me-2">{producto.rating.rate}</span>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className="text-warning" size={14}>
-              {i < Math.round(producto.rating.rate || producto.rating.rate || 0) ? <AiFillStar /> : <AiOutlineStar />}
-            </span>
-          ))}
-        </div>
-        <Card.Text>
-          {producto.discount || producto.descuento ? (
-            <>
-              <span className="d-flex align-items-center mb-1">
-                <del className="text-decoration-line-through text-muted me-2 mb-0">
-                  ${producto.precio || producto.price}
-                </del>
-                <Badge bg="danger" text="light" className="ms-1">
-                  {producto.discount || producto.descuento}% OFF
-                </Badge>
+      <Card
+        className="cartas-productos h-100"
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate(`/principal/producto/${producto.id}`)}
+      >
+        <Card.Img
+          variant="top"
+          src={
+            producto.image ||
+            producto.imagen ||
+            "https://via.placeholder.com/180"
+          }
+          style={{
+            width: "100%",
+            maxWidth: "100%",
+            height: "140px",
+            objectFit: "contain",
+          }}
+        />
+        <Card.Body className="d-flex flex-column">
+          <Card.Title className="mb-1">
+            {producto.title || producto.nombre}
+          </Card.Title>
+          <div className="d-flex align-items-center mb-2">
+            <span className="me-2">{producto.rating.rate}</span>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span key={i} className="text-warning" size={14}>
+                {i <
+                Math.round(
+                  producto.rating.rate || producto.rating.rate || 0
+                ) ? (
+                  <AiFillStar />
+                ) : (
+                  <AiOutlineStar />
+                )}
               </span>
-              <b className="text-dark fs-5 d-flex flex-column align-items-start">
-                ${((producto.precio || producto.price) * (1 - ((producto.discount || producto.descuento) / 100))).toFixed(2)}
-              </b>
-            </>
-          ) : (
-            <b>${producto.precio || producto.price}</b>
-          )}
-        </Card.Text>
-        <Card.Text>
-          {producto.delivery ? (
-            <span className="envio-gratis">
-              Envío GRATIS
-            </span>
-          ) : (
-            <span className="envio">
-              Sin envío gratis
-            </span>
-          )}
-        </Card.Text>
-        
+            ))}
+          </div>
+          <Card.Text>
+            {producto.discount || producto.descuento ? (
+              <>
+                <span className="d-flex align-items-center mb-1">
+                  <del className="text-decoration-line-through text-muted me-2 mb-0">
+                    ${producto.precio || producto.price}
+                  </del>
+                  <Badge bg="danger" text="light" className="ms-1">
+                    {producto.discount || producto.descuento}% OFF
+                  </Badge>
+                </span>
+                <b className="text-dark fs-5 d-flex flex-column align-items-start">
+                  $
+                  {(
+                    (producto.precio || producto.price) *
+                    (1 - (producto.discount || producto.descuento) / 100)
+                  ).toFixed(2)}
+                </b>
+              </>
+            ) : (
+              <b>${producto.precio || producto.price}</b>
+            )}
+          </Card.Text>
+          <Card.Text>
+            {producto.delivery ? (
+              <span className="envio-gratis">Envío GRATIS</span>
+            ) : (
+              <span className="envio">Sin envío gratis</span>
+            )}
+          </Card.Text>
+
           {esAdmin ? (
             <>
               <Button
                 variant="outline-primary"
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/principal/editar-producto/${producto.id}`);
                 }}
@@ -118,16 +134,20 @@ function ProductoCard({ producto }) {
                   <Modal.Title>Confirmar eliminación</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  ¿Seguro que deseas eliminar el producto <b>{producto.title || producto.nombre}</b>?
+                  ¿Seguro que deseas eliminar el producto{" "}
+                  <b>{producto.title || producto.nombre}</b>?
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={cancelarEliminacion}>
                     Cancelar
                   </Button>
-                  <Button variant="danger" onClick={e=> {
-                    e.stopPropagation();
-                    confirmarEliminacion()}}
-                    >
+                  <Button
+                    variant="danger"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      confirmarEliminacion();
+                    }}
+                  >
                     Eliminar
                   </Button>
                 </Modal.Footer>
@@ -135,37 +155,44 @@ function ProductoCard({ producto }) {
             </>
           ) : (
             <>
-            <div className="d-flex gap-2">
-              <Button
-                size={"lg"}
-                variant={favoritos.includes(producto.id) ? "warning" : "outline-warning"}
-                onClick={e => {
-                  e.stopPropagation();
-                  if (!user) return navigate("/principal/login");
-                  toggleFavorito(producto.id);
-                }}
-                aria-label="Favorito"
-              >
-                {favoritos.includes(producto.id) ? <AiFillStar /> : <AiOutlineStar />}
-              </Button>
-              <Button
-                size={"lg"}
-                variant="success"
-                onClick={e => {
-                  e.stopPropagation();
-                  if (!user) return navigate("/principal/login");
-                  agregarAlCarrito(producto);
-                }}
-                className="ms-auto"
-              >
-              <MdAddShoppingCart />
-              </Button>
-            </div>
-          </>
+              <div className="d-flex gap-2">
+                <Button
+                  size={"lg"}
+                  variant={
+                    favoritos.includes(producto.id)
+                      ? "warning"
+                      : "outline-warning"
+                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!user) return navigate("/principal/login");
+                    toggleFavorito(producto.id);
+                  }}
+                  aria-label="Favorito"
+                >
+                  {favoritos.includes(producto.id) ? (
+                    <AiFillStar />
+                  ) : (
+                    <AiOutlineStar />
+                  )}
+                </Button>
+                <Button
+                  size={"lg"}
+                  variant="success"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!user) return navigate("/principal/login");
+                    agregarAlCarrito(producto);
+                  }}
+                  className="ms-auto"
+                >
+                  <MdAddShoppingCart />
+                </Button>
+              </div>
+            </>
           )}
-        
-      </Card.Body>
-    </Card>
+        </Card.Body>
+      </Card>
   );
 }
 
