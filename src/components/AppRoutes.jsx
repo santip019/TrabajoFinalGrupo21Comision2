@@ -12,11 +12,6 @@ import Papelera from "../pages/Papelera";
 import AdminRoute from "../routes/AdminRoute";
 import RutaAutenticada from "../routes/RutaAutenticada";
 import Soporte from "../pages/Soporte";
-import Devoluciones from "../pages/Devoluciones";
-import Faq from "../pages/Faq";
-import Contacto from "../pages/Contacto";
-import Seguridad from "../pages/Seguridad";
-import Cuenta from "../pages/Cuenta";
 import Carrito from "../pages/Carrito";
 import Promociones from "../pages/Promociones";
 import MasVendidos from "../pages/MasVendidos";
@@ -35,84 +30,54 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Navigate to="/principal" />} />
       <Route path="/principal/error" element={<ErrorPage />} />
-
       <Route path="/principal/login" element={<Login />} />
-      <Route
-        path="/principal/registrarse"
-        element={<FormularioUsuario modo="registro" />}
+      <Route path="/principal/registrarse" element={<FormularioUsuario modo="registro" />} />
+      <Route path="perfil"
+        element={
+          <RutaAutenticada>
+            <PerfilWrapper />
+          </RutaAutenticada>
+        }
       />
-      {/*Rutas Publicas*/}
       <Route path="/principal" element={<Layout />}>
         <Route index element={<Inicio />} />
-
-        <Route
-          path="favoritos"
+        <Route path="favoritos"
           element={
             <RutaAutenticada>
               <Favoritos />
             </RutaAutenticada>
           }
         />
-        <Route
-          path="carrito"
+        <Route path="carrito"
           element={
             <RutaAutenticada>
               <Carrito />
             </RutaAutenticada>
           }
         />
-
-        <Route
-          path="cliente"
-          element={
-            <RutaAutenticada>
-              <Login />
-            </RutaAutenticada>
-          }
-        />
         <Route path="productos/:categoria" element={<ListarProductos />} />
-        <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="producto/:id" element={<VerDetalles />} />
         <Route path="promociones" element={<Promociones />} />
         <Route path="mas-vendidos" element={<MasVendidos />} />
         <Route path="novedades" element={<Novedades />} />
-        <Route path="acerca-de" element={<AcercaDe/>} />
-
-        <Route
-          path="perfil"
-          element={
-            <RutaAutenticada>
-              <PerfilWrapper />
-            </RutaAutenticada>
-          }
-        />
-
+        <Route path="acerca-de" element={<AcercaDe />} />
         <Route path="soporte" element={<Soporte />} />
-        <Route path="soporte/devoluciones" element={<Devoluciones />} />
-        <Route path="soporte/faq" element={<Faq />} />
-        <Route path="soporte/contacto" element={<Contacto />} />
-        <Route path="soporte/seguridad" element={<Seguridad />} />
-        <Route path="soporte/cuenta" element={<Cuenta />} />
 
-        {/* PROTEGER RUTAS ADMIN */}
-        <Route
-          path="nuevo-producto"
+       {/* RUTAS ADMIN */}
+        <Route path="nuevo-producto"
           element={
             <AdminRoute>
               <FormularioProducto />
             </AdminRoute>
           }
         />
-        {
-          <Route
-            path="editar-producto/:id"
-            element={
-              <AdminRoute>
-                <FormularioProducto esEdicion={true} />
-              </AdminRoute>
-            }
-          />
-        }
+        <Route path="editar-producto/:id"
+          element={
+            <AdminRoute>
+              <FormularioProducto esEdicion={true} />
+            </AdminRoute>
+          }
+        />
         <Route
           path="papelera"
           element={
@@ -122,8 +87,6 @@ function AppRoutes() {
           }
         />
       </Route>
-
-      {/* Redirección por defecto */}
       <Route path="*" element={<Navigate to="/principal/error" />} />
     </Routes>
   );
