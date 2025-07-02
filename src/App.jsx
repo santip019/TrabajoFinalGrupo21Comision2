@@ -12,9 +12,7 @@ function App() {
         <Spinner animation="border" variant="success" role="status"></Spinner>
       </div>} {/*Pregunta si el valor de loading = true, si es asi entonces renderza el Spinner, sino no pasa nada*/}
       <main className="flex-grow-1">
-        <BrowserRouter>
           <AppRoutes />{/* Componente con todas las rutas */}
-        </BrowserRouter>
       </main>
     </div>
   );

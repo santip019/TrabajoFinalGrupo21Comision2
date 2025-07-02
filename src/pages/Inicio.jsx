@@ -8,33 +8,40 @@ import CarruselDeImagenes from "../components/CarruselDeImagenes";
 import ProductoCard from "../components/ProductoCard";
 
 function Inicio() {
-  const location = useLocation();
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const [showToast, setShowToast] = useState(false);
-  const [nombre, setNombre] = useState("");
-  const [mostrarPapelera] = useState(false);
-  const {
-    productos,
-    busqueda,
-    categoriaSeleccionada,
-  } = useProductos();
+  const location = useLocation(), { user } = useAuth(), navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false), [nombre, setNombre] = useState("");
+  const [productosAleatorios, setProductosAleatorios] = useState([]);
+  const { productos, busqueda, categoriaSeleccionada } = useProductos();
 
-  // --- BÚSQUEDA DINÁMICA ---
-  // Si hay texto en la barra de búsqueda, mostrar solo los resultados como en promociones/novedades
-  const productosFiltradosBusqueda = productos.filter((producto) => {
-    const nombre = (producto.title || producto.nombre || "").toLowerCase();
-    const marca = (producto.brand || producto.marca || "").toLowerCase();
+  useEffect(() => {
+    if (location.state?.bienvenido) {
+      setShowToast(true);
+      setNombre(location.state.nombre || user?.name || "");
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate, user]);
+
+  useEffect(() => {
+    setProductosAleatorios(
+      productos
+        .filter(p => (p.brand || p.marca)?.toLowerCase() !== "waldo's" && p.estado !== false)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 20)
+    );
+  }, [productos]);
+
+  const productosFiltradosBusqueda = productos.filter(p => {
+    if (!p || (!p.title && !p.nombre) || (!p.brand && !p.marca)) return false;
+    const nombre = (p.title || p.nombre || "").toLowerCase();
+    const marca = (p.brand || p.marca || "").toLowerCase();
     const coincideBusqueda =
       nombre.includes(busqueda.toLowerCase()) ||
       marca.includes(busqueda.toLowerCase());
     const perteneceCategoria =
       categoriaSeleccionada === "todas" ||
-      producto.category === categoriaSeleccionada;
-    return producto.estado && coincideBusqueda && perteneceCategoria;
+      p.category === categoriaSeleccionada;
+    return p.estado && coincideBusqueda && perteneceCategoria;
   });
-
-  // Agrupa de a 5 productos por fila
 
   if (busqueda.trim() !== "") {
     return (
@@ -43,7 +50,7 @@ function Inicio() {
           <p className="text-muted">No hay productos para mostrar.</p>
         ) : (
           <Row className="productos">
-            {productosFiltradosBusqueda.map((producto) => (
+            {productosFiltradosBusqueda.map(producto => (
               <Col xs={6} md={3} key={producto.id} className="mb-4">
                 <ProductoCard producto={producto} />
               </Col>
@@ -59,80 +66,36 @@ function Inicio() {
     "/src/assets/images/banner_promocion_productos2.png",
     "/src/assets/images/banner_promocion_productos1.png",
   ];
-
   const productosConDescuento = productos.filter(
-    (p) => (p.discount || p.descuento || 0) > 0 && p.estado !== false
+    p => (p.discount || p.descuento || 0) > 0 && p.estado !== false
   );
-
   const productosWaldos = productos.filter(
-    (p) =>
-      (p.brand || p.marca) &&
-      (p.brand || p.marca).toLowerCase() === "waldo's" &&
-      p.estado !== false
+    p => (p.brand || p.marca)?.toLowerCase() === "waldo's" && p.estado !== false
   );
-
-  const [productosAleatorios, setProductosAleatorios] = useState([]);
-  useEffect(() => {
-    const productosNoWaldos = productos.filter(
-      (p) =>
-        (p.brand || p.marca)?.toLowerCase() !== "waldo's" && p.estado !== false
-    );
-    const mezclados = [...productosNoWaldos]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 20);
-    setProductosAleatorios(mezclados);
-  }, [productos]);
-
   const imagenesDescuento = [
     "/src/assets/images/Banners_promociones0.png",
     "/src/assets/images/Banners_promociones1.png",
   ];
 
-  // --- Efecto para mostrar el toast de bienvenida ---
-  // Si el usuario viene de un logueo exitoso, muestra un toast de bienvenida
-  useEffect(() => {
-    if (location.state?.bienvenido) {
-      setShowToast(true);
-      // Usa el nombre del estado o, si no viene, el del usuario logueado
-      setNombre(location.state.nombre || user.name || "");
-      // Limpia el estado para que no se muestre el toast al refrescar
-      navigate(location.pathname, { replace: true, state: {} });
-    }
-  }, [location, navigate, user]);
-
   return (
     <div>
       <CarruselDeImagenes imagenes={imagenesPrincipal} />
-
       <Container className="carruseles">
         <h2>Super Ofertas</h2>
-        <CarruselDeProductos
-          productos={productosConDescuento}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
-        />
+        <CarruselDeProductos productos={productosConDescuento} onVerDetalles={id => navigate(`/Layout/producto/${id}`)} />
       </Container>
-
       <Container className="carruseles">
         <h2>Productos Waldo's</h2>
-        <CarruselDeProductos
-          productos={productosWaldos}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
-        />
+        <CarruselDeProductos productos={productosWaldos} onVerDetalles={id => navigate(`/Layout/producto/${id}`)} />
       </Container>
-
       <Container className="carruseles-promo">
         <h2>Conoce nuestras promociones bancarias</h2>
         <CarruselDeImagenes imagenes={imagenesDescuento} />
       </Container>
-
       <Container className="carruseles">
         <h2>Otras Marcas</h2>
-        <CarruselDeProductos
-          productos={productosAleatorios}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
-        />
+        <CarruselDeProductos productos={productosAleatorios} onVerDetalles={id => navigate(`/Layout/producto/${id}`)} />
       </Container>
-      {/*Esto es el componente renderizado del mensaje de logueo correcto*/}
       <ToastContainer position="bottom-end" className="p-3">
         <Toast show={showToast} onClose={() => setShowToast(false)} bg="success" delay={5000} autohide>
           <Toast.Header className="text-black">
