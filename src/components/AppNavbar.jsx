@@ -10,6 +10,8 @@ import { useProductos } from "../context/ProductosContext";
 import { useState } from "react";
 import Footer from "../pages/Footer";
 import { useCarrito } from "../context/CarritoContext";
+import { IoMdExit } from "react-icons/io";
+
 
 function Layout() {
   const { user, logout } = useAuth();
@@ -147,7 +149,7 @@ function Layout() {
                             </Nav.Link>
                             <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
                               <Offcanvas.Header closeButton>
-                                <Offcanvas.Title>Mi cuenta</Offcanvas.Title>
+                                <Offcanvas.Title className="cliente-titulo">Mi cuenta</Offcanvas.Title>
                               </Offcanvas.Header>
                               <Offcanvas.Body>
                                 <ListGroup>
@@ -178,7 +180,7 @@ function Layout() {
                                 </ListGroup>
                                 </div>}
                                 <br></br>
-                                <Button variant="outline-danger" onClick={() => { setShow(false); setShowLogoutModal(true) }}>Cerrar sesión</Button>
+                                <Button variant="outline-danger" onClick={() => { setShow(false); setShowLogoutModal(true) }}>Cerrar sesión <IoMdExit /></Button>
                               </Offcanvas.Body>
                             </Offcanvas>
                           </>
