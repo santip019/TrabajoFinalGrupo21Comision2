@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // Esta función sirve para registro y edición
 export function validarYGuardarUsuario({ email, password, confirmar, name }, esEdicion = false, emailOriginal = "") {
-  if (!/\S+@\S+\.\S+/.test(email)) return { ok: false, error: "Correo inválido" };
+  // Solo validaciones lógicas, no de formato
   if (!esEdicion && password.length < 6) return { ok: false, error: "Contraseña muy corta" };
   if (password !== confirmar) return { ok: false, error: "Las contraseñas no coinciden" };
 
@@ -98,6 +98,7 @@ function FormularioUsuario({ modo = "registro", usuarioActual = null, onSuccess 
             onChange={handleChange}
             required
             type="email"
+            pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
           />
           <Form.Control.Feedback type="invalid">
             Ingrese un email válido.
