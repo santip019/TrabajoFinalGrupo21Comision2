@@ -237,6 +237,13 @@ function Layout() {
                         </Nav.Link>
                         <Nav.Link
                           as={Link}
+                          to="/principal/acerca-de"
+                          className="text-dark"
+                        >
+                          Acerca de
+                        </Nav.Link>
+                        <Nav.Link
+                          as={Link}
                           to="/principal/soporte"
                           className="text-dark"
                         >

@@ -76,6 +76,7 @@ function AppRoutes() {
         <Route path="promociones" element={<Promociones />} />
         <Route path="mas-vendidos" element={<MasVendidos />} />
         <Route path="novedades" element={<Novedades />} />
+        <Route path="acerca-de" element={<AcercaDe/>} />
 
         <Route
           path="perfil"
