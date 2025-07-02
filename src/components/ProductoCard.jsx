@@ -10,16 +10,36 @@ import { useAuth } from "../context/AuthContext";
 import { useProductos } from "../context/ProductosContext";
 import { useState } from "react";
 
-function ProductoCard({ producto }) {
+function ProductoCard({ producto, esPapelera = false }) {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { favoritos, toggleFavorito } = useFavoritos();
-  const { eliminarProducto } = useProductos();
+  const { eliminarProducto, restaurarProducto } = useProductos();
   const [mostrarModal, setMostrarModal] = useState(false);
-  const { agregarAlCarrito, carrito, quitarDelCarrito, cambiarCantidad } =
-    useCarrito();
+  const { agregarAlCarrito } = useCarrito();
+
+   const [showRestoreModal, setShowRestoreModal] = useState(false);
+  const [productoARestaurar, setProductoARestaurar] = useState(null);
 
   const esAdmin = user && user.role === "admin";
+
+  const abrirModalRestaurar = (e) => {
+    e.stopPropagation();
+    setProductoARestaurar(producto);
+    setShowRestoreModal(true);
+  };
+
+  const confirmarRestaurar = () => {
+    if (productoARestaurar) {
+      restaurarProducto(productoARestaurar.id);
+      setShowRestoreModal(false);
+      setProductoARestaurar(null);
+    }
+  };
+  const cancelarRestaurar = () => {
+    setShowRestoreModal(false);
+    setProductoARestaurar(null);
+  };
 
   // Abrir modal y guardar el id del producto a eliminar
   const abrirModal = (e) => {
@@ -109,85 +129,124 @@ function ProductoCard({ producto }) {
             )}
           </Card.Text>
 
-          {esAdmin ? (
-            <>
+          {esPapelera ? (
+          <>
+            <Badge bg="secondary" className="mb-2">Eliminado</Badge>
+            <Button
+              variant="success"
+              onClick={(e) => {
+                abrirModalRestaurar (e);
+              }}
+            >
+              Restaurar
+            </Button>
+            {/* Modal de confirmación de restaurar */}
+            <Modal show={showRestoreModal} onHide={() => setShowRestoreModal(false)} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Confirmar restauración</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                ¿Seguro que deseas restaurar el producto <b>{productoARestaurar?.title || productoARestaurar?.nombre}</b>?
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary"
+                  onClick={e => {
+                    e.stopPropagation();
+                    cancelarRestaurar();
+                  }}
+                >
+                  Cancelar
+                </Button>
+                <Button variant="success"
+                  onClick={e => {
+                    e.stopPropagation();
+                    confirmarRestaurar();
+                  }}
+                >
+                  Restaurar
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        ) : esAdmin ? (
+          <>
+            <Button
+              variant="outline-primary"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/principal/editar-producto/${producto.id}`);
+              }}
+              className="mt-1"
+            >
+              Editar
+            </Button>
+            <Button
+              variant="outline-danger"
+              onClick={abrirModal}
+              className="mt-1"
+            >
+              Eliminar
+            </Button>
+            {/* Modal de confirmación */}
+            <Modal show={mostrarModal} onHide={cancelarEliminacion} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Confirmar eliminación</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                ¿Seguro que deseas eliminar el producto{" "}
+                <b>{producto.title || producto.nombre}</b>?
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={cancelarEliminacion}>
+                  Cancelar
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    confirmarEliminacion();
+                  }}
+                >
+                  Eliminar
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        ) : (
+          <>
+            <div className="d-flex gap-2">
               <Button
-                variant="outline-primary"
+                size={"lg"}
+                variant={
+                  favoritos.includes(producto.id)
+                    ? "warning"
+                    : "outline-warning"
+                }
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate(`/principal/editar-producto/${producto.id}`);
+                  if (!user) return navigate("/principal/login");
+                  toggleFavorito(producto.id);
                 }}
-                className="mt-1"
+                aria-label="Favorito"
               >
-                Editar
+                {favoritos.includes(producto.id) ? (
+                  <AiFillStar />
+                ) : (
+                  <AiOutlineStar />
+                )}
               </Button>
               <Button
-                variant="outline-danger"
-                onClick={abrirModal}
-                className="mt-1"
+                size={"lg"}
+                variant="success"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!user) return navigate("/principal/login");
+                  agregarAlCarrito(producto);
+                }}
+                className="ms-auto"
               >
-                Eliminar
+                <MdAddShoppingCart />
               </Button>
-              {/* Modal de confirmación */}
-              <Modal show={mostrarModal} onHide={cancelarEliminacion} centered>
-                <Modal.Header closeButton>
-                  <Modal.Title>Confirmar eliminación</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  ¿Seguro que deseas eliminar el producto{" "}
-                  <b>{producto.title || producto.nombre}</b>?
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={cancelarEliminacion}>
-                    Cancelar
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      confirmarEliminacion();
-                    }}
-                  >
-                    Eliminar
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            </>
-          ) : (
-            <>
-              <div className="d-flex gap-2">
-                <Button
-                  size={"lg"}
-                  variant={
-                    favoritos.includes(producto.id)
-                      ? "warning"
-                      : "outline-warning"
-                  }
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (!user) return navigate("/principal/login");
-                    toggleFavorito(producto.id);
-                  }}
-                  aria-label="Favorito"
-                >
-                  {favoritos.includes(producto.id) ? (
-                    <AiFillStar />
-                  ) : (
-                    <AiOutlineStar />
-                  )}
-                </Button>
-                <Button
-                  size={"lg"}
-                  variant="success"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (!user) return navigate("/principal/login");
-                    agregarAlCarrito(producto);
-                  }}
-                  className="ms-auto"
-                >
-                  <MdAddShoppingCart />
-                </Button>
               </div>
             </>
           )}
