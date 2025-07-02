@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import productosLocales from "../assets/productos.json"; // Importa tu JSON local
+import productosLocales from "../assets/data/productos.json"; // Importa tu JSON local
 
 const ProductosContext = createContext();
 
