@@ -112,7 +112,7 @@ function Layout() {
                       lg={6}
                       className="d-flex justify-content-end"
                     >
-                      <Nav className="flex-row gap-2 text-end">
+                      <Nav className="flex-column justify-content-end flex-md-row w-100 text-md-end">
                         <Nav.Link
                           as={Link}
                           to="/principal/favoritos"
@@ -202,9 +202,9 @@ function Layout() {
                     </Col>
                   </Row>
                   {/* Fila inferior: Menú principal */}
-                  <Row className="menu-abajo justify-content-end align-items-center">
-                    <Col xs={12} className="d-flex justify-content-end">
-                      <Nav className="flex-wrap">
+                  <Row className="menu-abajo align-items-center">
+                    <Col xs={12} className="d-flex">
+                      <Nav className="flex-column justify-content-end flex-md-row w-100 text-md-end">
                         <Nav.Link
                           as={Link}
                           to="/principal"
