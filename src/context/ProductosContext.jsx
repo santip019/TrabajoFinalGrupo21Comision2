@@ -18,7 +18,9 @@ export function ProductosProvider({ children }) {
   // Cargar productos desde la API y el JSON local al montar el componente
   useEffect(() => {
     if (productosGuardados) {
+      setLoading(true); // cuando empieza a solicitar (get) los productos de la API se define como true el que aparezca el Spinner de carga 
       setProductos(JSON.parse(productosGuardados));
+      setTimeout(() => setLoading(false), 300); // 300ms de spinner
     } else {
       const fetchProductos = async () => {
         setLoading(true); // cuando empieza a solicitar (get) los productos de la API se define como true el que aparezca el Spinner de carga 

@@ -27,7 +27,12 @@ export function CarritoProvider({ children }) {
   const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
-      if (existe) return prev;
+      if (existe) {
+        return prev.map(item =>
+        item.id === producto.id
+          ? { ...item, cantidad: item.cantidad + 1 }
+          : item
+      );}
       return [...prev, { ...producto, cantidad: 1 }];
     });
   };

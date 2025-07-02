@@ -46,7 +46,7 @@ function Carrito() {
                     min={1}
                     value={item.cantidad}
                     onChange={(e) =>
-                      cambiarCantidad({ id: item.id, cantidad: +e.target.value })
+                      cambiarCantidad(item.id, +e.target.value)
                     }
                     style={{ width: '80px' }}
                   />
