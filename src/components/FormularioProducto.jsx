@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Col, Row } from "react-bootstrap";
 import { useProductos } from "../context/ProductosContext";
 
 function FormularioProducto({ esEdicion = false }) {
@@ -92,161 +92,167 @@ function FormularioProducto({ esEdicion = false }) {
 
   return (
     <div className="d-flex justify-content-center mt-5">
-      <Card style={{ width: "32rem" }} className="p-4 shadow">
-        <Card.Title>{esEdicion ? "Editar Producto" : "Agregar Nuevo Producto"}</Card.Title>
+      <Card className="w-100 p-4 shadow me-5 ms-5">
+        <Card.Title className="editar-titulo">{esEdicion ? "Editar Producto" : "Agregar Nuevo Producto"}</Card.Title>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control
-              name="title"
-              onChange={handleChange}
-              value={producto.title}
-              required
-              minLength={3}
-            />
-            <Form.Control.Feedback type="invalid">
-              El nombre es obligatorio y debe tener al menos 3 caracteres.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Marca</Form.Label>
-            <Form.Control
-              name="brand"
-              onChange={handleChange}
-              value={producto.brand}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              La marca es obligatoria.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Precio</Form.Label>
-            <Form.Control
-              type="number"
-              name="price"
-              onChange={handleChange}
-              value={producto.price}
-              required
-              min={1}
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese un precio válido mayor a 0.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Descripción</Form.Label>
-            <Form.Control
-              name="description"
-              onChange={handleChange}
-              value={producto.description}
-              required
-              minLength={10}
-            />
-            <Form.Control.Feedback type="invalid">
-              La descripción es obligatoria y debe tener al menos 10 caracteres.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Categoría</Form.Label>
-            <Form.Select
-              name="category"
-              onChange={handleChange}
-              value={producto.category}
-              required
-            >
-              <option value="">Selecciona una categoría</option>
-              {categorias.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              La categoría es obligatoria.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>URL de Imagen</Form.Label>
-            <Form.Control
-              name="image"
-              onChange={handleChange}
-              value={producto.image}
-              required
-              type="url"
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese una URL de imagen válida.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Rating (Puntaje)</Form.Label>
-            <Form.Control
-              type="number"
-              name="rate"
-              onChange={handleChange}
-              value={producto.rating.rate}
-              min={0}
-              max={5}
-              step={0.1}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese un puntaje válido (0 a 5).
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Rating (Cantidad de votos)</Form.Label>
-            <Form.Control
-              type="number"
-              name="count"
-              onChange={handleChange}
-              value={producto.rating.count}
-              min={0}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese la cantidad de votos.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Descuento (%)</Form.Label>
-            <Form.Control
-              type="number"
-              name="discount"
-              onChange={handleChange}
-              value={producto.discount}
-              min={0}
-              max={100}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese un descuento válido.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Fecha de ingreso</Form.Label>
-            <Form.Control
-              type="date"
-              name="dateOfEntry"
-              onChange={handleChange}
-              value={producto.dateOfEntry}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese la fecha de ingreso.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Check
-              type="checkbox"
-              label="Entrega disponible"
-              name="delivery"
-              checked={producto.delivery}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            {esEdicion ? "Guardar Cambios" : "Guardar"}
-          </Button>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control
+                  name="title"
+                  onChange={handleChange}
+                  value={producto.title}
+                  required
+                  minLength={3}
+                />
+                <Form.Control.Feedback type="invalid">
+                  El nombre es obligatorio y debe tener al menos 3 caracteres.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Marca</Form.Label>
+                <Form.Control
+                  name="brand"
+                  onChange={handleChange}
+                  value={producto.brand}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  La marca es obligatoria.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Precio</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="price"
+                  onChange={handleChange}
+                  value={producto.price}
+                  required
+                  min={1}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese un precio válido mayor a 0.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Descripción</Form.Label>
+                <Form.Control
+                  name="description"
+                  onChange={handleChange}
+                  value={producto.description}
+                  required
+                  minLength={10}
+                />
+                <Form.Control.Feedback type="invalid">
+                  La descripción es obligatoria y debe tener al menos 10 caracteres.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Categoría</Form.Label>
+                <Form.Select
+                  name="category"
+                  onChange={handleChange}
+                  value={producto.category}
+                  required
+                >
+                  <option value="">Selecciona una categoría</option>
+                  {categorias.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  La categoría es obligatoria.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>URL de Imagen</Form.Label>
+                <Form.Control
+                  name="image"
+                  onChange={handleChange}
+                  value={producto.image}
+                  required
+                  type="url"
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese una URL de imagen válida.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Rating (Puntaje)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="rate"
+                  onChange={handleChange}
+                  value={producto.rating.rate}
+                  min={0}
+                  max={5}
+                  step={0.1}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese un puntaje válido (0 a 5).
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Rating (Cantidad de votos)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="count"
+                  onChange={handleChange}
+                  value={producto.rating.count}
+                  min={0}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese la cantidad de votos.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Descuento (%)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="discount"
+                  onChange={handleChange}
+                  value={producto.discount}
+                  min={0}
+                  max={100}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese un descuento válido.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Fecha de ingreso</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="dateOfEntry"
+                  onChange={handleChange}
+                  value={producto.dateOfEntry}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Ingrese la fecha de ingreso.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Check
+                  type="checkbox"
+                  label="Entrega disponible"
+                  name="delivery"
+                  checked={producto.delivery}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                {esEdicion ? "Guardar Cambios" : "Guardar"}
+              </Button>
+            </Col>
+          </Row>
         </Form>
       </Card>
     </div>

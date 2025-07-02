@@ -135,6 +135,7 @@ function ProductoCard({ producto }) {
             </>
           ) : (
             <>
+            <div className="d-flex gap-2">
               <Button
                 size={"lg"}
                 variant={favoritos.includes(producto.id) ? "warning" : "outline-warning"}
@@ -155,9 +156,11 @@ function ProductoCard({ producto }) {
                   if (!user) return navigate("/principal/login");
                   agregarAlCarrito(producto);
                 }}
+                className="ms-auto"
               >
               <MdAddShoppingCart />
               </Button>
+            </div>
           </>
           )}
         
