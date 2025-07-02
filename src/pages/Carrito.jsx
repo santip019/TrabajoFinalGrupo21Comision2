@@ -17,8 +17,12 @@ function Carrito() {
   // Cálculo seguro de precio (precio || price || 0)
   const total = carrito.reduce((acc, item) => {
     const precio = item.precio || item.price || 0;
-    return acc + precio * item.cantidad;
-  }, 0);
+    const descuento = item.discount || item.descuento || 0;
+    const precioFinal = descuento
+      ? precio * (1 - descuento / 100)
+      : precio;
+    return acc + precioFinal * item.cantidad;
+}, 0);
 
   return (
     <Container className="my-4">

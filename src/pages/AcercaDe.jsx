@@ -44,7 +44,7 @@ function AcercaDe() {
           <Carousel
             controls={false}
             indicators={true}
-            interval={5000}
+            interval={3000}
             className="carrusel-integrantes"
           >
             {slides.map((grupo, idx) => (
@@ -53,24 +53,13 @@ function AcercaDe() {
                   {grupo.map((participante) => (
                     <Card
                       key={participante.id}
-                      style={{
-                        width: "13rem",
-                        margin: "1rem",
-                        height: "18rem",
-                      }}
+                      className="card-acercade shadow-sm mb-3"
                     >
                       <Card.Img
                         variant="top"
                         src={participante.img}
                         alt={participante.nombre}
-                        style={{
-                          width: "80%",
-                          borderRadius: "50%",
-                          marginTop: "2rem",
-                          objectFit: "cover",
-                          height: "150px",
-                          alignSelf: "center",
-                        }}
+                        className="imagen-acercade img-fluid"
                       />
                       <Card.Body className="text-center">
                         <Card.Title>{participante.nombre}</Card.Title>
@@ -78,14 +67,13 @@ function AcercaDe() {
                           href={participante.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ textDecoration: "none" }}
                           aria-label={`GitHub de ${participante.nombre}`}
                         >
                           <Badge
                             bg="dark"
                             className="d-inline-flex align-items-center gap-1 justify-content-center"
                           >
-                            <FaGithub style={{ fontSize: "1.1em" }} />
+                            <FaGithub />
                             {participante.github}
                           </Badge>
                         </a>

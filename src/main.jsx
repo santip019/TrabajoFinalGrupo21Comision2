@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import { FavoritosProvider } from "./context/FavoritosContext";
 import { CarritoProvider } from "./context/CarritoContext";
-import { ProductosProvider } from "./context/ProductosContext"; // <-- Importa el proveedor
+import { ProductosProvider } from "./context/ProductosContext"; // Importa el proveedor
 import { BrowserRouter } from "react-router";
 
 createRoot(document.getElementById("root")).render(

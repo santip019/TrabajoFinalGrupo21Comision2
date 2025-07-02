@@ -21,17 +21,7 @@ function Login() {
       e.stopPropagation();
       return;
     }
-
-    // Validación manual extra para email y password
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError("Ingrese un correo válido.");
-      return;
-    }
-    if (!password || password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres.");
-      return;
-    }
-
+    
     const res = login(email, password);
     if (res.success) {
       navigate("/principal", { state: { bienvenido: true, nombre: res.name } });

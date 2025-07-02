@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { useAuth } from "./AuthContext";
 import { useUserLocalStorage } from "../hooks/useUserLocalStorage";
 
@@ -18,7 +18,6 @@ export function FavoritosProvider({ children }) {
     );
   };
 
-  // Nueva función para limpiar favoritos
   const limpiarFavoritos = () => setFavoritos([]);
 
   return (

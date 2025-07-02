@@ -82,7 +82,7 @@ function FormularioProducto({ esEdicion = false }) {
       // Crear producto
       setProductos([...productos, producto]);
     }
-    navigate("/Layout");
+    navigate("/principal");
   };
 
   // Si es edición y no existe el producto, muestra mensaje

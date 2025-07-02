@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import productosLocales from "../assets/data/productos.json"; // Importa tu JSON local
+import productosLocales from "../assets/data/productos.json";
 
 const ProductosContext = createContext();
 
@@ -9,7 +9,7 @@ export function useProductos() {
 
 export function ProductosProvider({ children }) {
   const [productos, setProductos] = useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas"); // Esto guarda la categoría elegida por el usuario.
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas"); // guarda la categoría elegida por el usuario.
   const [busqueda, setBusqueda] = useState("");
   const [loading, setLoading] = useState(false);// Se define un estado para controlar cuando mostrar el Spinner de carga
   
@@ -29,14 +29,13 @@ export function ProductosProvider({ children }) {
           const data = await res.json();
           const productosAdaptados = data.map(prod => ({
             ...prod,
-            estado: true, // activo por defecto
+            estado: true,
             favoritos: false,
             brand: prod.brand || "Waldo's",
             discount: prod.discount || 0,
             delivery: prod.delivery || false
           }));
 
-          // Adaptar productosLocales si es necesario
           const productosLocalesAdaptados = productosLocales.map(prod => ({
             ...prod,
             estado: prod.estado !== undefined ? prod.estado : true,
@@ -46,7 +45,7 @@ export function ProductosProvider({ children }) {
             delivery: prod.delivery !== undefined ? prod.delivery : false
           }));
 
-          // Unir ambos arrays
+          // Une ambos arrays
           setProductos([...productosAdaptados, ...productosLocalesAdaptados]);
           // Guarda en localStorage la primera vez
           localStorage.setItem("productos", JSON.stringify([...productosAdaptados, ...productosLocalesAdaptados]));

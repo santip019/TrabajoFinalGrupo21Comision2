@@ -34,7 +34,6 @@ function Novedades() {
           ))}
         </Row>
       )}
-      
     </Container>
   );
 }
