@@ -84,7 +84,7 @@ function FormularioUsuario({ modo = "registro", usuarioActual = null, onSuccess 
   };
 
   return (
-    <div className={`d-flex justify-content-center ${modo === "registro" ? "registrar" : "editar-user"}`}>
+    <div className={`d-flex justify-content-center ${modo === "registro" ? "registrar" : "editar-user mt-5"}`}>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <h2>{modo === "edicion" ? "Editar Perfil" : "REGISTRARSE"}</h2>
         <h3>{modo === "edicion" ? "" : "Bienvenido"}</h3>

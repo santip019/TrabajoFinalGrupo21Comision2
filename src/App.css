@@ -8,7 +8,6 @@
 }
 
 /* Comienzo del estilo del navbar */
-
 .navbar {
   background: #047857;
   height: 8em;
@@ -17,7 +16,7 @@
 .navbar .nav-link,
 .categorias {
   font-family: "Montserrat", sans-serif;
-  color: #fff;
+  color: #fff !important;
   text-decoration: none;
   font-weight: 500;
 }
@@ -114,11 +113,9 @@
 .icono-ayuda {
   margin-left: 0.3em;
 }
-
 /* Finaliza del estilo del navbar */
 
 /* Comienzo del estilo del inicio */
-
 .imagenes-principal {
   width: 100vw;
   height: 60vh;
@@ -126,7 +123,6 @@
   margin-top: 0;
 }
 
-/**/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1) grayscale(1) brightness(0.3);
@@ -161,7 +157,6 @@
   text-align: left;
   align-self: flex-start;
   padding: 0.2em 1em;
-  margin-bottom: 25px;
 }
 
 .carruseles-promo h2 {
@@ -171,8 +166,6 @@
   font-weight: 500;
   font-size: 25px;
 }
-
-/**/
 
 .cartas-productos {
   box-shadow: 0 0 8px 2px #00000017;
@@ -209,11 +202,9 @@
 .envio {
   color: #b3b3b3;
 }
-
 /* Finaliza del estilo del inicio */
 
 /* Comienzo del estilo de otras vistas */
-
 .titulos {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
@@ -258,7 +249,6 @@
 }
 
 /*login*/
-
 .iniciar-sesion, .registrar {
   background-image: url("/src/assets/images/Imagen-login.png");
   display: flex;
@@ -269,7 +259,7 @@
   min-height: 100vh;
 }
 
-.contenedor-iniciar, .registrar form {
+.contenedor-iniciar, .registrar form, .editar-user form {
   width: 100%;
   max-width: 400px;
   padding: 2em;
@@ -278,7 +268,7 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.274);
 }
 
-.login-titulo, .registrar h2 {
+.login-titulo, .registrar h2, .editar-user h2, .editar-titulo {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 2em;
@@ -286,7 +276,7 @@
   margin-top: 10px;
 }
 
-.login-texto, .registrar h3 {
+.login-texto, .registrar h3{
   font-family: "Nunito", sans-serif;
   font-weight: 400;
   font-size: 1.2em;
@@ -299,7 +289,7 @@
   font-weight: 400;
 }
 
-.login-campos, .registrar .form-label {
+.login-campos, .registrar .form-label, .editar-user .form-label {
   font-family: "Nunito", sans-serif;
   display: flex;
   align-items: start;
@@ -308,7 +298,6 @@
 }
 
 /*Ver detalles*/
-
 .ver-detalle {
   border-top: 1px solid #bbbbbb;
   padding-top: 10px;
@@ -343,6 +332,14 @@
   display: block;
   background: #fff;
   margin: 0 auto;
+}
+
+/*Editar Perfil*/
+.editar-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
 }
 
 @media (max-width: 767px) { 
