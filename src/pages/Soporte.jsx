@@ -30,7 +30,7 @@ function Soporte() {
               <Card.Body>
                 <Card.Title>{item.titulo}</Card.Title>
                 <Card.Text>{item.descripcion}</Card.Text>
-                <Button onClick={() => navigate(`/soporte/${item.ruta}`)} variant="outline-success">
+                <Button onClick={() => navigate(`/principal/error`)} variant="outline-success">
                   Ver más
                 </Button>
               </Card.Body>
