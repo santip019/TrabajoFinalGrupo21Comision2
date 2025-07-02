@@ -6,17 +6,12 @@ export function useUserLocalStorage(key, user, initialValue = []) {
   useEffect(() => {
     if (user && user.email) {
       const stored = localStorage.getItem(`${key}_${user.email}`);
-      setValue(stored ? JSON.parse(stored) : initialValue);
+      const parsed = stored ? JSON.parse(stored) : initialValue;
+      setValue(prev => JSON.stringify(prev) !== JSON.stringify(parsed) ? parsed : prev);
     } else {
-      // Solo setea si el valor es distinto
-      setValue((prev) => {
-        if (JSON.stringify(prev) !== JSON.stringify(initialValue)) {
-          return initialValue;
-        }
-        return prev;
-      });
+      setValue(prev => JSON.stringify(prev) !== JSON.stringify(initialValue) ? initialValue : prev);
     }
-  }, [user, key, initialValue]);
+  }, [user, key]);
 
   useEffect(() => {
     if (user && user.email) {
