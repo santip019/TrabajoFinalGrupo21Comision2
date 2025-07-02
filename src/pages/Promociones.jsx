@@ -25,7 +25,7 @@ function Promociones() {
       {productosConDescuento.length === 0 ? (
         <p className="text-muted">No hay productos para mostrar.</p>
       ) : (
-        <Row className="productos">
+        <Row className="my-4 align-items-center">
           {productosConDescuento.map((producto) => (
             <Col xs={6} md={3} key={producto.id} className="mb-4">
               <ProductoCard producto={producto} />

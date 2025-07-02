@@ -362,6 +362,64 @@
   margin-top: 10px;
 }
 
+/*Carrito*/
+
+.imagen-carrito {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+}
+
+.titulo-carrito {
+  font-family: "Nunito", sans-serif;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #000000;
+}
+
+.titulo-boton {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  color: #1f5e27;
+}
+
+.contador-carrito {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  max-width: 200px;
+}
+
+.contador-carrito-icono-menos, .contador-carrito-icono-mas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: solid;
+}
+
+.contador-carrito-icono-mas {
+  color: #b43d3d;
+}
+
+.contador-carrito-icono-mas:hover {
+  background-color: #d66a6a;
+  color: #fff;
+}
+
+.contador-carrito-icono-menos {
+  color: #2757c0;
+}
+
+.contador-carrito-icono-menos:hover {
+  background-color: #6484ce;
+  color: #fff;
+}
 
 @media (max-width: 767px) { 
   .navbar .nav-link,

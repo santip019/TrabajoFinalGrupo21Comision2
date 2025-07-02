@@ -1,6 +1,7 @@
 import { useCarrito } from "../context/CarritoContext";
 import { useAuth } from "../context/AuthContext";
-import { Card, Button, Form } from 'react-bootstrap';
+import { Card, Button, Form, Container, Badge, Row, Col, InputGroup } from 'react-bootstrap';
+
 
 function Carrito() {
   const { user, loadingUser } = useAuth();
@@ -20,53 +21,100 @@ function Carrito() {
   }, 0);
 
   return (
-    <div className="container mt-4">
-      <h2>🛒 Carrito de Compras</h2>
+    <Container className="my-4">
+      <h2 className="titulos d-flex align-items-start">
+        <Badge bg="none">Mi carrito</Badge>
+      </h2>
       {carrito.length === 0 ? (
         <p className="text-muted">El carrito está vacío.</p>
       ) : (
         <>
-          {carrito.map((item) => (
-            <Card key={item.id} className="mb-3">
-              <Card.Body className="d-flex align-items-center gap-4">
-                {/* ✅ Imagen del producto AGREGAR UNA IMAGEN EN CASO DE NO TENER O NO CARGAR*/}
-                <img
-                  src={item.image || item.imagen || 'https://via.placeholder.com/80'}
-                  alt={item.nombre || item.title}
-                  style={{ width: '80px', height: '80px', objectFit: 'contain' }}
-                />
+        <Row className="my-4">
+            <Col md={8}>
+              {carrito.map((item) => (
+                <Card key={item.id} className="mb-3 shadow-sm">
+                  <Card.Body className="p-3">
+                    <Row className="align-items-center g-2">
+                      <Col xs={3} sm={2} md={3} className="d-flex justify-content-center">
+                      <img className="imagen-carrito img-fluid"
+                        src={item.image || item.imagen}
+                        alt={item.nombre || item.title}
+                      />
+                      </Col>
 
-                {/* ✅ Detalles del producto */}
-                <div style={{ flex: 1 }}>
-                  <h5 className="mb-1">{item.nombre || item.title}</h5>
-                  <p className="mb-2">${item.precio || item.price}</p>
-
-                  <Form.Control
-                    type="number"
-                    min={1}
-                    value={item.cantidad}
-                    onChange={(e) =>
-                      cambiarCantidad(item.id, +e.target.value)
-                    }
-                    style={{ width: '80px' }}
-                  />
-                </div>
-
-                {/* ✅ Botón de quitar */}
-                <Button
-                  variant="danger"
-                  onClick={() => quitarDelCarrito(item.id)}
-                >
-                  Quitar
-                </Button>
-              </Card.Body>
-            </Card>
-          ))}
-          <h4 className="mt-3 text-end">Total: ${total.toFixed(2)}</h4>
-          <Button variant="outline-danger" onClick={vaciarCarrito}>Vaciar carrito</Button>
+                      <Col xs={9} sm={5} md={6}>
+                        <h5 className="titulo-carrito mb-1 d-flex align-items-start text-truncate">{item.nombre || item.title}</h5>
+                        <InputGroup className="contador-carrito">
+                          <Button
+                            variant="none"
+                            onClick={() => cambiarCantidad(item.id, item.cantidad - 1)}
+                            disabled={item.cantidad <= 1}
+                            className="contador-carrito-icono-mas"
+                          >
+                            -
+                          </Button>
+                          <Form.Control
+                            size="sm"
+                            min={1}
+                            value={item.cantidad}
+                            onChange={(e) =>
+                              cambiarCantidad(item.id, +e.target.value)
+                            }
+                            className="text-center"
+                          />
+                          <Button
+                            variant="none"
+                            onClick={() => cambiarCantidad(item.id, item.cantidad + 1)}
+                            className="contador-carrito-icono-menos"
+                          >
+                            +
+                          </Button>
+                          
+                        </InputGroup>
+                      </Col>
+                      <Col md={3} className="d-flex flex-column align-items-start">
+                        {item.discount || item.descuento ? (
+                          <>
+                            <span className="d-flex align-items-center mb-1">
+                              <del className="text-decoration-line-through text-muted me-2 mb-0">
+                                ${item.precio || item.price}
+                              </del>
+                              <Badge bg="danger" text="light" className="ms-1">
+                                {item.discount || item.descuento}% OFF
+                              </Badge>
+                            </span>
+                            <b className="text-dark fs-5 d-flex flex-column align-items-start">
+                              $
+                              {(
+                                (item.precio || item.price) *
+                                (1 - (item.discount || item.descuento) / 100)
+                              ).toFixed(2)}
+                            </b>
+                          </>
+                        ) : (
+                          <b>${item.precio || item.price}</b>
+                        )}
+                        <Button
+                          variant="secondary"
+                          onClick={() => quitarDelCarrito(item.id)}
+                          className="mb-1 mt-3 w-100"
+                        >
+                          Eliminar
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              ))}
+          </Col>
+          <Col md={2}>
+            <h4 className="mt-3 text-end">Total: ${total.toFixed(2)}</h4>
+            <Button variant="outline-danger" onClick={vaciarCarrito}>Vaciar carrito</Button>
+          </Col>
+        </Row>
         </>
       )}
-    </div>
+    </Container>
   );
 }
 
