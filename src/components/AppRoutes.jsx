@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import FormularioProducto from "./FormularioProducto";
 import Favoritos from "../pages/Favoritos";
 import AcercaDe from "../pages/AcercaDe";
-import ListarProductos from "../components/ListarProductos"; // Asegúrate de tener este componente
+import ListarProductos from "../components/ListarProductos";
 import VerDetalles from "../pages/VerDetalles";
 import Papelera from "../pages/Papelera";
 import AdminRoute from "../routes/AdminRoute";
