@@ -133,7 +133,9 @@ function ProductoCard({ producto, esPapelera = false }) {
               Restaurar
             </Button>
             {/* Modal de confirmación de restaurar */}
-            <Modal show={showRestoreModal} onHide={() => setShowRestoreModal(false)} centered>
+            <Modal show={showRestoreModal} onHide={() => setShowRestoreModal(false)}
+            centered
+            onClick={e => e.stopPropagation()}>
               <Modal.Header closeButton>
                 <Modal.Title>Confirmar restauración</Modal.Title>
               </Modal.Header>
@@ -179,8 +181,10 @@ function ProductoCard({ producto, esPapelera = false }) {
             >
               Eliminar
             </Button>
-            {/* Modal de confirmación */}
-            <Modal show={mostrarModal} onHide={cancelarEliminacion} centered>
+            {/* Modal de confirmación de eliminacion*/}
+            <Modal show={mostrarModal} onHide={() => {
+              setMostrarModal(false);
+            }} centered onClick={e => e.stopPropagation()}>
               <Modal.Header closeButton>
                 <Modal.Title>Confirmar eliminación</Modal.Title>
               </Modal.Header>

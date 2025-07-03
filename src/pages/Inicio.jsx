@@ -6,6 +6,11 @@ import { useAuth } from "../context/AuthContext";
 import CarruselDeProductos from "../components/CarruselDeProductos";
 import CarruselDeImagenes from "../components/CarruselDeImagenes";
 import ProductoCard from "../components/ProductoCard";
+import bannerproducto1 from "../assets/images/banner_promocion_productos1.png";
+import bannerproducto2 from "../assets/images/banner_promocion_productos2.png";
+import bannerproducto3 from "../assets/images/banner_promocion_productos3.png";
+import bannerpromocion1 from "../assets/images/Banners_promociones0.png";
+import bannerpromocion2 from "../assets/images/Banners_promociones1.png";
 
 function Inicio() {
   const location = useLocation(),
@@ -69,9 +74,9 @@ function Inicio() {
   }
 
   const imagenesPrincipal = [
-    "/src/assets/images/banner_promocion_productos3.png",
-    "/src/assets/images/banner_promocion_productos2.png",
-    "/src/assets/images/banner_promocion_productos1.png",
+    bannerproducto1,
+    bannerproducto2,
+    bannerproducto3
   ];
   const productosConDescuento = productos.filter(
     (p) => (p.discount || p.descuento || 0) > 0 && p.estado !== false
@@ -81,8 +86,8 @@ function Inicio() {
       (p.brand || p.marca)?.toLowerCase() === "waldo's" && p.estado !== false
   );
   const imagenesDescuento = [
-    "/src/assets/images/Banners_promociones0.png",
-    "/src/assets/images/Banners_promociones1.png",
+    bannerpromocion1,
+    bannerpromocion2
   ];
 
   return (
@@ -92,14 +97,12 @@ function Inicio() {
         <h2>Super Ofertas</h2>
         <CarruselDeProductos
           productos={productosConDescuento}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </Container>
       <Container className="carruseles">
         <h2>Productos Waldo's</h2>
         <CarruselDeProductos
           productos={productosWaldos}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </Container>
       <Container className="carruseles-promo">
@@ -110,7 +113,6 @@ function Inicio() {
         <h2>Otras Marcas</h2>
         <CarruselDeProductos
           productos={productosAleatorios}
-          onVerDetalles={(id) => navigate(`/Layout/producto/${id}`)}
         />
       </Container>
       <ToastContainer position="bottom-end" className="p-3">
