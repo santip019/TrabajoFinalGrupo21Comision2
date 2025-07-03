@@ -82,7 +82,7 @@ function FormularioProducto({ esEdicion = false }) {
       // Crear producto
       setProductos([...productos, producto]);
     }
-    navigate("/principal");
+    navigate(-1);
   };
 
   // Si es edición y no existe el producto, muestra mensaje
@@ -131,6 +131,7 @@ function FormularioProducto({ esEdicion = false }) {
                   value={producto.price}
                   required
                   min={1}
+                  step="0.01"
                 />
                 <Form.Control.Feedback type="invalid">
                   Ingrese un precio válido mayor a 0.

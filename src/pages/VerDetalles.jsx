@@ -29,7 +29,6 @@ function VerDetalles() {
     );
   }
 
-  const volverA = location.state?.from === "papelera" ? "/principal/papelera" : "/principal";
   const esFavorito = favoritos.includes(producto.id);
 
   return (
@@ -47,7 +46,7 @@ function VerDetalles() {
           <Card className="shadow position-relative ms-5 me-5">
             <Button
               variant="outline-secondary"
-              onClick={() => navigate(volverA)}
+              onClick={() => navigate(-1)}
               className="position-absolute top-10 end-10 m-2"
             >
               <FaArrowLeft />

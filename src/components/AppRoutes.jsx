@@ -55,6 +55,14 @@ function AppRoutes() {
             </RutaAutenticada>
           }
         />
+         <Route
+          path="perfil"
+          element={
+            <RutaAutenticada>
+              <PerfilWrapper />
+            </RutaAutenticada>
+          }
+        />
         <Route path="productos/:categoria" element={<ListarProductos />} />
         <Route path="producto/:id" element={<VerDetalles />} />
         <Route path="promociones" element={<Promociones />} />

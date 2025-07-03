@@ -17,7 +17,7 @@ function Papelera() {
             </h2>
           </Col>
           <Col md={6} sm={4} className="d-flex justify-content-end mb-4">
-            <Button variant="secondary" onClick={() => navigate('/principal/productos/todas')}>
+            <Button variant="secondary" onClick={() => navigate(-1)}>
               ← Volver al Listado
             </Button>
           </Col>
